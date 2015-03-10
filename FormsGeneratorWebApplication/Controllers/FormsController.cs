@@ -10,13 +10,29 @@ namespace FormsGeneratorWebApplication.Controllers
     {
         //
         // GET: /Forms/
+  
         [HttpGet]
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
+
+           return View();
+        }
+
+        [HttpGet]
+        public ActionResult Forms(String guid) {
+
             return View();
         }
+
+        //TODO Define method to add iteams
+        
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult Forms() {
+        public ActionResult AddFormIteam(int type) {
+            // This will be a partial
             return View();
         }
 	}
