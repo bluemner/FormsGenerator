@@ -291,7 +291,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_FormsLayout .cshtml" />
+    <Content Include="Views\Shared\_FormsLayout.cshtml" />
     <Content Include="Views\_FormsViewStart.cshtml" />
     <Content Include="Views\Forms\Forms.cshtml" />
     <Content Include="Views\Forms\Index.cshtml" />

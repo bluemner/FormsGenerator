@@ -10,13 +10,16 @@ namespace FormsGeneratorWebApplication.Controllers
     {
         //
         // GET: /Forms/
+  
         [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
+        public ActionResult Index() {
+
+           return View();
         }
+
         [HttpGet]
-        public ActionResult Forms() {
+        public ActionResult Forms(String guid) {
+
             return View();
         }
 	}
