@@ -18,7 +18,7 @@
         },
         //Example of a function
         samplefunc: function(selectedObject){
-    
+            
         }
 
     });//extend

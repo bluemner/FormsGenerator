@@ -13,10 +13,8 @@ namespace FormsGeneratorWebApplication.Controllers
   
         [HttpGet]
         public ActionResult Index() {
-
            return View();
         }
-
         [HttpGet]
         public ActionResult Forms(String guid) {
 
@@ -38,5 +36,7 @@ namespace FormsGeneratorWebApplication.Controllers
             // This will be a partial
             return View();
         }
+
+
 	}
 }
