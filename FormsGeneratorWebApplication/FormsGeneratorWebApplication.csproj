@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FormsAdminController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +299,7 @@
     <Content Include="Views\Forms\Index.cshtml" />
     <Content Include="Views\Forms\_RadioButtonPartial.cshtml" />
     <Content Include="Views\Forms\About.cshtml" />
+    <Content Include="Views\FormsAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
