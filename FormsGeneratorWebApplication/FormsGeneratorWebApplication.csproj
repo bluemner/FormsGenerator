@@ -297,6 +297,7 @@
     <Content Include="Views\Forms\Forms.cshtml" />
     <Content Include="Views\Forms\Index.cshtml" />
     <Content Include="Views\Forms\_RadioButtonPartial.cshtml" />
+    <Content Include="Views\Forms\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

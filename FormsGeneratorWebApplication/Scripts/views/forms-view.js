@@ -7,6 +7,7 @@
         settings: {
 
         },
+
         init: function () {
             var $sample = $('#sample');
 

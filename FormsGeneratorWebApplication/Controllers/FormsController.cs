@@ -22,7 +22,10 @@ namespace FormsGeneratorWebApplication.Controllers
 
             return View();
         }
-
+        [HttpGet]
+        public ActionResult About() { 
+            return View();
+        }
         //TODO Define method to add iteams
         
         /// <summary>
