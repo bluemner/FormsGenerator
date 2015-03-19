@@ -33,7 +33,7 @@
                 type: 'GET',
                 url: url,
                 cache: false,
-                data: ({ type: 0, count: 1 }),
+                data: ({ type: 0, count: count }),
                 sucess: function (data) {
                     selectedObject.append(data);
                     form.refreshAccordion(selectedObject);

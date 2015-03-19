@@ -304,6 +304,10 @@
     <Content Include="Views\Forms\About.cshtml" />
     <Content Include="Views\FormsAdmin\Index.cshtml" />
     <Content Include="Views\Forms\_TextBoxPartial.cshtml" />
+    <Content Include="Views\FormsAdmin\_RadioButtonPartial.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\FormsAdmin\_TextBoxPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

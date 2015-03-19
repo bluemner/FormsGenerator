@@ -16,15 +16,15 @@ namespace FormsGeneratorWebApplication.Models
         
         [Display(Name = "Form Name")]
         [Required(ErrorMessage="Please enter a name")]
-        string Name { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Start Date")]
         [Required(ErrorMessage = "Please a start date")]
-        DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Display(Name = "End Date")]
         [Required(ErrorMessage = "Please a end date")]
-        DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         
 
