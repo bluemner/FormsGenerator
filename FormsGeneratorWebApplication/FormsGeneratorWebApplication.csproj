@@ -308,6 +308,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\FormsAdmin\_TextBoxPartial.cshtml" />
+    <Content Include="Views\FormsAdmin\MakeForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
