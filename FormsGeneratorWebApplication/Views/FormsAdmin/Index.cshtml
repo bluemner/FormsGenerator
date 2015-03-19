@@ -1,22 +1,33 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
 @model  FormsGeneratorWebApplication.Models.FormsModel
 
 <h2>Welcome To The Admin Page</h2>
 
-@using (Html.BeginForm("Index", "Form", FormMethod.Post, new { @class="full",  @id="new-form"})){
-
-    @Html.AntiForgeryToken()
+@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class="full",  @id="new-form"}))
+@Html.AntiForgeryToken()
     <fieldset>
         <h3>Form Title</h3>
         <div class="from-group">
             <div class="form-item">
                 @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m =>)
+                @Html.TextBoxFor(m =>m.Name)
+                @Html.ValidationMessageFor(m =>m.Name)
             </div>
         </div>
 
+       <div class="form-group">
+           <form class="form-item">
+               @Html.LabelFor(m=> m.StartDate)
+               @Html.TextBoxFor(m=> m.StartDate,  null, new {@class ="date"})
+               @Html.ValidationMessageFor(m => m.StartDate)
+           </form>
+           <form class="form-item">
+               @Html.LabelFor(m => m.EndDate)
+               @Html.TextBoxFor(m => m.EndDate)
+               @Html.ValidationMessageFor(m => m.EndDate)
+           </form>
+       </div>
+        
     </fieldset>
-}
