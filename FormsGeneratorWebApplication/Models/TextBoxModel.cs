@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FormsGeneratorWebApplication.Models
 {
-    public class TextBoxModel : FormItem
+    public class TextBoxModel : FormItemModel
     {
       
        [Display(Name = "Answer")]

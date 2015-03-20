@@ -6,11 +6,11 @@
 
 <h2>Welcome To The Admin Page</h2>
 
-@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class="full",  @id="new-form"}))
-@{Html.AntiForgeryToken()}
+@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) { 
+    @Html.AntiForgeryToken()
     <fieldset>
         <h3>Form Title</h3>
-        <div class="from-group">
+        <div class="from-group"> d
             <div class="form-item">
                 @Html.LabelFor(m => m.Name)
                 @Html.TextBoxFor(m =>m.Name)
@@ -32,3 +32,4 @@
        </div>
         
     </fieldset>
+}

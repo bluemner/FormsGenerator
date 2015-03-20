@@ -166,7 +166,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\FormItem.cs" />
+    <Compile Include="Models\CheckBoxesModel.cs" />
+    <Compile Include="Models\FormItemModel.cs" />
     <Compile Include="Models\FormsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\TextBoxModel.cs" />
@@ -309,6 +310,7 @@
     </Content>
     <Content Include="Views\FormsAdmin\_TextBoxPartial.cshtml" />
     <Content Include="Views\FormsAdmin\MakeForm.cshtml" />
+    <Content Include="Views\FormsAdmin\_CheckBoxesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
