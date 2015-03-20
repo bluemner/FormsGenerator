@@ -10,10 +10,7 @@ namespace FormsGeneratorWebApplication.Models
     ///  Used To Create An Instance Of a Form
     /// </summary>
     public class FormsModel
-    {
-
-        
-
+    {      
         IList<FormItemModel> FormItemIList { get; set; }
         
         [Display(Name = "Form Name")]
@@ -27,8 +24,6 @@ namespace FormsGeneratorWebApplication.Models
         [Display(Name = "End Date")]
         [Required(ErrorMessage = "Please a end date")]
         public DateTime EndDate { get; set; }
-
         
-
     }
 }
