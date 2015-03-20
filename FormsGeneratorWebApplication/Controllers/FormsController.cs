@@ -18,10 +18,15 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult Index() {
            return View();
         }
+
         [HttpGet]
         public ActionResult Forms() {
+            var model =
+                from r in _questions
+                orderby r.Type
+                select r;
 
-            return View();
+            return View(model);
         }
         [HttpGet]
         public ActionResult About() { 
@@ -39,6 +44,35 @@ namespace FormsGeneratorWebApplication.Controllers
             // This will be a partial
             return View();
         }
+
+        //dummy data for questions
+
+        static List<FormItemModel> _questions = new List<FormItemModel>
+        {
+            new FormItemModel{
+                ID = 1,
+                Postion = 1,
+                Question = "Do you like to dance?",
+                Type= 1,
+                Options = new string[]{"Yes", "NO"}
+            },
+            new FormItemModel{
+                ID = 1,
+                Postion = 2,
+                Question = "Have you been to Paris?",
+                Type= 1,
+                Options = new string[]{"Yes", "NO", "2-4 times.", "10+ times."}
+            },
+            new FormItemModel{
+                ID = 1,
+                Postion = 3,
+                Question = "Packer will win this year superball?",
+                Type= 1,
+                Options = new string[]{"Agree", "Disagree"}
+            }
+
+        };
+
 
 
 	}

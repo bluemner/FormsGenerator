@@ -9,23 +9,13 @@ namespace FormsGeneratorWebApplication.Models
 {
     public class FormItemModel
     {
-        public int postion { get; set; }
-        public string question { get; set; }
-        public int type { get; set; }
 
-    }
-
-    //What is the point of this? this is  parent class explain
-    public class Question
-    {
         public int ID { get; set; }
-        public string QuestionText { get; set; }
+        public int Postion { get; set; }
+        public string Question { get; set; }
+        public int Type { get; set; }
         public string[] Options { get; set; }
-        
+
     }
 
-    public class QuestionDBContext : DbContext
-    {
-        public DbSet<Question> Questions { get; set; }
-    }
 }
