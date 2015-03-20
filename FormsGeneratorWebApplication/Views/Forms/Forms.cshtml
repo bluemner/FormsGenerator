@@ -1,103 +1,91 @@
-﻿
+﻿@model FormsGeneratorWebApplication.Models.Question
 
 @{
-    ViewBag.Title = "Forms";
+    ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_FormsLayout.cshtml";
+
+    //for testing purposes
+    List<SelectListItem> list = new List<SelectListItem>();
+    
+    SelectListItem radiotype = new SelectListItem() { Text="Radio Type Question", Value="R"};
+    SelectListItem checkBoxtype = new SelectListItem() { Text="CheckBox Type Question", Value="R"};
+    list.Add(radiotype);
+    list.Add(checkBoxtype);
 }
 
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Question</h4>
+        <hr />
+        @Html.ValidationSummary(true)
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Question Settings</a>
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="#">Question Settings</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.DropDownListFor(model => model.QuestionText, list, "Select", htmlAttributes: new { @class = "dropdown-menu" } )</li>
+
+                        <li>@Html.ActionLink("Add", "Forms", "Forms")</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Type of Question <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Options Count">
+        <div class="form-group">
+            <div class="form-group"> 
+                <label for="inputQuestion" class="col-lg-2 control-label">Question:</label>
+                <div class="col-lg-10">                    
+                    @Html.EditorFor(model => model.QuestionText)
+                    @Html.ValidationMessageFor(model => model.QuestionText)
                 </div>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" data-title="add">Add</button>
-            </form>
+            </div>
+           
+             <div class="form-group">
+                <label class="col-lg-2 control-label">Radios</label>
+                <div class="col-lg-10">
+                    <div class="radio">
+                        @Html.RadioButton("Option", "1", true)
+                            Option 1 to the Question.
+                    </div>
+                    <div class="radio">                       
+                        @Html.RadioButton("Option", "1")
+                            Option 2 to the Question.
+                    </div>
+                    <div class="radio">
+                        @Html.RadioButton("Option", "1")
+                            Option 3 to the Question.
+                    </div>
+                    <div class="radio">                        
+                        @Html.RadioButton("Option", "1")
+                            Option 4 to the Question.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</nav>
+}
 
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <fieldset>
-                        <legend>Add Question</legend>
-                        <div class="form-group">
-                            <label for="inputQuestion" class="col-lg-2 control-label">Question:</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputQuestion" placeholder="Question">
-                            </div>
-                        </div>
+<div>
+    @Html.ActionLink("Back to List", "Forms")
+</div>
 
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Radios</label>
-                            <div class="col-lg-10">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                        Option 1 to the Question.
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        Option 2 to the Question.
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        Option 3 to the Question.
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        Option 4 to the Question.
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Question</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

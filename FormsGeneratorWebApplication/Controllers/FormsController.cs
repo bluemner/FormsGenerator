@@ -19,7 +19,7 @@ namespace FormsGeneratorWebApplication.Controllers
            return View();
         }
         [HttpGet]
-        public ActionResult Forms(String guid) {
+        public ActionResult Forms() {
 
             return View();
         }

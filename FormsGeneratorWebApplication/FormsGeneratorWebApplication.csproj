@@ -299,7 +299,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_FormsLayout.cshtml" />
     <Content Include="Views\_FormsViewStart.cshtml" />
-    <Content Include="Views\Forms\Forms.cshtml" />
     <Content Include="Views\Forms\Index.cshtml" />
     <Content Include="Views\Forms\_RadioButtonPartial.cshtml" />
     <Content Include="Views\Forms\About.cshtml" />
@@ -311,6 +310,8 @@
     <Content Include="Views\FormsAdmin\_TextBoxPartial.cshtml" />
     <Content Include="Views\FormsAdmin\MakeForm.cshtml" />
     <Content Include="Views\FormsAdmin\_CheckBoxesPartial.cshtml" />
+    <Content Include="Views\Forms\Forms.cshtml" />
+    <Content Include="Views\Forms\QuestionNavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
