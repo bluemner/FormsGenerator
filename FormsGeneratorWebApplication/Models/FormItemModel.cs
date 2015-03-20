@@ -11,6 +11,8 @@ namespace FormsGeneratorWebApplication.Models
     {
         public int postion { get; set; }
         public string question { get; set; }
+        public int type { get; set; }
+
     }
 
 
