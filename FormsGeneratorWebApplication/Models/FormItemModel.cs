@@ -15,7 +15,7 @@ namespace FormsGeneratorWebApplication.Models
 
     }
 
-
+    //What is the point of this? this is  parent class explain
     public class Question
     {
         public int ID { get; set; }
