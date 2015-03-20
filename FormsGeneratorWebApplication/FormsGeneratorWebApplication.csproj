@@ -170,6 +170,7 @@
     <Compile Include="Models\FormItemModel.cs" />
     <Compile Include="Models\FormsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\TextAreaModel.cs" />
     <Compile Include="Models\TextBoxModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Views\FormsAdmin\_TextBoxPartial.cshtml" />
     <Content Include="Views\FormsAdmin\MakeForm.cshtml" />
     <Content Include="Views\FormsAdmin\_CheckBoxesPartial.cshtml" />
+    <Content Include="Views\FormsAdmin\_TextAreaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

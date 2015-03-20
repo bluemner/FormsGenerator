@@ -8,7 +8,7 @@
 @model  FormsGeneratorWebApplication.Models.FormsModel
 
 
-@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" }))
+@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) { 
 @Html.AntiForgeryToken()
     <fieldset>
         <h3>Form Title</h3>
@@ -33,4 +33,33 @@
             </form>
         </div>
 
+        <div id="item-zone" >        </div>
+        <div class="form-group">
+            <div class="form-item">
+                
+            </div>
+
+            <div class="form-item">
+               
+            </div>
+        </div>
+        <div class="form-group">
+            
+            <div class="form-item">
+                <input type="button" value="Add Form Item" class="btn btn-add-form-item" />
+            </div>
+        </div>
     </fieldset>
+}   
+@Scripts.Render("~/Scripts/views/forms-admin-view.js");
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.extend(form, {
+            settings: {
+                UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
+                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
+            }
+        });
+    })
+
+</script>
