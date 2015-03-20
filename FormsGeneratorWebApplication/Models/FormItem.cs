@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace FormsGeneratorWebApplication.Models
 {
@@ -9,6 +10,19 @@ namespace FormsGeneratorWebApplication.Models
     {
         public int postion { get; set; }
         public string question { get; set; }
+    }
 
+
+    public class Question
+    {
+        public int ID { get; set; }
+        public string QuestionType { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public string[] Options { get; set; }
+    }
+
+    public class QuestionDBContext : DbContext
+    {
+        public DbSet<Question> Questions { get; set; }
     }
 }

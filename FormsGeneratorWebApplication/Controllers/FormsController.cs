@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FormsGeneratorWebApplication.Models;
+using System.Net;
 
 namespace FormsGeneratorWebApplication.Controllers
 {
     public class FormsController : Controller
     {
+
         //
         // GET: /Forms/
   
@@ -32,7 +35,7 @@ namespace FormsGeneratorWebApplication.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddFormIteam(int type) {
+        public ActionResult AddFormIteam(int guid) {
             // This will be a partial
             return View();
         }

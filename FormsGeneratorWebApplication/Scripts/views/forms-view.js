@@ -27,3 +27,9 @@
 jQuery(function () {
     forms.init();
 });
+
+$(document).ready(function () {
+    $(".btn").click(function () {
+        $("#myModal").modal('show');
+    });
+});

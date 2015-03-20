@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
     ViewBag.Title = "Forms";
     Layout = "~/Views/Shared/_FormsLayout.cshtml";
 }
@@ -35,52 +37,67 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Options Count">
                 </div>
-                <button type="submit" class="btn btn-default">Add</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" data-title="add">Add</button>
             </form>
         </div>
     </div>
 </nav>
 
-
-<form class="form-horizontal">
-    <fieldset>
-        <legend>Add Question</legend>
-        <div class="form-group">
-            <label for="inputQuestion" class="col-lg-2 control-label">Question:</label>
-            <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputQuestion" placeholder="Question">
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Modal title</h4>
             </div>
-        </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>Add Question</legend>
+                        <div class="form-group">
+                            <label for="inputQuestion" class="col-lg-2 control-label">Question:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputQuestion" placeholder="Question">
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Radios</label>
-            <div class="col-lg-10">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                        Option 1 to the Question.
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        Option 2 to the Question.
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        Option 3 to the Question.
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        Option 4 to the Question.
-                    </label>
-                </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Radios</label>
+                            <div class="col-lg-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                        Option 1 to the Question.
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        Option 2 to the Question.
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        Option 3 to the Question.
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        Option 4 to the Question.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-        </div>
-    </fieldset>
-</form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add Question</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
