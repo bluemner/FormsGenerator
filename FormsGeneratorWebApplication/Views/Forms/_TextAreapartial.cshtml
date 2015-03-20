@@ -1,0 +1,28 @@
+﻿
+@model  FormsGeneratorWebApplication.Models.TextAreaModel
+
+@{
+    var index = Model.postion;
+}
+
+<div class="ui-accordion-header">
+    <div class="form-item">
+        <h3>Text Box</h3>
+    </div>
+</div>
+<div>
+    <div class="form-group">
+        <div class="form-item">
+            @Html.HiddenFor(m => m.question, new { Name = "[" + index + "].question" })
+            @Html.Label(Model.question+"?")
+        </div>
+
+        <div class="form-item">
+            @Html.LabelFor(m => m.value)
+            @Html.TextBoxFor(m => m.value, new { Name = "[" + index + "].value" })
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.postion, new { Name = "[" + index + "].postion" })
+</div>
+
+

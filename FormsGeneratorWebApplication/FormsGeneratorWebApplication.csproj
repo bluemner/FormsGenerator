@@ -314,6 +314,8 @@
     <Content Include="Views\FormsAdmin\_CheckBoxesPartial.cshtml" />
     <Content Include="Views\FormsAdmin\_TextAreaPartial.cshtml" />
     <Content Include="Views\Forms\NavBarPartial.cshtml" />
+    <Content Include="Views\Forms\_TextAreaPartial.cshtml" />
+    <Content Include="Views\Forms\QuestionNavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

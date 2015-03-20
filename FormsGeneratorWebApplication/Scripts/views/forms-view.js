@@ -34,7 +34,7 @@
 })(window.jQuery, window.form || (window.form = {}));
 
 jQuery(function () {
-    forms.init();
+    form.init();
 });
 
 //THIS IS BAD CODE DONT DO THIS!!!! IF I SEE THIS I WILL DELETE THIS USE THE ABOVE PATTERN
