@@ -12,13 +12,13 @@
             var $sample = $('#sample');
 
             // Dynamic java script command
-            $sample.on('mouseover', '.classname', function () {
-                samplefunc($(this)); 
+            $sample.on('click', '#addForm', function () {
+                samplefunc($(this));
             });
         },
         //Example of a function
-        samplefunc: function(selectedObject){
-            
+        samplefunc: function (selectedObject) {
+
         }
 
     });//extend
@@ -26,10 +26,4 @@
 
 jQuery(function () {
     forms.init();
-});
-
-$(document).ready(function () {
-    $(".btn").click(function () {
-        $("#myModal").modal('show');
-    });
 });

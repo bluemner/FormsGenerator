@@ -6,8 +6,9 @@ using System.Data.Entity;
 
 namespace FormsGeneratorWebApplication.Models
 {
-    public class FormItem
+    public class FormItemModel
     {
+
         public int postion { get; set; }
         public string question { get; set; }
     }
