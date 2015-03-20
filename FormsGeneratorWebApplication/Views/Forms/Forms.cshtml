@@ -1,4 +1,4 @@
-﻿@model FormsGeneratorWebApplication.Models.Question
+﻿@model IEnumerable<FormsGeneratorWebApplication.Models.Question>
 
 @{
     ViewBag.Title = "Home Page";
@@ -20,65 +20,27 @@
     <div class="form-horizontal">
         <h4>Question</h4>
         <hr />
-        @Html.ValidationSummary(true)
 
-        <div class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <a class="navbar-brand" href="#">Question Settings</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.DropDownListFor(model => model.QuestionText, list, "Select", htmlAttributes: new { @class = "dropdown-menu" } )</li>
-
-                        <li>@Html.ActionLink("Add", "Forms", "Forms")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="form-group"> 
-                <label for="inputQuestion" class="col-lg-2 control-label">Question:</label>
-                <div class="col-lg-10">                    
-                    @Html.EditorFor(model => model.QuestionText)
-                    @Html.ValidationMessageFor(model => model.QuestionText)
-                </div>
-            </div>
-           
-             <div class="form-group">
-                <label class="col-lg-2 control-label">Radios</label>
+        @foreach (var item in Model)
+        {
+            <div class="form-group">
                 <div class="col-lg-10">
-                    <div class="radio">
-                        @Html.RadioButton("Option", "1", true)
-                            Option 1 to the Question.
-                    </div>
-                    <div class="radio">                       
-                        @Html.RadioButton("Option", "1")
-                            Option 2 to the Question.
-                    </div>
-                    <div class="radio">
-                        @Html.RadioButton("Option", "1")
-                            Option 3 to the Question.
-                    </div>
-                    <div class="radio">                        
-                        @Html.RadioButton("Option", "1")
-                            Option 4 to the Question.
+                    @item.QuestionText
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        @foreach (var option in @item.Options)
+                        {
+                            <div class="radio">
+                                @Html.RadioButton("Option", option)
+                                @option
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
 

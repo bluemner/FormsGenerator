@@ -20,8 +20,6 @@ namespace FormsGeneratorWebApplication.Models
     {
         public int ID { get; set; }
         public string QuestionText { get; set; }
-        [Required(ErrorMessage = "Please provide a Question.", AllowEmptyStrings=false)]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Text)]
         public string[] Options { get; set; }
         
     }

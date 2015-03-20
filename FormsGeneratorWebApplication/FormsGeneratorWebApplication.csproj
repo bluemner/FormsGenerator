@@ -313,6 +313,7 @@
     <Content Include="Views\FormsAdmin\MakeForm.cshtml" />
     <Content Include="Views\FormsAdmin\_CheckBoxesPartial.cshtml" />
     <Content Include="Views\FormsAdmin\_TextAreaPartial.cshtml" />
+    <Content Include="Views\Forms\NavBarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,75 @@
+﻿@model FormsGeneratorWebApplication.Models.Question
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_FormsLayout.cshtml";
+
+    //for testing purposes
+    List<SelectListItem> list = new List<SelectListItem>();
+
+    SelectListItem radiotype = new SelectListItem() { Text="Radio Type Question", Value="R"};
+    SelectListItem checkBoxtype = new SelectListItem() { Text="CheckBox Type Question", Value="R"};
+    list.Add(radiotype);
+    list.Add(checkBoxtype);
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Question</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="#">Question Settings</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown-menu">@Html.DropDownListFor(model => model.QuestionText, list, "Select")</li>
+                        <li>   </li>
+                        <li>@Html.ActionLink("Add", "Forms", "Forms", new { @class = "navbar-brand" })</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="inputQuestion" class="col-lg-2 control-label">Question:</label>
+                    <div class="col-lg-10">
+                        @Html.EditorFor(model => model.QuestionText)
+                        @Html.ValidationMessageFor(model => model.QuestionText)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        <div class="radio">
+                            @Html.RadioButton("Option", "1", true)
+                            Option 1 to the Question.
+                        </div>
+                        <div class="radio">
+                            @Html.RadioButton("Option", "1")
+                            Option 2 to the Question.
+                        </div>
+                        <div class="radio">
+                            @Html.RadioButton("Option", "1")
+                            Option 3 to the Question.
+                        </div>
+                        <div class="radio">
+                            @Html.RadioButton("Option", "1")
+                            Option 4 to the Question.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
