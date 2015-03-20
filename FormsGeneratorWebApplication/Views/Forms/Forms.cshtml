@@ -1,53 +1,30 @@
-﻿@model IEnumerable<FormsGeneratorWebApplication.Models.Question>
+﻿@using FormsGeneratorWebApplication.Models;
+@model IEnumerable<FormsGeneratorWebApplication.Models.FormsModel>
 
 @{
-    ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_FormsLayout.cshtml";
 
-    //for testing purposes
-    List<SelectListItem> list = new List<SelectListItem>();
-    
-    SelectListItem radiotype = new SelectListItem() { Text="Radio Type Question", Value="R"};
-    SelectListItem checkBoxtype = new SelectListItem() { Text="CheckBox Type Question", Value="R"};
-    list.Add(radiotype);
-    list.Add(checkBoxtype);
+    ViewBag.Title = "Form";
+    var items = Model;
 }
+<h2>Please fill out the folowing form:</h2>
+@using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Question</h4>
-        <hr />
+    @for (var i = 0; i < items.Count(); ++i)
+    {
+        var currentItem = items.ElementAt(i);
 
-        @foreach (var item in Model)
+        if (currentItem.GetType() == typeof(CheckBoxesModel)) 
         {
-            <div class="form-group">
-                <div class="col-lg-10">
-                    @item.QuestionText
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-10">
-                        @foreach (var option in @item.Options)
-                        {
-                            <div class="radio">
-                                @Html.RadioButton("Option", option)
-                                @option
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("~/Views/Forms/_RaidoButtonPartial",currentItem)
         }
+        else if (currentItem.GetType() == typeof(TextAreaModel))
+        {
+            @Html.Partial("~/Views/Forms/_TextAreaPartial", currentItem)
+        }
+        else if (currentItem.GetType() == typeof(TextBoxModel))
+        {
+            @Html.Partial("~/Views/Forms/_TextBoxPartial", currentItem)
+        }
+    }
 
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Forms")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
