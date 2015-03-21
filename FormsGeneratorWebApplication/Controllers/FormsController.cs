@@ -21,7 +21,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
         [HttpGet]
         public ActionResult Forms(string guid) {
-            return View(laodContentFromDataBase(guid));
+            return View(loadContentFromDataBase(guid));
         }
         [HttpGet]
         public ActionResult About() { 
@@ -36,14 +36,14 @@ namespace FormsGeneratorWebApplication.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddFormIteam(int guid) {
+        public ActionResult AddFormItem(int guid) {
             // This will be a partial
             return View();
         }
 
-        private FormsModel laodContentFromDataBase(string guid) {
+        private FormsModel loadContentFromDataBase(string guid) {
 
-            //TODO Laod the content from database
+            //TODO Load the content from database
             return new FormsModel()
             {
 

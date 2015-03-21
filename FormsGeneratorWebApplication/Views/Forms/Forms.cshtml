@@ -9,12 +9,12 @@
 @using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
 
-    @for (var i = 0; i < items.Count(); ++i)
+    for (var i = 0; i < items.Count(); ++i)
    {
          var currentItem = items.ElementAt(i);
                if (currentItem.GetType() == typeof(CheckBoxesModel))
        {
-                @Html.Partial("~/Views/Forms/_RaidoButtonPartial",currentItem)
+                @Html.Partial("~/Views/Forms/_RadioButtonPartial",currentItem)
         }
         else if (currentItem.GetType() == typeof(TextAreaModel))
         {
@@ -24,6 +24,7 @@
         {
             @Html.Partial("~/Views/Forms/_TextBoxPartial", currentItem)
         }
+    }
     }
 
     @*@using (Html.BeginForm())
