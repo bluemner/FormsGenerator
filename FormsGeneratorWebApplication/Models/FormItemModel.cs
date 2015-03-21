@@ -22,4 +22,8 @@ namespace FormsGeneratorWebApplication.Models
         public int type { get; set; }
     }
 
+    public class FormItemModelDBContext : DbContext
+    {
+        public DbSet<FormItemModel> FormItems { get; set; }
+    }
 }
