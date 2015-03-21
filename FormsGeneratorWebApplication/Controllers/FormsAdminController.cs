@@ -26,8 +26,8 @@ namespace FormsGeneratorWebApplication.Controllers
 
         [HttpGet]
         public ActionResult AddTextBox(int count) {
-            ViewBag.TextBoxCount = count;
-            return PartialView("_EditTextBoxPartial", new TextBoxModel());
+            ViewBag.TextBoxCount = count.ToString();
+            return PartialView("~/Views/FormsAdmin/t.cshtml");
         }
 
        [HttpGet]

@@ -1,6 +1,7 @@
-﻿
+﻿@using FormsGeneratorWebApplication.Models;
 @{
     ViewBag.Title = "MakeForm";
+    ViewBag.TextBoxCount = '0';
 }
 
 <h2>MakeForm</h2>
@@ -10,6 +11,8 @@
 
 @using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) { 
 @Html.AntiForgeryToken()
+               
+              @Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel())
     <fieldset>
         <h3>Form Title</h3>
         <div class="from-group">
@@ -44,7 +47,7 @@
                     <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
                 </select>
             </div>
-
+  
             <div class="form-item">
                 <label>Count</label>
                 <input type="text" value="1" class="form-selection-count" />

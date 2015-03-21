@@ -10,8 +10,10 @@ namespace FormsGeneratorWebApplication.Models
     ///  Used To Create An Instance Of a Form
     /// </summary>
     public class FormsModel
-    {      
-        IList<FormItemModel> FormItemIList { get; set; }
+    {
+
+        [Required(ErrorMessage = "")]
+        public  IList<FormItemModel> FormItemIList { get; set; }
         
         [Display(Name = "Form Name")]
         [Required(ErrorMessage="Please enter a name")]
