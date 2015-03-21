@@ -6,36 +6,28 @@
 
         settings: {
             AccordionHeader: '.ui-accordion-header',
-            AccordionStyle:  'content',
-        },
+            AccordionHeightStyle:  'content',
+        },        
 
         init: function () {
             var $formname = $('#new-form');
-            var $sample = $('#');
-            
-            // Dynamic java script command
-            $sample.on('mouseover', '.classname', function () {
-                samplefunc($(this));
-            });
-            
-            //$formname.on('click', '#Accordion', function () {
-            //    updatePostion($(this));
-            //});
+            var $itemZone = $('#item-zone');
 
+            this.addFormItem($itemZone, form.settings.UrlAddTextBox);
+            this.initAccordion($itemZone);
+            this.refreshAccordion($itemZone);
             $formname.on('click', '.btn-add-form-item', function () {
-                addFormItem($(this));
+
+                form.addFormItem($itemZone, $('.form-selection-type').val());
             });
            
         },
-        //Example of a function
-        samplefunc: function (selectedObject) {
-
-        },
-
-        initAccordion: function (selectedObject) {
+   
+        initAccordion: function(selectedObject) {
+            
             $(selectedObject).accordion({
                 header: form.settings.AccordionHeader,
-                heightStyle: form.settings.AccordionStyle,
+                heightStyle: form.settings.AccordionHeightStyle,
                 collapsible: true,
             });
         },
@@ -44,33 +36,44 @@
             $(selectedObject).accordion('refresh');
         },
 
-        addTextBox: function (selectedObject, url) {
+        updatePostion: function(selectedObject){
+            var active = selectedObject.accordion("option", "active");
+        },
+        addFormItem: function (selectedObject, url) {
+
+
             var count = selectedObject.children(form.settings.AccordionHeader).length;
-            
+               
             $.ajax({
                 type: 'GET',
                 url: url,
                 cache: false,
-                data: ({ type: 0, count: count }),
+                data: ({ count: count }),
                 sucess: function (data) {
+                    alert('here');
                     selectedObject.append(data);
                     form.refreshAccordion(selectedObject);
                     selectedObject.accordion({ active: count });
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    } else if (jqXHR.status == 404) {
+                        alert('Requested page not found. [404]');
+                    } else if (jqXHR.status == 500) {
+                        alert('Internal Server Error [500].');
+                    } else if (exception === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (exception === 'timeout') {
+                        alert('Time out error.');
+                    } else if (exception === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('Uncaught Error.\n' + jqXHR.responseText);
+                    }
                 }
-                
+
             });
-
-        },
-
-        updatePostion: function(selectedObject){
-            var active = selectedObject.accordion("option", "active");
-        },
-        addFormItem: function (selecteObject){
-            
         } 
     });//extend
 })(window.jQuery, window.form || (window.form = {}));
-
-jQuery(function () {
-    form.init();
-});

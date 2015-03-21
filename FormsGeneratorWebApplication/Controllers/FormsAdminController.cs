@@ -23,15 +23,16 @@ namespace FormsGeneratorWebApplication.Controllers
           return View(new FormsModel());
         }
 
+
         [HttpGet]
         public ActionResult AddTextBox(int count) {
-            ViewBag.FormCount = count;
-            return PartialView("_TextBoxPartial", new TextBoxModel() { type = TYPE_TEXT_BOX });
+            ViewBag.TextBoxCount = count;
+            return PartialView("_EditTextBoxPartial", new TextBoxModel());
         }
 
        [HttpGet]
-        public ActionResult AddTextArea(int count) { 
-            ViewBag.FormCount = count;
+        public ActionResult AddTextArea(int count) {
+            ViewBag.TextBoxCount = count;
             return PartialView("_TextAreaPartial", new TextAreaModel() { type = TYPE_TEXT_AREA });
         }
 

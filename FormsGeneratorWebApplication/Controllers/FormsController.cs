@@ -20,13 +20,14 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Forms() {
-           return View(new FormsModel());
+        public ActionResult Forms(string guid) {
+            return View(laodContentFromDataBase(guid));
         }
         [HttpGet]
         public ActionResult About() { 
             return View();
         }
+
         //TODO Define method to add iteams
         
         /// <summary>
@@ -40,7 +41,14 @@ namespace FormsGeneratorWebApplication.Controllers
             return View();
         }
 
-      
+        private FormsModel laodContentFromDataBase(string guid) {
+
+            //TODO Laod the content from database
+            return new FormsModel()
+            {
+
+            };
+        }
 
 
 	}

@@ -315,7 +315,7 @@
     <Content Include="Views\FormsAdmin\_RadioButtonPartial.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\FormsAdmin\_TextBoxPartial.cshtml" />
+    <Content Include="Views\FormsAdmin\_EditTextBoxPartial.cshtml" />
     <Content Include="Views\FormsAdmin\MakeForm.cshtml" />
     <Content Include="Views\FormsAdmin\_CheckBoxesPartial.cshtml" />
     <Content Include="Views\FormsAdmin\_TextAreaPartial.cshtml" />

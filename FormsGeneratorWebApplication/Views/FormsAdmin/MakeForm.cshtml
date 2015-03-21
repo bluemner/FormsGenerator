@@ -36,11 +36,18 @@
         <div id="item-zone" > </div>
         <div class="form-group">
             <div class="form-item">
-                
+                <label>Type</label>
+                <select class="form-selection-type">
+                    <option value='@Url.Content("~/FormsAdmin/AddTextBox")'>Text Box</option>
+                    <option value='@Url.Content("~/FormsAdmin/AddTextArea")'>Text Area</option>
+                    <option value='@Url.Content("~/FormsAdmin/AddRadioButton")'>Radio Button</option>
+                    <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
+                </select>
             </div>
 
             <div class="form-item">
-               
+                <label>Count</label>
+                <input type="text" value="1" class="form-selection-count" />
             </div>
         </div>
         <div class="form-group">            
@@ -50,15 +57,18 @@
         </div>
     </fieldset>
 }   
-@Scripts.Render("~/Scripts/views/forms-admin-view.js");
+@Scripts.Render("~/Scripts/views/forms-admin-view.js")
 <script type="text/javascript">
     $(document).ready(function () {
         $.extend(form, {
             settings: {
-                UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
-                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
+                UrlAddTextBox:'@Url.Content("~/FormsAdmin/AddTextBox")',
+                UrlAddTextArea:'@Url.Content("~/FormsAdmin/AddTextArea")',
+                UrlAddTextArea:'@Url.Content("~/FormsAdmin/AddRadioButton")',
+                UrlAddTextArea:'@Url.Content("~/FormsAdmin/AddCheckBoxes")',
             }
         });
+        window.form.init();
     })
 
 </script>

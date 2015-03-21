@@ -9,7 +9,6 @@ namespace FormsGeneratorWebApplication
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-
             RegisterScriptBundles(bundles);
             RegisterStyleBundles(bundles);
         }
@@ -19,7 +18,7 @@ namespace FormsGeneratorWebApplication
             venderBundle.Include(
                 "~/Scripts/vender/jquery.unobtrusive*",
                    "~/Scripts/vender/jquery.validate*",
-                   "~/Scripts/vender/jquery-ui-{version}-custom.js" );
+                   "~/Scripts/vender/jquery-ui-{version}.custom.js" );
             bundles.Add(venderBundle);
 
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
