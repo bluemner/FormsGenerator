@@ -50,10 +50,10 @@
                 cache: false,
                 data: ({ count: count }),
                 sucess: function (data) {
-                    alert('here');
+                    
                     selectedObject.append(data);
-                    form.refreshAccordion(selectedObject);
-                    selectedObject.accordion({ active: count });
+                   // form.refreshAccordion(selectedObject);
+                   // selectedObject.accordion({ active: count });
                 },
                 error: function (jqXHR, exception) {
                     if (jqXHR.status === 0) {
