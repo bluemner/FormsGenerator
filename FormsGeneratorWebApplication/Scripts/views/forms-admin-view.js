@@ -72,5 +72,5 @@
 })(window.jQuery, window.form || (window.form = {}));
 
 jQuery(function () {
-    forms.init();
+    form.init();
 });

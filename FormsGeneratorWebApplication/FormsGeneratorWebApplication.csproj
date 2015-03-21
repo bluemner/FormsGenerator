@@ -260,6 +260,8 @@
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
     <None Include="Scripts\vender\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\vender\jquery-ui-1.11.4.custom.js" />
+    <Content Include="Scripts\vender\jquery-ui-1.11.4.custom.min.js" />
     <Content Include="Scripts\views\forms-admin-view.js" />
     <Content Include="Scripts\views\forms-view.js" />
     <Content Include="Scripts\vender\jquery-1.10.2.js" />
@@ -273,6 +275,12 @@
     <Content Include="Scripts\vender\respond.js" />
     <Content Include="Scripts\vender\respond.min.js" />
     <Content Include="Scripts\vender\_references.js" />
+    <Content Include="Styles\vender\jquery-ui.css" />
+    <Content Include="Styles\vender\jquery-ui.min.css" />
+    <Content Include="Styles\vender\jquery-ui.structure.css" />
+    <Content Include="Styles\vender\jquery-ui.structure.min.css" />
+    <Content Include="Styles\vender\jquery-ui.theme.css" />
+    <Content Include="Styles\vender\jquery-ui.theme.min.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -298,8 +306,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_FormsLayout.cshtml" />
-    <Content Include="Views\_FormsViewStart.cshtml" />
     <Content Include="Views\Forms\Forms.cshtml" />
     <Content Include="Views\Forms\Index.cshtml" />
     <Content Include="Views\Forms\_RadioButtonPartial.cshtml" />

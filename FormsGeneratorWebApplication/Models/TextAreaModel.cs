@@ -10,7 +10,6 @@ namespace FormsGeneratorWebApplication.Models
     {
         [Display(Name = "Answer")]
         public string value { get; set; }
-
-        public int type { get; set; }
+        
     }
 }
