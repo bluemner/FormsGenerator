@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FormsGeneratorWebApplication;
 using FormsGeneratorWebApplication.Controllers;
+
+using FormsGeneratorWebApplication.Models;
 
 namespace FormsGeneratorWebApplication.Tests.Controllers
 {
@@ -77,6 +80,39 @@ namespace FormsGeneratorWebApplication.Tests.Controllers
             AccountController controller = new AccountController();
             //Act
             ActionResult result = controller.Manage(AccountController.ManageMessageId.Error) as ActionResult;
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void ExternalLogin()
+        {
+            //Arrange
+            AccountController controller = new AccountController();
+            //Act
+            ActionResult result = controller.ExternalLogin("", "");
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void LinkLogin()
+        {
+            //Arrange
+            AccountController controller = new AccountController();
+            //Act
+            ActionResult result = controller.LinkLogin("");
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void LogOff()
+        {
+            //Arrange
+            AccountController controller = new AccountController();
+            //Act
+            ActionResult result = controller.LogOff();
             //Assert
             Assert.IsNotNull(result);
         }
