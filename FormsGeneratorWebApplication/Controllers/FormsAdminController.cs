@@ -22,12 +22,11 @@ namespace FormsGeneratorWebApplication.Controllers
         {
           return View(new FormsModel());
         }
-
-
+        
         [HttpGet]
         public ActionResult AddTextBox(int count) {
             ViewBag.TextBoxCount = count.ToString();
-            return PartialView("~/Views/FormsAdmin/t.cshtml");
+            return PartialView("_EditTextBoxPartial");
         }
 
        [HttpGet]

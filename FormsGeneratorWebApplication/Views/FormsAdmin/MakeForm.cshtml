@@ -12,7 +12,7 @@
 @using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) { 
 @Html.AntiForgeryToken()
                
-              @Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel())
+              
     <fieldset>
         <h3>Form Title</h3>
         <div class="from-group">
@@ -36,7 +36,7 @@
             </form>
         </div>
 
-        <div id="item-zone" > </div>
+        <div id="item-zone" >@Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel()) </div>
         <div class="form-group">
             <div class="form-item">
                 <label>Type</label>

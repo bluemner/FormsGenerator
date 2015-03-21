@@ -50,7 +50,7 @@
                 cache: false,
                 data: ({ count: count }),
                 sucess: function (data) {
-                    
+                    console.log("AddForIteam:" + data);
                     selectedObject.append(data);
                    // form.refreshAccordion(selectedObject);
                    // selectedObject.accordion({ active: count });

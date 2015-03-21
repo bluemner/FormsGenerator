@@ -1,16 +1,18 @@
 ﻿@using FormsGeneratorWebApplication.Models;
-@model IEnumerable<FormsGeneratorWebApplication.Models.FormsModel>
+
+@model FormsModel
 @{
     ViewBag.Title = "Form";
-    var items = Model;
+    var items = Model.FormItemIList;
 }
 
 <h2>Please fill out the folowing form:</h2>
 @using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
 
-    @for (var i = 0; i < items.Count(); ++i)
+  for (var i = 0; i < items.Count(); ++i)
    {
+      
          var currentItem = items.ElementAt(i);
                if (currentItem.GetType() == typeof(CheckBoxesModel))
        {
