@@ -162,6 +162,7 @@
     <Compile Include="Controllers\FormsAdminController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\FormsDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

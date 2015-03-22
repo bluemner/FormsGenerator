@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 
 namespace FormsGeneratorWebApplication.Models
 {
@@ -29,8 +28,5 @@ namespace FormsGeneratorWebApplication.Models
         public DateTime EndDate { get; set; }
         
     }
-    public class FormsModelDBContext: DbContext
-    {
-        public DbSet<FormsModel> Forms { get; set; }
-    }
+   
 }

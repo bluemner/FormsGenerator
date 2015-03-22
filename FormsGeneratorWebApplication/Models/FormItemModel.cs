@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 
 namespace FormsGeneratorWebApplication.Models
@@ -22,8 +21,5 @@ namespace FormsGeneratorWebApplication.Models
         public int type { get; set; }
     }
 
-    public class FormItemModelDBContext : DbContext
-    {
-        public DbSet<FormItemModel> FormItems { get; set; }
-    }
+    
 }
