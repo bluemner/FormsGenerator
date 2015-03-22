@@ -15,7 +15,8 @@
               
     <fieldset>
         <h3>Form Title</h3>
-        <div class="from-group">
+        <br />
+        <div class="form-group">
             <div class="form-item">
                 @Html.LabelFor(m => m.Name)
                 @Html.TextBoxFor(m =>m.Name)
@@ -36,7 +37,6 @@
             </form>
         </div>
 
-        <div id="item-zone" >@Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel()) </div>
         <div class="form-group">
             <div class="form-item">
                 <label>Type</label>
@@ -53,6 +53,9 @@
                 <input type="text" value="1" class="form-selection-count" />
             </div>
         </div>
+
+        @*<div id="item-zone" >@Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel()) </div>*@
+
         <div class="form-group">            
             <div class="form-item">
                 <input type="button" value="Add Form Item" class="btn btn-add-form-item" />
@@ -75,3 +78,27 @@
     })
 
 </script>
+<style>
+    label{
+        display: inline-block;
+        float: left;
+        clear: left;
+        width: 100px;
+        text-align: right;
+        margin-bottom: 10px;
+    }
+    input, select {
+        display: inline-block;
+        float: left;
+        margin-left: 15px;
+    }
+    div.form-group, label {
+        padding: 10px;
+    }
+    select option {
+        color: black;
+    }
+    input[type=submit] {
+        display: block;
+    }
+</style>
