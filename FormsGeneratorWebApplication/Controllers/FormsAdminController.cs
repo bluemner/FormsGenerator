@@ -21,7 +21,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult MakeForm() 
         {
-          return View(new FormsModel());
+            Console.WriteLine("started");
+            return View(new FormsModel());
         
         }
         [HttpPost]
@@ -53,6 +54,8 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
            }
            db.FormModels.Add(model);
+           db.SaveChanges();
+           Console.WriteLine("make forms ran");
                return View("Sucess");
         }
         
