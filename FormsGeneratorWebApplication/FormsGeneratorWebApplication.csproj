@@ -171,6 +171,7 @@
     <Compile Include="Models\FormItemModel.cs" />
     <Compile Include="Models\FormsModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RadioButtonModel.cs" />
     <Compile Include="Models\TextAreaModel.cs" />
     <Compile Include="Models\TextBoxModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

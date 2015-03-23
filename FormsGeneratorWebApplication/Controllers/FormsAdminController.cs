@@ -21,12 +21,35 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult MakeForm() 
         {
           return View(new FormsModel());
+        
+        }
+        [HttpPost]
+        public ActionResult MakeForms(FormsModel model ){
+           var formItemList = model.FormItemIList;
+            
+           for (int i = 0; i < formItemList.Count; ++i) { 
+                var currentItem = formItemList[i];
+
+                if (currentItem.GetType() == typeof(CheckBoxesModel))
+                {
+                    var casted = ((CheckBoxesModel)(currentItem));
+                }
+                else if (currentItem.GetType() == typeof(TextAreaModel))
+                {
+                  
+                }
+                else if (currentItem.GetType() == typeof(TextBoxModel))
+                {
+               
+                }
+           }
+               return View("Sucess");
         }
         
         [HttpGet]
         public ActionResult AddTextBox(int count) {
             ViewBag.TextBoxCount = count.ToString();
-            return PartialView("_EditTextBoxPartial");
+            return PartialView("_EditTextBoxPartial", new TextBoxModel());
         }
 
        [HttpGet]
@@ -34,6 +57,35 @@ namespace FormsGeneratorWebApplication.Controllers
             ViewBag.TextBoxCount = count;
             return PartialView("_TextAreaPartial", new TextAreaModel() { type = TYPE_TEXT_AREA });
         }
+
+       [HttpGet]
+       public ActionResult AddCheckBox(int count, int numberOfSubElements)
+       {
+           var CheckboxModel = new CheckBoxesModel();
+           CheckboxModel.checkboxes = new List<checkbox>();
+
+           for(int i=0; i< numberOfSubElements; ++i){
+              CheckboxModel.checkboxes.Add(new checkbox());
+           }
+
+           ViewBag.TextBoxCount = count;
+           return PartialView("_CheckBoxesPartial",CheckboxModel);
+       }
+
+       [HttpGet]
+       public ActionResult AddRadioButton(int count, int numberOfSubElements)
+       {
+           var RadioMod = new RadioButtonModel();
+           RadioMod.options = new List<string>();
+
+           for (int i = 0; i < numberOfSubElements; ++i)
+           {
+               RadioMod.options.Add("");
+           }
+
+           ViewBag.TextBoxCount = count;
+           return PartialView("_RadioButtonPartial", RadioMod);
+       }
 
 	}
 }

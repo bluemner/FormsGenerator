@@ -9,6 +9,8 @@ namespace FormsGeneratorWebApplication.Models
     {
 
         public IList<checkbox> checkboxes { get; set; }
+
+        public int checkedOption { get; set; }
         [Display(Name = "Minimum Selection")]
         public int minCheckable { get; set; }
         [Display(Name = "Maximum Selection")]
