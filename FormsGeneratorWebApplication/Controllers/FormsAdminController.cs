@@ -59,7 +59,7 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
        [HttpGet]
-       public ActionResult AddCheckBox(int count, int numberOfSubElements)
+       public ActionResult AddCheckBoxes(int count, int numberOfSubElements)
        {
            var CheckboxModel = new CheckBoxesModel();
            CheckboxModel.checkboxes = new List<checkbox>();
