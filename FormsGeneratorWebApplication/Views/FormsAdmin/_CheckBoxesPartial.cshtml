@@ -22,7 +22,7 @@
             @Html.TextBoxFor(m => m.minCheckable, new { Name = "[" + index + "].value" })
         </div>
         <div class="form-item">
-            @*@Html.LabelFor(m => m.maxCheckable)*@
+            Html.LabelFor(m => m.maxCheckable+"[" + index + "]")
             @Html.TextBoxFor(m => m.maxCheckable, new { Name = "[" + index + "].value" })
         </div>
 
@@ -36,7 +36,7 @@
                @Html.TextBoxFor(m =>m.checkboxes[i].answer)
             </div>
             <div class="form-item">
-               @Html.LabelFor(m=>m.checkboxes[i].isChecked)
+               @*@Html.LabelFor(m=>m.checkboxes[i].isChecked)*@
                @Html.CheckBoxFor(m=>m.checkboxes[i].isChecked)
             </div>
         </div>

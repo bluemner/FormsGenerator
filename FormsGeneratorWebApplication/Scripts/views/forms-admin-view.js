@@ -58,7 +58,7 @@
                         form.refreshAccordion(selectedObject);
                     });
                 } else {
-                    $('#test').load(url + '?count=' + count + ",numberOfSubElements="+subelem, function () {
+                    $('#test').load(url + '?count=' + count + "&numberOfSubElements="+subelem, function () {
                         /* When load is done */
                         selectedObject.append($(test).html());
                         form.refreshAccordion(selectedObject);
