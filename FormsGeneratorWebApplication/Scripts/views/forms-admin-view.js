@@ -12,14 +12,17 @@
         init: function () {
             var $formname = $('#new-form');
             var $itemZone = $('#item-zone');
-
+            
             this.initAccordion($itemZone);
-            this.addFormItem($itemZone, form.settings.UrlAddTextBox);
+      
       
             this.refreshAccordion($itemZone);
             $formname.on('click', '.btn-add-form-item', function () {
 
                 form.addFormItem($itemZone, $('.form-selection-type').val());
+            });
+            $formname.on('change', '.form-selection-type', function () {
+
             });
            
         },
@@ -43,14 +46,27 @@
         addFormItem: function (selectedObject, url) {
             
             var count = selectedObject.children(form.settings.AccordionHeader).length;
-            var addCount = parseInt($('form-selection-count').val() );
+            var addCount = parseInt($('.form-selection-count').val() );
             for (var i = 0; i < addCount; ++i) {
 
-                $('#test').load(url + '?count=' + count);
-                selectedObject.append($(test).html());
-                this.refreshAccordion(selectedObject);
+                var subelem = $('.number-Of-sub-elements').val();
+                if (subelem < 0) {
+                    // $('#test').html("");
+                    $('#test').load(url + '?count=' + count, function () {
+                        /* When load is done */
+                        selectedObject.append($(test).html());
+                        form.refreshAccordion(selectedObject);
+                    });
+                } else {
+                    $('#test').load(url + '?count=' + count + ",numberOfSubElements="+subelem, function () {
+                        /* When load is done */
+                        selectedObject.append($(test).html());
+                        form.refreshAccordion(selectedObject);
+                    });
+                }
 
             }
+         
             //$.ajax({
             //    type: 'GET',
             //    url: url,
@@ -85,6 +101,14 @@
 
             //});
 
-        } 
+        } ,
+
+        updateSlected: function(selectedObject){
+            switch (selectedObject) {
+                case UrlAddTextBox: $('')
+                    break;
+            }
+        }
+
     });//extend
 })(window.jQuery, window.form || (window.form = {}));
