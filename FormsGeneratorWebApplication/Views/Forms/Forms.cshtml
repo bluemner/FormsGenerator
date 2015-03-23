@@ -14,9 +14,9 @@
    {
       
          var currentItem = items.ElementAt(i);
-               if (currentItem.GetType() == typeof(CheckBoxesModel))
-       {
-                @Html.Partial("~/Views/Forms/_RaidoButtonPartial",currentItem)
+        if (currentItem.GetType() == typeof(CheckBoxesModel))
+        {
+            @Html.Partial("~/Views/Forms/_RadioButtonPartial",currentItem)
         }
         else if (currentItem.GetType() == typeof(TextAreaModel))
         {
