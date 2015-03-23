@@ -42,8 +42,8 @@ namespace FormsGeneratorWebApplication
 
         public static void RegisterStyleBundles(BundleCollection bundles) {
             bundles.Add(new StyleBundle("~/Content/css").Include(
-             "~/Content/bootstrap.css",
-             "~/Content/site.css",
+             "~/Content/bootstrap*",
+             "~/Content/Site.css",
              "~/Styles/vender/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Styles/vender/main-bundle").Include("~/Styles/vender/jquery-ui.css"));

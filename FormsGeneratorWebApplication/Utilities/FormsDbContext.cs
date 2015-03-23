@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using FormsGeneratorWebApplication.Models;
 
-namespace FormsGeneratorWebApplication.DAL
+namespace FormsGeneratorWebApplication.Utilities
 {
     //http://www.ryadel.com/2014/10/20/asp-net-setup-mvc5-website-mysql-entity-framework-6-code-first-vs2013/
     public class FormsDbContext : DbContext
@@ -16,8 +16,13 @@ namespace FormsGeneratorWebApplication.DAL
             Database.SetInitializer<FormsDbContext>(new MyDbInitializer());
         }
         
-        public DbSet<FormsModel> Forms { get; set; }
-        public DbSet<FormItemModel> FormItems { get; set; }
+        public DbSet<FormsModel> FormModels { get; set; }
+        public DbSet<CheckBoxesModel> CheckBoxModels { get; set; }
+        public DbSet<TextAreaModel> TextAreaModels { get; set; }
+        public DbSet<TextBoxModel> TextBoxModels { get; set; }
+        public DbSet<RadioButtonModel> RadioButtonModels { get; set; }
+        //public DbSet<ResultModel> ResultModels { get; set; }
+
  
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

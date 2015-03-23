@@ -13,7 +13,7 @@ namespace FormsGeneratorWebApplication.Models
     {
 
         [Required(ErrorMessage = "")]
-        public  IList<FormItemModel> FormItemIList { get; set; }
+        public virtual IList<FormItemModel> FormItemIList { get; set; }
         
         [Display(Name = "Form Name")]
         [Required(ErrorMessage="Please enter a name")]
