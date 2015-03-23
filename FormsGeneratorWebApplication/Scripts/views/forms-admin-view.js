@@ -22,7 +22,7 @@
                 form.addFormItem($itemZone, $('.form-selection-type').val());
             });
             $formname.on('change', '.form-selection-type', function () {
-
+                form.updateSlected($(this));
             });
            
         },
@@ -103,11 +103,15 @@
 
         } ,
 
-        updateSlected: function(selectedObject){
-            switch (selectedObject) {
-                case UrlAddTextBox: $('')
-                    break;
-            }
+        updateSlected: function (selectedObject) {
+
+            if (selectedObject.val().indexOf('AddRadioButton') > 0 || selectedObject.val().indexOf('AddCheckBoxes') >0)
+                $('.sub-elements').show();
+            else
+                $('.sub-elements').hide();
+
+              
+            
         }
 
     });//extend
