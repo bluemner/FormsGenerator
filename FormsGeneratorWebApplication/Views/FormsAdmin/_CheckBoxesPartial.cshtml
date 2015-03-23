@@ -6,7 +6,7 @@
 
 <div class="ui-accordion-header">
     <div class="form-item">
-        <h3>Text Box</h3>
+        <h3>Check Boxes</h3>
     </div>
 </div>
 <div>
@@ -14,6 +14,7 @@
         <div class="form-item">
             @Html.LabelFor(m => m.question)
             @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question" })
+           
         </div>   
     </div>
     <div class="form-group">
@@ -22,7 +23,7 @@
             @Html.TextBoxFor(m => m.minCheckable, new { Name = "[" + index + "].value" })
         </div>
         <div class="form-item">
-            @*@Html.LabelFor(m => m.maxCheckable)*@
+            @Html.LabelFor(m => m.maxCheckable)
             @Html.TextBoxFor(m => m.maxCheckable, new { Name = "[" + index + "].value" })
         </div>
 
@@ -35,11 +36,13 @@
                @Html.LabelFor(m =>m.checkboxes[i].answer)
                @Html.TextBoxFor(m =>m.checkboxes[i].answer)
             </div>
-            <div class="form-item">
-               @Html.LabelFor(m=>m.checkboxes[i].isChecked)
-               @Html.CheckBoxFor(m=>m.checkboxes[i].isChecked)
-            </div>
+  
         </div>
     }   
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="button" class="btn btn-danger btn-remove-form-item">Remove</button>
+        </div>
+    </div>
  @Html.HiddenFor(m => m.postion, new { Name = "[" + index + "].postion" })
 </div>

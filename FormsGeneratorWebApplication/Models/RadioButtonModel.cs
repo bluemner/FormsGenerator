@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FormsGeneratorWebApplication.Models
 {
-    public class RadioButtonModel
+    public class RadioButtonModel : FormItemModel
     {
 
         public IList<string> options { get; set; }

@@ -6,29 +6,47 @@
 
         settings: {
             AccordionHeader: '.ui-accordion-header',
-            AccordionHeightStyle:  'content',
-        },        
+            AccordionHeightStyle: 'content',
+        },
 
         init: function () {
             var $formname = $('#new-form');
             var $itemZone = $('#item-zone');
-            
+          
+
             this.initAccordion($itemZone);
-      
-      
+            form.updateSlected(null);
+            
+            $("input[type='number']").on("click", function () {
+                $(this).select();
+            });
+
+            $("input[type='text']").on("click", function () {
+                $(this).select();
+            });
             this.refreshAccordion($itemZone);
             $formname.on('click', '.btn-add-form-item', function () {
-
                 form.addFormItem($itemZone, $('.form-selection-type').val());
             });
             $formname.on('change', '.form-selection-type', function () {
-
+                form.updateSlected($(this));
             });
-           
-        },
-   
-        initAccordion: function(selectedObject) {
+
+            $formname.on('click', '.date', function () {
+                form.initDateTimePicker($(this));
+            });
+
+            $formname.on('click', '.btn-remove-form-item', function () {
+                form.removeAccordion($(this));
+            });
             
+        },
+
+        initDateTimePicker: function(selectedObject){
+            selectedObject.datetimepicker();
+        },
+
+        initAccordion: function (selectedObject) {
             $(selectedObject).accordion({
                 header: form.settings.AccordionHeader,
                 heightStyle: form.settings.AccordionHeightStyle,
@@ -36,17 +54,29 @@
             });
         },
 
-        refreshAccordion: function(selectedObject){
+        refreshAccordion: function (selectedObject) {
             $(selectedObject).accordion('refresh');
         },
 
-        updatePostion: function(selectedObject){
+        removeAccordion: function (selectedObject) {
+
+            selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
+                console.log('remove header');
+            });
+
+            selectedObject.parents('.ui-accordion-content').slideUp('slow', function (){
+                console.log('remove content');
+            });
+        },
+
+        updatePostion: function (selectedObject) {
             var active = selectedObject.accordion("option", "active");
         },
         addFormItem: function (selectedObject, url) {
-            
+
             var count = selectedObject.children(form.settings.AccordionHeader).length;
-            var addCount = parseInt($('.form-selection-count').val() );
+
+            var addCount = parseInt($('.form-selection-count').val());
             for (var i = 0; i < addCount; ++i) {
 
                 var subelem = $('.number-Of-sub-elements').val();
@@ -56,17 +86,19 @@
                         /* When load is done */
                         selectedObject.append($(test).html());
                         form.refreshAccordion(selectedObject);
+                        selectedObject.accordion({ active: count });
                     });
                 } else {
-                    $('#test').load(url + '?count=' + count + ",numberOfSubElements="+subelem, function () {
+                    $('#test').load(url + '?count=' + count + "&numberOfSubElements=" + subelem, function () {
                         /* When load is done */
                         selectedObject.append($(test).html());
                         form.refreshAccordion(selectedObject);
+                        selectedObject.accordion({ active: count });
                     });
                 }
 
             }
-         
+
             //$.ajax({
             //    type: 'GET',
             //    url: url,
@@ -101,12 +133,21 @@
 
             //});
 
-        } ,
+        },
 
-        updateSlected: function(selectedObject){
-            switch (selectedObject) {
-                case UrlAddTextBox: $('')
-                    break;
+        updateSlected: function (selectedObject) {
+
+            
+
+            if (selectedObject !=null && ( selectedObject.val().indexOf('AddRadioButton') > 0 || selectedObject.val().indexOf('AddCheckBoxes') > 0))
+            {
+                $('.sub-elements').show();
+                $('.number-Of-sub-elements').val(1);
+            }
+            else
+            {
+                $('.sub-elements').hide();
+                $('.number-Of-sub-elements').val(-1);
             }
         }
 
