@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +15,7 @@ namespace FormsGeneratorWebApplication.Controllers
     {
         public static int TYPE_TEXT_BOX = 0;
         public static int TYPE_TEXT_AREA = 1;
+        private FormsDbContext db = new FormsDbContext();
 
         // GET: /FormsAdmin/
         public ActionResult Index()
@@ -27,7 +32,7 @@ namespace FormsGeneratorWebApplication.Controllers
         }
         [HttpPost]
         public ActionResult MakeForms(FormsModel model ){
-            FormsDbContext db = new FormsDbContext();
+           
             var formItemList = model.FormItemIList;
             
            for (int i = 0; i < formItemList.Count; ++i) { 
