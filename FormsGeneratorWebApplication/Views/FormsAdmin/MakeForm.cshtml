@@ -53,7 +53,7 @@
                 <label class="col-lg-2 control-label"></label>
                 <div class=" col-lg-8">
                     <div id="item-zone">
-                        @Html.Partial("~/Views/FormsAdmin/_EditTextBoxPartial.cshtml", new TextBoxModel())
+                       
                     </div>
                 </div>
             </div>
@@ -68,24 +68,30 @@
                         <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
                     </select>
                 </div>
+                <div class="col-lg-11">
+                    <label class="sub-elements" hidden>Number:</label>
+                </div>
+                <div class="col-lg-12">
+                    <input type="number" class="number-Of-sub-elements form-control sub-elements" hidden value="-1" />
+                </div>
             </div>
 
             <div class="form-group">
                 <label class="col-lg-2 control-label ">Count</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control form-selection-count" value="1">
+                    <input type="number" class="form-control form-selection-count" value="1">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button type="button" class="btn btn-primary btn-lg">Add FormItem</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-add-form-item">Add FormItem</button>
                     <button type="submit" class="btn btn-success btn-lg">Submit</button>
                 </div>
             </div>
         </fieldset>
     </div>
-
+            <div id="test" hidden></div>
 }
 
 @Scripts.Render("~/Scripts/views/forms-admin-view.js")
@@ -95,8 +101,8 @@
             settings: {
                 UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
                 UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
-                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddRadioButton")',
-                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddCheckBoxes")',
+                UrlAddRaidoBtton: '@Url.Content("~/FormsAdmin/AddRadioButton")',
+                UrlAddCheckBoxes: '@Url.Content("~/FormsAdmin/AddCheckBoxes")',
             }
         });
         window.form.init();
