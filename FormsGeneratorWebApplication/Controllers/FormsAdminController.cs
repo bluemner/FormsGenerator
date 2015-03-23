@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FormsGeneratorWebApplication.Models;
+using FormsGeneratorWebApplication.Utilities;
 namespace FormsGeneratorWebApplication.Controllers
 {
     public class FormsAdminController : Controller
@@ -25,7 +26,8 @@ namespace FormsGeneratorWebApplication.Controllers
         }
         [HttpPost]
         public ActionResult MakeForms(FormsModel model ){
-           var formItemList = model.FormItemIList;
+            FormsDbContext db = new FormsDbContext();
+            var formItemList = model.FormItemIList;
             
            for (int i = 0; i < formItemList.Count; ++i) { 
                 var currentItem = formItemList[i];
@@ -33,16 +35,24 @@ namespace FormsGeneratorWebApplication.Controllers
                 if (currentItem.GetType() == typeof(CheckBoxesModel))
                 {
                     var casted = ((CheckBoxesModel)(currentItem));
+                    db.CheckBoxModels.Add(casted);
+                    db.SaveChanges();
+                    
                 }
                 else if (currentItem.GetType() == typeof(TextAreaModel))
                 {
-                  
+                    var casted = ((TextAreaModel)(currentItem));
+                    db.TextAreaModels.Add(casted);
+                    db.SaveChanges();
                 }
                 else if (currentItem.GetType() == typeof(TextBoxModel))
                 {
-               
+                    var casted = ((TextBoxModel)(currentItem));
+                    db.TextBoxModels.Add(casted);
+                    db.SaveChanges();
                 }
            }
+           db.FormModels.Add(model);
                return View("Sucess");
         }
         
