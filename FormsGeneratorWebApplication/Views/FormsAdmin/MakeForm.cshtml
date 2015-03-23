@@ -4,101 +4,102 @@
     ViewBag.TextBoxCount = '0';
 }
 
-<h2>MakeForm</h2>
 
 @model  FormsGeneratorWebApplication.Models.FormsModel
 
 
-@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) { 
-@Html.AntiForgeryToken()
-               
-              
-    <fieldset>
-        <h3>Form Title</h3>
-        <br />
-        <div class="form-group">
-            <div class="form-item">
-                @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m =>m.Name)
-                @Html.ValidationMessageFor(m =>m.Name)
-            </div>
-        </div>
+@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
+    @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            <form class="form-item">
-                @Html.LabelFor(m=> m.StartDate)
-                @Html.TextBoxFor(m=> m.StartDate,  null, new {@class ="date"})
-                @Html.ValidationMessageFor(m => m.StartDate)
-            </form>
-            <form class="form-item">
-                @Html.LabelFor(m => m.EndDate)
-                @Html.TextBoxFor(m => m.EndDate)
-                @Html.ValidationMessageFor(m => m.EndDate)
-            </form>
-        </div>
+    
+    <div class="form-horizontal">
+        <fieldset>
+            <legend>MakeForm</legend>
 
-        <div class="form-group">
-            <div class="form-item">
-                <label>Type</label>
-                <select class="form-selection-type">
-                    <option value='@Url.Content("~/FormsAdmin/AddTextBox")'>Text Box</option>
-                    <option value='@Url.Content("~/FormsAdmin/AddTextArea")'>Text Area</option>
-                    <option value='@Url.Content("~/FormsAdmin/AddRadioButton")'>Radio Button</option>
-                    <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
-                </select>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">@Html.LabelFor(m => m.Name)</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    <p class="text-warning">@Html.ValidationMessageFor(m => m.Name)</p>
+                </div>
             </div>
-  
-            <div class="form-item">
-                <label>Count</label>
-                <input type="text" value="1" class="form-selection-count" />
-            </div>
-        </div>
 
-        @*<div id="item-zone" >@Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel()) </div>*@
-
-        <div class="form-group">            
-            <div class="form-item">
-                <input type="button" value="Add Form Item" class="btn btn-add-form-item" />
+            <div class="form-group">
+                <label class="col-lg-2 control-label">@Html.LabelFor(m => m.StartDate)</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.StartDate, null, new { @class = "date form-control" })
+                    @Html.ValidationMessageFor(m => m.StartDate)
+                </div>
             </div>
-        </div>
-    </fieldset>
-}   
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">@Html.LabelFor(m => m.EndDate)</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.EndDate, null, new { @class = "date form-control" })
+                    @Html.ValidationMessageFor(m => m.EndDate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label"></label>
+                <div class=" col-lg-8">
+                    <div id="item-zone">
+                        @Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel())
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label"></label>
+                <div class=" col-lg-8">
+                    <div id="item-zone">
+                        @Html.Partial("~/Views/FormsAdmin/_EditTextBoxPartial.cshtml", new TextBoxModel())
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Type</label>
+                <div class="col-lg-10">
+                    <select class="form-control form-selection-type" id="select">
+                        <option value='@Url.Content("~/FormsAdmin/AddTextBox")'>Text Box</option>
+                        <option value='@Url.Content("~/FormsAdmin/AddTextArea")'>Text Area</option>
+                        <option value='@Url.Content("~/FormsAdmin/AddRadioButton")'>Radio Button</option>
+                        <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label ">Count</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control form-selection-count" value="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="button" class="btn btn-primary btn-lg">Add FormItem</button>
+                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+}
+
 @Scripts.Render("~/Scripts/views/forms-admin-view.js")
 <script type="text/javascript">
     $(document).ready(function () {
         $.extend(form, {
             settings: {
-                UrlAddTextBox:'@Url.Content("~/FormsAdmin/AddTextBox")',
-                UrlAddTextArea:'@Url.Content("~/FormsAdmin/AddTextArea")',
-                UrlAddTextArea:'@Url.Content("~/FormsAdmin/AddRadioButton")',
-                UrlAddTextArea:'@Url.Content("~/FormsAdmin/AddCheckBoxes")',
+                UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
+                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
+                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddRadioButton")',
+                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddCheckBoxes")',
             }
         });
         window.form.init();
     })
 
 </script>
-<style>
-    label{
-        display: inline-block;
-        float: left;
-        clear: left;
-        width: 100px;
-        text-align: right;
-        margin-bottom: 10px;
-    }
-    input, select {
-        display: inline-block;
-        float: left;
-        margin-left: 15px;
-    }
-    div.form-group, label {
-        padding: 10px;
-    }
-    select option {
-        color: black;
-    }
-    input[type=submit] {
-        display: block;
-    }
-</style>

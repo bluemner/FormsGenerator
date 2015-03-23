@@ -1,5 +1,4 @@
-﻿
-@model  FormsGeneratorWebApplication.Models.TextAreaModel
+﻿@model  FormsGeneratorWebApplication.Models.TextAreaModel
 
 @{
     var index = Convert.ToInt16((int)ViewBag.TextBoxCount);
@@ -7,20 +6,33 @@
 
 <div class="ui-accordion-header">
     <div class="form-item">
-        <h3>Text Box</h3>
+        <h3>Text Area</h3>
     </div>
 </div>
-<div>
-    <div class="form-group">
-        <div class="form-item">
-            @Html.LabelFor(m => m.question)
-            @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question" })
-        </div>
 
-        <div class="form-item">
-            @Html.LabelFor(m => m.value)
-            @Html.TextBoxFor(m => m.value, new { Name = "[" + index + "].value" })
-        </div>
+<div>
+    <div class="form-horizontal">
+        <fieldset>
+            <div class="row">
+                <div class="form-group">
+                    <label for="inputFormName" class="col-lg-2 control-label">@Html.LabelFor(m => m.question)</label>
+                    <div class="col-xs-10">
+                        @Html.TextAreaFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputFormName" class="col-lg-2 control-label">@Html.LabelFor(m => m.value)</label>
+                    <div class="col-xs-10">
+                        @Html.TextAreaFor(m => m.value, new { Name = "[" + index + "].value", @class = "form-control Answer-inputWidthHeight" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="button" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.postion, new { Name = "[" + index + "].postion" })
+        </fieldset>
     </div>
-    @Html.HiddenFor(m => m.postion, new { Name = "[" + index + "].postion" })
 </div>

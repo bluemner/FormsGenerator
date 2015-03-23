@@ -6784,3 +6784,14 @@ a.list-group-item-danger.active:focus {
 .popover-title {
   border: none;
 }
+/*
+    Added CSS BY US
+*/
+    .Answer-inputWidthHeight {
+        max-width: 550px;
+        max-height: 100px;
+    }
+    .question-inputWidth{
+        max-width: 550px;
+        max-height: 42px;
+    }
