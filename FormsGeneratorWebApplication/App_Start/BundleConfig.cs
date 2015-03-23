@@ -17,8 +17,9 @@ namespace FormsGeneratorWebApplication
             var venderBundle = new ScriptBundle("~/Scripts/vender/vender-bundle") { Orderer = new AsIsBundleOrderer() { } };
             venderBundle.Include(
                 "~/Scripts/vender/jquery.unobtrusive*",
-                   "~/Scripts/vender/jquery.validate*",
-                   "~/Scripts/vender/jquery-ui-{version}.custom.js" );
+                "~/Scripts/vender/jquery.validate*",
+                "~/Scripts/vender/jquery-ui-{version}.custom.js",
+                "~/Scripts/vender/jquery-ui-timepicker-addon.js");
             bundles.Add(venderBundle);
 
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -35,16 +36,15 @@ namespace FormsGeneratorWebApplication
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/vender/bootstrap.js",
-                "~/Scripts/vender/respond.js"));
-
-  
+                "~/Scripts/vender/respond.js"));  
         }
 
         public static void RegisterStyleBundles(BundleCollection bundles) {
             bundles.Add(new StyleBundle("~/Content/css").Include(
              "~/Content/bootstrap*",
              "~/Content/Site.css",
-             "~/Styles/vender/jquery-ui.css"));
+             "~/Styles/vender/jquery-ui.css",
+             "~/Styles/vender/jquery-ui-timepicker-addon.css"));
 
             bundles.Add(new StyleBundle("~/Styles/vender/main-bundle").Include("~/Styles/vender/jquery-ui.css"));
         }

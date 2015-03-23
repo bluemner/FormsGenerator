@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
     @Html.AntiForgeryToken()
-
     
     <div class="form-horizontal">
         <fieldset>
@@ -19,7 +18,7 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.Name)</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
                     <p class="text-warning">@Html.ValidationMessageFor(m => m.Name)</p>
                 </div>
             </div>
@@ -27,7 +26,7 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.StartDate)</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.StartDate, null, new { @class = "date form-control" })
+                    @Html.TextBoxFor(m => m.StartDate, null, new { @Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
                     @Html.ValidationMessageFor(m => m.StartDate)
                 </div>
             </div>
@@ -35,7 +34,7 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.EndDate)</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.EndDate, null, new { @class = "date form-control" })
+                    @Html.TextBoxFor(m => m.EndDate, null, new { @Value = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
                     @Html.ValidationMessageFor(m => m.EndDate)
                 </div>
             </div>
@@ -53,7 +52,6 @@
                 <label class="col-lg-2 control-label"></label>
                 <div class=" col-lg-8">
                     <div id="item-zone">
-                       
                     </div>
                 </div>
             </div>
@@ -73,14 +71,14 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label sub-elements" hidden>Number</label>
                 <div class="col-lg-10">
-                    <input type="number" class="form-control number-Of-sub-elements sub-elements" hidden value="-1">
+                    <input type="number" class="form-control number-Of-sub-elements sub-elements"  value="-1" min="1">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-lg-2 control-label ">Count</label>
                 <div class="col-lg-10">
-                    <input type="number" class="form-control form-selection-count" value="1">
+                    <input type="number" class="form-control form-selection-count" value="1" min="1">
                 </div>
             </div>
 
@@ -92,7 +90,7 @@
             </div>
         </fieldset>
     </div>
-            <div id="test" hidden></div>
+    <div id="test" hidden></div>
 }
 
 @Scripts.Render("~/Scripts/views/forms-admin-view.js")
