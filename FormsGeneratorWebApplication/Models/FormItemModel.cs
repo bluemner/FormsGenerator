@@ -8,6 +8,9 @@ namespace FormsGeneratorWebApplication.Models
 {
     public class FormItemModel
     {
+        [Key]
+        public int id { get; set; }
+
         [Display(Name="Position")]
         [Required(ErrorMessage="No postion set")]
         public int postion { get; set; }
