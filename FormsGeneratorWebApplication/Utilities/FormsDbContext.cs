@@ -32,7 +32,7 @@ namespace FormsGeneratorWebApplication.Utilities
         }
     }
 
-    public class MyDbInitializer : DropCreateDatabaseAlways<FormsDbContext>//Fill this with mock data
+    public class MyDbInitializer : System.Data.Entity.DropCreateDatabaseAlways<FormsDbContext>//Fill this with mock data
     {
         protected override void Seed(FormsDbContext context)
         {

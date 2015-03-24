@@ -26,12 +26,12 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult MakeForm() 
         {
-            Console.WriteLine("started");
+            db.FormModels.Load();
             return View(new FormsModel());
         
         }
         [HttpPost]
-        public ActionResult MakeForms(FormsModel model ){
+        public ActionResult MakeForm(FormsModel model ){
            
             var formItemList = model.FormItemIList;
             

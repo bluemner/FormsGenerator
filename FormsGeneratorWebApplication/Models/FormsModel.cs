@@ -17,6 +17,7 @@ namespace FormsGeneratorWebApplication.Models
         
         [Display(Name = "Form Name")]
         [Required(ErrorMessage="Please enter a name")]
+        [Key]
         public string Name { get; set; }
 
         [Display(Name = "Start Date")]
