@@ -26,7 +26,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult MakeForm() 
         {
-            db.FormModels.Load();
+            //db.FormModels.Load();
             return View(new FormsModel());
         
         }
