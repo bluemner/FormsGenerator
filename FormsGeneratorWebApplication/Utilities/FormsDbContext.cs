@@ -28,7 +28,7 @@ namespace FormsGeneratorWebApplication.Utilities
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<FormsModel>().HasMany<FormItemModel>(c => c.FormItemIList);
+           
         }
     }
 

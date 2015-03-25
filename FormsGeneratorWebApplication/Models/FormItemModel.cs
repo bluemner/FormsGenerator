@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FormsGeneratorWebApplication.Models
 {
@@ -22,6 +23,9 @@ namespace FormsGeneratorWebApplication.Models
         [Display(Name = "Type")]
         [Required(ErrorMessage = "Type is required")]
         public int type { get; set; }
+
+        public virtual FormsModel FormsModel { get; set; }
+
     }
 
     
