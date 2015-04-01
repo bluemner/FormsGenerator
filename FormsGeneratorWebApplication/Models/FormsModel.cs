@@ -14,19 +14,19 @@ namespace FormsGeneratorWebApplication.Models
         [Key]
         public int key { get; set; }
 
-        [Required(ErrorMessage = "")]
+        //[Required(ErrorMessage = "")]
         public virtual IList<FormItemModel> FormItemIList { get; set; }
         
-        [Display(Name = "Form Name")]
-        [Required(ErrorMessage="Please enter a name")]
+        //[Display(Name = "Form Name")]
+        //[Required(ErrorMessage="Please enter a name")]
         public string Name { get; set; }
 
-        [Display(Name = "Start Date")]
-        [Required(ErrorMessage = "Please a start date")]
+        //[Display(Name = "Start Date")]
+        //[Required(ErrorMessage = "Please a start date")]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "End Date")]
-        [Required(ErrorMessage = "Please a end date")]
+        //[Display(Name = "End Date")]
+        //[Required(ErrorMessage = "Please a end date")]
         public DateTime EndDate { get; set; }
         
     }
