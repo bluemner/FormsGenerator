@@ -44,7 +44,19 @@ namespace FormsGeneratorWebApplication.Controllers
         private FormsModel loadContentFromDataBase(string guid) {
 
             //TODO Load the content from database
-            return new FormsModel()
+            //FormsModel model = new FormsModel();
+            //model.FormItemIList = new List<FormItemModel>();
+            //model.FormItemIList.Add(new TextBoxModel());
+            //model.FormItemIList.ElementAt<FormItemModel>(0).id = 1;
+            //model.FormItemIList.ElementAt<FormItemModel>(0).postion = 1;
+            //model.FormItemIList.ElementAt<FormItemModel>(0).question = "What is your name?";
+            //model.FormItemIList.ElementAt<FormItemModel>(0).type = 0;
+            //model.key = 1;
+            //model.Name = "Survey 1";
+            //model.StartDate = DateTime.Now;
+            //model.EndDate = DateTime.Now.AddDays(1);
+            //return model;
+            return new FormsModel
             {
 
             };
