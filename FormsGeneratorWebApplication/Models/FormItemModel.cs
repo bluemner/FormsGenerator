@@ -12,16 +12,16 @@ namespace FormsGeneratorWebApplication.Models
         [Key]
         public int id { get; set; }
 
-        [Display(Name="Position")]
-        [Required(ErrorMessage="No postion set")]
+        [Display(Name = "Position")]
+        //[Required(ErrorMessageResourceName = "NoPosition", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public int postion { get; set; }
 
         [Display(Name = "Question")]
-        [Required(ErrorMessage = "Question is required")]
+        //[Required(ErrorMessageResourceName = "QuestionRequired", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public string question { get; set; }
 
         [Display(Name = "Type")]
-        [Required(ErrorMessage = "Type is required")]
+        //[Required(ErrorMessageResourceName = "TypeRequired", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public int type { get; set; }
 
         public virtual FormsModel FormsModel { get; set; }

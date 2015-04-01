@@ -8,7 +8,7 @@
 @model  FormsGeneratorWebApplication.Models.FormsModel
 
 
-@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
+@using (Html.BeginForm("MakeForm", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -100,7 +100,7 @@
             settings: {
                 UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
                 UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
-                UrlAddRaidoBtton: '@Url.Content("~/FormsAdmin/AddRadioButton")',
+                UrlAddRadioBtton: '@Url.Content("~/FormsAdmin/AddRadioButton")',
                 UrlAddCheckBoxes: '@Url.Content("~/FormsAdmin/AddCheckBoxes")',
             }
         });
