@@ -14,19 +14,19 @@ namespace FormsGeneratorWebApplication.Models
         [Key]
         public int key { get; set; }
 
-        [Required(ErrorMessage = "")]
+        //[Required(ErrorMessageResourceName = null)]
         public virtual IList<FormItemModel> FormItemIList { get; set; }
-        
+
         [Display(Name = "Form Name")]
-        [Required(ErrorMessage="Please enter a name")]
+        //[Required(ErrorMessageResourceName = "EnterName", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public string Name { get; set; }
 
         [Display(Name = "Start Date")]
-        [Required(ErrorMessage = "Please a start date")]
+        //[Required(ErrorMessageResourceName = "EnterStartDate", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public DateTime StartDate { get; set; }
 
         [Display(Name = "End Date")]
-        [Required(ErrorMessage = "Please a end date")]
+        //[Required(ErrorMessageResourceName = "EnterEndDate", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public DateTime EndDate { get; set; }
         
     }
