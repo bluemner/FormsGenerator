@@ -28,7 +28,10 @@ namespace FormsGeneratorWebApplication.Models
         [Display(Name = "End Date")]
         [Required(ErrorMessage = "Please a end date")]
         public DateTime EndDate { get; set; }
-        
+
+        [Display(Name = "Status")]
+        public bool Status { get; set; }
+
     }
    
 }

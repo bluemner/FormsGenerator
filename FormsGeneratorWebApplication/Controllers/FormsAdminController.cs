@@ -20,7 +20,15 @@ namespace FormsGeneratorWebApplication.Controllers
         // GET: /FormsAdmin/
         public ActionResult Index()
         {
-            return View();
+
+            var adminFormModel = new AdminFormModel()
+            {
+                forms = new List<FormsModel>()
+            };
+
+
+
+            return View(adminFormModel);
         }
 
         [HttpGet]

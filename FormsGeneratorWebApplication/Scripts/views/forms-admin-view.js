@@ -32,7 +32,7 @@
                 form.updateSlected($(this));
             });
 
-            $formname.on('click', '.date', function () {
+            $formname.on('focus', '.date', function () {
                 form.initDateTimePicker($(this));
             });
 
@@ -135,9 +135,7 @@
 
         },
 
-        updateSlected: function (selectedObject) {
-
-            
+        updateSlected: function (selectedObject) {           
 
             if (selectedObject !=null && ( selectedObject.val().indexOf('AddRadioButton') > 0 || selectedObject.val().indexOf('AddCheckBoxes') > 0))
             {
