@@ -34,38 +34,15 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult MakeForm() 
         {
-            //db.FormModels.Load();
+
             return View(new FormsModel());
         
         }
         [HttpPost]
         public ActionResult MakeForm(FormsModel model ){
-           
-            var formItemList = model.FormItemIList;
             
-           for (int i = 0; i < formItemList.Count; ++i) { 
-                var currentItem = formItemList[i];
-
-                if (currentItem.GetType() == typeof(CheckBoxesModel))
-                {
-                    var casted = ((CheckBoxesModel)(currentItem));
-                    db.CheckBoxModels.Add(casted);
-                    db.SaveChanges();
-                    
-                }
-                else if (currentItem.GetType() == typeof(TextAreaModel))
-                {
-                    var casted = ((TextAreaModel)(currentItem));
-                    db.TextAreaModels.Add(casted);
-                    db.SaveChanges();
-                }
-                else if (currentItem.GetType() == typeof(TextBoxModel))
-                {
-                    var casted = ((TextBoxModel)(currentItem));
-                    db.TextBoxModels.Add(casted);
-                    db.SaveChanges();
-                }
-           }
+            // This logic works, but when the view passes the model to 
+            // this function, the model's FormItemList is null
            db.FormModels.Add(model);
            db.SaveChanges();
            Console.WriteLine("make forms ran");
