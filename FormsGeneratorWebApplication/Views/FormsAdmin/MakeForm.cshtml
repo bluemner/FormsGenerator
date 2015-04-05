@@ -8,7 +8,7 @@
 @model  FormsGeneratorWebApplication.Models.FormsModel
 
 
-@using (Html.BeginForm("Index", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
+@using (Html.BeginForm("MakeForm", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -43,7 +43,7 @@
                 <label class="col-lg-2 control-label"></label>
                 <div class=" col-lg-8">
                     <div id="item-zone">
-                        @Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", new TextAreaModel())
+                       
                     </div>
                 </div>
             </div>
@@ -85,12 +85,13 @@
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="button" class="btn btn-primary btn-lg btn-add-form-item">Add FormItem</button>
-                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                   
                 </div>
             </div>
         </fieldset>
     </div>
     <div id="test" hidden></div>
+   <button type="submit" class="btn btn-success btn-lg">Submit</button>
 }
 
 @Scripts.Render("~/Scripts/views/forms-admin-view.js")

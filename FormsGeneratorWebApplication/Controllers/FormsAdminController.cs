@@ -21,13 +21,17 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult MakeForm() 
         {
           return View(new FormsModel());
-        
         }
+
+
+
         [HttpPost]
-        public ActionResult MakeForms(FormsModel model ){
-           var formItemList = model.FormItemIList;
-            
-           for (int i = 0; i < formItemList.Count; ++i) { 
+        public ActionResult MakeForm(FormsModel model, IList<FormItemModel> L)
+        {
+            var formItemList = model.FormItemIList;
+
+            for (int i = 0; i < formItemList.Count; ++i)
+            {
                 var currentItem = formItemList[i];
 
                 if (currentItem.GetType() == typeof(CheckBoxesModel))
@@ -36,16 +40,20 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
                 else if (currentItem.GetType() == typeof(TextAreaModel))
                 {
-                  
+
                 }
                 else if (currentItem.GetType() == typeof(TextBoxModel))
                 {
-               
+
                 }
-           }
-               return View("Sucess");
+            }
+            return View("Sucess");
         }
-        
+
+
+
+
+
         [HttpGet]
         public ActionResult AddTextBox(int count) {
             ViewBag.TextBoxCount = count.ToString();
