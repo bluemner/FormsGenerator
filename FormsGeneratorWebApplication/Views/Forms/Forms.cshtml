@@ -9,11 +9,10 @@
 <h2>Please fill out the folowing form:</h2>
 @using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
+    for (var i = 0; i < items.Count(); ++i)
+    {
 
-  for (var i = 0; i < items.Count(); ++i)
-   {
-      
-         var currentItem = items.ElementAt(i);
+        var currentItem = items.ElementAt(i);
         if (currentItem.GetType() == typeof(CheckBoxesModel))
         {
             @Html.Partial("~/Views/Forms/_RadioButtonPartial",currentItem)
@@ -24,7 +23,11 @@
         }
         else if (currentItem.GetType() == typeof(TextBoxModel))
         {
-            @Html.Partial("~/Views/Forms/_TextBoxPartial", currentItem)
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Questions :</div>
+                @Html.Partial("~/Views/Forms/_TextBoxPartial.cshtml", currentItem)
+            </div>
         }
     }
 }
@@ -71,4 +74,4 @@
             @Html.ActionLink("Back to List", "Forms")
         </div>*@
 
-    @Scripts.Render("~/Scripts/views/forms-view.js");
+    @Scripts.Render("~/Scripts/views/forms-view.js")

@@ -11,8 +11,10 @@ namespace FormsGeneratorWebApplication.Models
     /// </summary>
     public class FormsModel
     {
+        [Key]
+        public int key { get; set; }
 
-        //Required(ErrorMessage = "")]
+        [Required(ErrorMessage = "")]
         public virtual IList<FormItemModel> FormItemIList { get; set; }
         
         [Display(Name = "Form Name")]

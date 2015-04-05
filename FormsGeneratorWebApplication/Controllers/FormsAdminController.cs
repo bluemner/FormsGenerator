@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FormsGeneratorWebApplication.Models;
+using FormsGeneratorWebApplication.Utilities;
 namespace FormsGeneratorWebApplication.Controllers
 {
     public class FormsAdminController : Controller
     {
         public static int TYPE_TEXT_BOX = 0;
         public static int TYPE_TEXT_AREA = 1;
+        private FormsDbContext db = new FormsDbContext();
 
         // GET: /FormsAdmin/
         public ActionResult Index()
@@ -20,40 +26,44 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult MakeForm() 
         {
-          return View(new FormsModel());
+            //db.FormModels.Load();
+            return View(new FormsModel());
+        
         }
-
-
-
         [HttpPost]
-        public ActionResult MakeForm(FormsModel model, IList<FormItemModel> L)
-        {
+        public ActionResult MakeForm(FormsModel model ){
+           
             var formItemList = model.FormItemIList;
-
-            for (int i = 0; i < formItemList.Count; ++i)
-            {
+            
+           for (int i = 0; i < formItemList.Count; ++i) { 
                 var currentItem = formItemList[i];
 
                 if (currentItem.GetType() == typeof(CheckBoxesModel))
                 {
                     var casted = ((CheckBoxesModel)(currentItem));
+                    db.CheckBoxModels.Add(casted);
+                    db.SaveChanges();
+                    
                 }
                 else if (currentItem.GetType() == typeof(TextAreaModel))
                 {
-
+                    var casted = ((TextAreaModel)(currentItem));
+                    db.TextAreaModels.Add(casted);
+                    db.SaveChanges();
                 }
                 else if (currentItem.GetType() == typeof(TextBoxModel))
                 {
-
+                    var casted = ((TextBoxModel)(currentItem));
+                    db.TextBoxModels.Add(casted);
+                    db.SaveChanges();
                 }
-            }
-            return View("Sucess");
+           }
+           db.FormModels.Add(model);
+           db.SaveChanges();
+           Console.WriteLine("make forms ran");
+               return View("Sucess");
         }
-
-
-
-
-
+        
         [HttpGet]
         public ActionResult AddTextBox(int count) {
             ViewBag.TextBoxCount = count.ToString();
