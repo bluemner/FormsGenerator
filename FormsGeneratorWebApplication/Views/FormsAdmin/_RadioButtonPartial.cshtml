@@ -30,10 +30,15 @@
                         </div>*@
                     <div class="checkboxes form-group">
                         <div class="radio">
-                            <label class="col-lg-2 control-label"> <input type="radio"></label>
-                            <div class="col-xs-10">
+
+                            <label class="col-lg-2 control-label">Option @i:</label>
+                            <div class="col-lg-10">                         
+                           
                                 @Html.TextBoxFor(m => m.options[i], new { @class = "form-control" })
+                             
                             </div>
+                       
+                            @Html.RadioButtonFor(m => m.val, new { @class = "radio-btn-value" })
                         </div>
                     </div>
                 }

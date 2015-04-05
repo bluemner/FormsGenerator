@@ -11,5 +11,7 @@ namespace FormsGeneratorWebApplication.Models
 
         public IList<string> options { get; set; }
         public int selectedOption { get; set; }
+
+        public bool val { get; set; }
     }
 }
