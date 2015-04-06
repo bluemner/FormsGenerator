@@ -25,19 +25,24 @@
 
             <div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.StartDate)</label>
-                <div class="col-lg-10">
+                <div class="col-lg-2">
                     @Html.TextBoxFor(m => m.StartDate, null, new { @Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
                     @Html.ValidationMessageFor(m => m.StartDate)
                 </div>
+                <label class="col-lg-1 control-label">@Html.LabelFor(m => m.EndDate)</label>
+                <div class="col-lg-2">
+                    @Html.TextBoxFor(m => m.EndDate, null, new { @Value = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
+                    @Html.ValidationMessageFor(m => m.EndDate)
+                </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.EndDate)</label>
                 <div class="col-lg-10">
                     @Html.TextBoxFor(m => m.EndDate, null, new { @Value = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
                     @Html.ValidationMessageFor(m => m.EndDate)
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <label class="col-lg-2 control-label"></label>
@@ -85,13 +90,16 @@
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="button" class="btn btn-primary btn-lg btn-add-form-item">Add FormItem</button>
-                   
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
                 </div>
             </div>
         </fieldset>
     </div>
     <div id="test" hidden></div>
-   <button type="submit" class="btn btn-success btn-lg">Submit</button>
 }
 
 @Scripts.Render("~/Scripts/views/forms-admin-view.js")
