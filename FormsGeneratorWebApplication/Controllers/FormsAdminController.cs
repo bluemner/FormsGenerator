@@ -15,6 +15,10 @@ namespace FormsGeneratorWebApplication.Controllers
     {
         public static int TYPE_TEXT_BOX = 0;
         public static int TYPE_TEXT_AREA = 1;
+        public static int TYPE_TEXT_RADIO = 2;
+        public static int TYPE_TEXT_CHECKBOX = 3;
+
+
         private FormsDbContext db = new FormsDbContext();
 
         // GET: /FormsAdmin/
@@ -39,14 +43,16 @@ namespace FormsGeneratorWebApplication.Controllers
         
         }
         [HttpPost]
-        public ActionResult MakeForm(FormsModel model ){
-            
+        public ActionResult MakeForm(FormsModel model){
+
+
+            var x = 3;
             // This logic works, but when the view passes the model to 
             // this function, the model's FormItemList is null
            db.FormModels.Add(model);
            db.SaveChanges();
            Console.WriteLine("make forms ran");
-               return View("Sucess");
+               return View("Index");
         }
         
         [HttpGet]
@@ -70,7 +76,7 @@ namespace FormsGeneratorWebApplication.Controllers
            for(int i=0; i< numberOfSubElements; ++i){
               CheckboxModel.checkboxes.Add(new checkbox());
            }
-
+           
            ViewBag.TextBoxCount = count;
            return PartialView("_CheckBoxesPartial",CheckboxModel);
        }
@@ -83,7 +89,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
            for (int i = 0; i < numberOfSubElements; ++i)
            {
-               RadioMod.options.Add("");
+               RadioMod.options.Add("option"+i);
            }
 
            ViewBag.TextBoxCount = count;

@@ -3,17 +3,16 @@
     'use strict';
     //We will be using strict java script!
     $.extend(form, {
-
+        
         settings: {
             AccordionHeader: '.ui-accordion-header',
-            AccordionHeightStyle: 'content',
+            AccordionHeightStyle: 'content',  
         },
 
         init: function () {
             var $formname = $('#new-form');
             var $itemZone = $('#item-zone');
           
-
             this.initAccordion($itemZone);
             form.updateSlected(null);
             
@@ -74,8 +73,9 @@
         },
         addFormItem: function (selectedObject, url) {
 
-            var count = selectedObject.children(form.settings.AccordionHeader).length;
-
+            var count = selectedObject.children(form.settings.AccordionHeader).length/2;
+            // var count = parseInt(form.settings.CurrentIndex);
+            ///form.settings.CurrentIndex = (++count) + "";
             var addCount = parseInt($('.form-selection-count').val());
             for (var i = 0; i < addCount; ++i) {
 
