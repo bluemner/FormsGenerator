@@ -25,12 +25,12 @@
 
             <div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.StartDate)</label>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     @Html.TextBoxFor(m => m.StartDate, null, new { @Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
                     @Html.ValidationMessageFor(m => m.StartDate)
                 </div>
                 <label class="col-lg-1 control-label">@Html.LabelFor(m => m.EndDate)</label>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     @Html.TextBoxFor(m => m.EndDate, null, new { @Value = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
                     @Html.ValidationMessageFor(m => m.EndDate)
                 </div>
@@ -63,7 +63,7 @@
 
             <div class="form-group">
                 <label class="col-lg-2 control-label">Type</label>
-                <div class="col-lg-10">
+                <div class="col-lg-4">
                     <select class="form-control form-selection-type" id="select">
                         <option value='@Url.Content("~/FormsAdmin/AddTextBox")'>Text Box</option>
                         <option value='@Url.Content("~/FormsAdmin/AddTextArea")'>Text Area</option>
@@ -71,12 +71,9 @@
                         <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-2 control-label sub-elements" hidden>Number of Options:</label>
-                <div class="col-lg-10">
-                    <input type="number" class="form-control number-Of-sub-elements sub-elements"  value="-1" min="1">
+                <label class="col-lg-1 control-label sub-elements" hidden>Number of Options:</label>
+                <div class="col-lg-4">
+                    <input type="number" class="form-control number-Of-sub-elements sub-elements" value="-1" min="1">
                 </div>
             </div>
 
@@ -93,7 +90,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
+                <div class="col-lg-10 col-lg-offset-8">
                     <button type="submit" class="btn btn-success btn-lg">Submit</button>
                 </div>
             </div>
