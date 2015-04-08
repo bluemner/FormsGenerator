@@ -15,13 +15,13 @@
         <fieldset>
             <div class="row">
                 <div class="form-group">
-                    <label for="inputFormName" class="col-lg-2 control-label">@Html.LabelFor(m => m.question)</label>
+                    <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
                     <div class="col-xs-10">
                         @Html.TextAreaFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputFormName" class="col-lg-2 control-label">@Html.LabelFor(m => m.value)</label>
+                    <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.value)</label>
                     <div class="col-xs-10">
                         @Html.TextAreaFor(m => m.value, new { Name = "[" + index + "].value", @class = "form-control Answer-inputWidthHeight" })
                     </div>

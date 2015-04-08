@@ -15,9 +15,9 @@
         <fieldset>
             <div class="row">
                 <div class="form-group">
-                    <label for="inputFormName" class="col-lg-2 control-label">@Html.LabelFor(m => m.question)</label>
+                    <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
                     <div class="col-xs-10">
-                        @Html.TextBoxFor(m => m.question, new { Name = "FormItemIList[" + index + "].question", @class = "form-control question-inputWidth" })
+                        @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
                     </div>
                 </div>
                 @for (var i = 0; i < Model.options.Count; ++i)
@@ -30,14 +30,14 @@
                         </div>*@
                     <div class="checkboxes form-group">
                         <div class="radio">
-                            <label class="col-lg-2 control-label">Option @i:</label>
+                            <label class="col-lg-2 control-label label label-default">Option @i:</label>
                             <div class="col-lg-4">                         
                            
-                                @Html.TextBoxFor(m => m.options[i], new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.options[i], new { Name = "FormItemIList[" + index + "].options[" + i + "]",@class = "form-control" })
                              
                             </div>
                             <label class="col-lg-1 control-label">
-                                @Html.RadioButtonFor(m => m.val, new { @class = "radio-btn-value" })
+                                @Html.RadioButtonFor(m => m.val, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
                             </label>
                         </div>
                     </div>
