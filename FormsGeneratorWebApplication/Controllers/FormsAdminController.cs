@@ -44,10 +44,10 @@ namespace FormsGeneratorWebApplication.Controllers
             return View(new FormsModel());
 
         }
+ 
         [HttpPost]
         public ActionResult MakeForm(FormsModel model)
         {
-
 
             var x = 3;
             // This logic works, but when the view passes the model to 

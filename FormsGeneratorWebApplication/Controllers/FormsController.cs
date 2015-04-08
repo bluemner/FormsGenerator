@@ -23,6 +23,12 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult Forms(string guid) {
             return View(loadContentFromDataBase(guid));
         }
+
+        [HttpPost]
+        public ActionResult Forms(FormsModel model)
+        {
+            return View();
+        }
         [HttpGet]
         public ActionResult About() { 
             return View();
