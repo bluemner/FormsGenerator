@@ -19,6 +19,7 @@ namespace FormsGeneratorWebApplication.Models
     }
 
     public struct checkbox {
+
        [Display(Name = "Checked")]
        public bool isChecked;
        [Display(Name = "Answer")]

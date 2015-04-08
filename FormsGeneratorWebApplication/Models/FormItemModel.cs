@@ -24,6 +24,15 @@ namespace FormsGeneratorWebApplication.Models
         //[Required(ErrorMessageResourceName = "TypeRequired", ErrorMessageResourceType = typeof(Resources.FormsResource))]
         public int type { get; set; }
 
+        [Display(Name = "options")]
+        public IList<string> options { get; set; }
+
+        public IList<string> selected { get; set; }
+
+        public int selectedOption { get; set; }
+        /// <summary>
+        /// TODO: Add description 
+        /// </summary>
         public virtual FormsModel FormsModel { get; set; }
 
     }
