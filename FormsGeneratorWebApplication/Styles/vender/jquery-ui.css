@@ -844,8 +844,10 @@ body .ui-tooltip {
 	font-size: 1em;
 }
 .ui-widget-content {
-	border: 1px solid #dddddd;
-	background: #eeeeee url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") 50% top repeat-x;
+	/*border: 1px solid #dddddd;*/
+    -webkit-box-shadow: 0 0px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.5);
+	background: #4e5d6c;/*#eeeeee url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") 50% top repeat-x;*/
 	color: #333333;
 }
 .ui-widget-content a {
@@ -866,8 +868,8 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	border: 1px solid #cccccc;
-	background: #f6f6f6 url("images/ui-bg_glass_100_f6f6f6_1x400.png") 50% 50% repeat-x;
+	/*border: 1px solid #cccccc;*/
+	background: #485563;/*/#f6f6f6 url("images/ui-bg_glass_100_f6f6f6_1x400.png") 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #1c94c4;
 }
@@ -883,10 +885,10 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #fbcb09;
-	background: #fdf5ce url("images/ui-bg_glass_100_fdf5ce_1x400.png") 50% 50% repeat-x;
+	/*border: 1px solid #fbcb09;*/
+	background: #414C59; /*#fdf5ce url("images/ui-bg_glass_100_fdf5ce_1x400.png") 50% 50% repeat-x;*/
 	font-weight: bold;
-	color: #c77405;
+	color: white;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -902,10 +904,12 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	border: 1px solid #fbd850;
-	background: #ffffff url("images/ui-bg_glass_65_ffffff_1x400.png") 50% 50% repeat-x;
+    -webkit-box-shadow: 0 0px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.5);
+	/*border: 1px solid #fbd850;
+	background: #ffffff url("images/ui-bg_glass_65_ffffff_1x400.png") 50% 50% repeat-x;*/
 	font-weight: bold;
-	color: #eb8f00;
+	color: white;
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -1222,4 +1226,18 @@ body .ui-tooltip {
 	opacity: .2;
 	filter: Alpha(Opacity=20); /* support: IE8 */
 	border-radius: 5px;
+}
+
+/*my style
+
+*/
+h3 {
+    outline:none;
+}
+h3.ui-accordion-header {
+    border:0px;
+}
+
+h3.prelevement_auto_p {
+    border:0px;
 }
