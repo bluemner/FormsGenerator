@@ -18,7 +18,11 @@ namespace FormsGeneratorWebApplication.Controllers
         public static int TYPE_TEXT_RADIO = 2;
         public static int TYPE_TEXT_CHECKBOX = 3;
 
-        public static int TEMPLATE_FORM_TRUE_OR_FALSE = 0;
+        public const int TEMPLATE_FORM_TRUE_OR_FALSE = 0;
+        public const int TEMPLATE_FORM_TEXTAREA = 1;
+        public const int TEMPLATE_FORM_TEXTBOX = 2;
+        
+
 
 
         private FormsDbContext db = new FormsDbContext();
@@ -56,6 +60,27 @@ namespace FormsGeneratorWebApplication.Controllers
             db.SaveChanges();
             Console.WriteLine("make forms ran");
             return View("Index");
+        }
+
+        private Guid createGuid()
+        {
+            bool unique = false;
+            Guid guid = Guid.NewGuid();
+            while (!unique)
+            {
+                unique = uniqueGuid(guid);
+                if (!unique)
+                {
+                    guid = Guid.NewGuid();
+                }
+            }
+            return guid;
+        }
+
+        private bool uniqueGuid(Guid g)
+        {
+            //TODO: check database to see if it's unique
+            return false;
         }
 
         [HttpGet]
@@ -102,16 +127,16 @@ namespace FormsGeneratorWebApplication.Controllers
             ViewBag.TextBoxCount = count;
             return PartialView("_RadioButtonPartial", RadioMod);
         }
-
+        //creates a simple form for user if creating from template
         [HttpGet]
         public ActionResult Template(int type, int numberOfSubElements)
         {
             ViewBag.TextBoxCount = numberOfSubElements;
             // Create instance of a form
-            var fromModel = new FormsModel();
+            var formModel = new FormsModel();
             switch (type)
             {
-                case 0:
+                case TEMPLATE_FORM_TRUE_OR_FALSE:
                     // populate form model with true or false
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
@@ -122,17 +147,34 @@ namespace FormsGeneratorWebApplication.Controllers
                         RadioMod.options.Add("False");
 
                         RadioMod.question = "Can pigs fly?";
-                        fromModel.FormItemIList.Add(RadioMod);
+                        formModel.FormItemIList.Add(RadioMod);
                     }
-                    return View(fromModel);
-            
-
+                    break;
+                case TEMPLATE_FORM_TEXTAREA:
+                    //populate form model with textarea questions
+                    for (int i = 0; i < numberOfSubElements; ++i)
+                    {
+                        var TextAreaMod = new TextAreaModel();
+                        TextAreaMod.value = "Pigs do fly.";
+                        formModel.FormItemIList.Add(TextAreaMod);
+                    }
+                    break;
+                case TEMPLATE_FORM_TEXTBOX:
+                    //populate form model with textbox questions
+                    for(int i = 0; i < numberOfSubElements; ++i)
+                    {
+                        var TextBoxMod = new TextBoxModel();
+                        TextBoxMod.value = "Pigs do fly.";
+                        formModel.FormItemIList.Add(TextBoxMod);
+                    }
+                    break;   
             }
-            return PartialView("Error");
+            return View(formModel);
         }
-
+        //TODO: low- priority. 
+        //makes a copy of a pre-existing form for sake of convenience.
         [HttpGet]
-        public ActionResult CopyTemplate(int type, int numberOfSubElements)
+        public ActionResult CopyForm(int type, int numberOfSubElements)
         {
             ViewBag.TextBoxCount = numberOfSubElements;
             // Create instance of a form
