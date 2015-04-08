@@ -118,6 +118,7 @@ namespace FormsGeneratorWebApplication.Controllers
             ViewBag.TextBoxCount = numberOfSubElements;
             // Create instance of a form
             var formModel = new FormsModel();
+            formModel.FormItemIList = new List<FormItemModel>();
             switch (type)
             {
                 case TEMPLATE_FORM_TRUE_OR_FALSE:
