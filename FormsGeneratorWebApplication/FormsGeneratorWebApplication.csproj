@@ -352,6 +352,7 @@
     <Content Include="Views\Forms\_TextAreaPartial.cshtml" />
     <Content Include="Views\Forms\QuestionNavBar.cshtml" />
     <Content Include="Views\FormsAdmin\t.cshtml" />
+    <Content Include="Views\FormsAdmin\EditUserPermission.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
