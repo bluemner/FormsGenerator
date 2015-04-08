@@ -33,11 +33,11 @@
                             <label class="col-lg-2 control-label">Option @i:</label>
                             <div class="col-lg-4">                         
                            
-                                @Html.TextBoxFor(m => m.options[i], new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.options[i], new { Name = "FormItemIList[" + index + "].options[" + i + "]",@class = "form-control" })
                              
                             </div>
                             <label class="col-lg-1 control-label">
-                                @Html.RadioButtonFor(m => m.val, new { @class = "radio-btn-value" })
+                                @Html.RadioButtonFor(m => m.val, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
                             </label>
                         </div>
                     </div>
