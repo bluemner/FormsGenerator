@@ -168,6 +168,7 @@
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\AdminFormModel.cs" />
+    <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Utilities\FormsDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -310,7 +311,9 @@
     <Content Include="Styles\vender\jquery-ui.structure.min.css" />
     <Content Include="Styles\vender\jquery-ui.theme.css" />
     <Content Include="Styles\vender\jquery-ui.theme.min.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

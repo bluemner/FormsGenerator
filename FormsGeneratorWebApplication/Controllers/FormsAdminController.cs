@@ -52,7 +52,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult MakeForm(FormsModel model)
         {
-
+            model.adminGUID = createGuid();
             var x = 3;
             // This logic works, but when the view passes the model to 
             // this function, the model's FormItemList is null
