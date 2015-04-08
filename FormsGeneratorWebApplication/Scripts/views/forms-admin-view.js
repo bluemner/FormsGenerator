@@ -36,7 +36,6 @@
             });
 
             $formname.on('click', '.btn-remove-form-item', function () {
-                //TODO: Add code to shift the dom
                 form.removeAccordion($(this));
             });
             
@@ -60,7 +59,6 @@
 
         removeAccordion: function (selectedObject) {
 
-
             selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
                 console.log('remove header');
                 selectedObject.remove($(this));
@@ -69,9 +67,8 @@
             selectedObject.parents('.ui-accordion-content').slideUp('slow', function (){
                 console.log('remove content');
                 selectedObject.remove($(this));
+
             });
-
-
         },
 
         updatePostion: function (selectedObject) {
