@@ -61,10 +61,13 @@
 
             selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
                 console.log('remove header');
+                selectedObject.remove($(this));
             });
 
             selectedObject.parents('.ui-accordion-content').slideUp('slow', function (){
                 console.log('remove content');
+                selectedObject.remove($(this));
+
             });
         },
 
