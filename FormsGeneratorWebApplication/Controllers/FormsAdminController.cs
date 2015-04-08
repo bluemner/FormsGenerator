@@ -48,10 +48,10 @@ namespace FormsGeneratorWebApplication.Controllers
             return View(new FormsModel());
 
         }
+ 
         [HttpPost]
         public ActionResult MakeForm(FormsModel model)
         {
-
 
             var x = 3;
             // This logic works, but when the view passes the model to 
@@ -64,23 +64,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
         private Guid createGuid()
         {
-            bool unique = false;
-            Guid guid = Guid.NewGuid();
-            while (!unique)
-            {
-                unique = uniqueGuid(guid);
-                if (!unique)
-                {
-                    guid = Guid.NewGuid();
-                }
-            }
-            return guid;
-        }
-
-        private bool uniqueGuid(Guid g)
-        {
-            //TODO: check database to see if it's unique
-            return false;
+            return Guid.NewGuid();
         }
 
         [HttpGet]

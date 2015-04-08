@@ -21,19 +21,24 @@
                     <table style="width:100%">
                         <tr>
                             <th>Name</th>
-                            <th>Status</th>
+                            <th>Copy</th>
+                            <th>Edit</th>                           
                             <th>Date Range</th>
+                            <th>Status</th>
                         </tr>
                         @for (var i = 0; i < Model.forms.Count; ++i)
                         {
 
                             <tr>
-                                <td><a href="">@Model.forms[i].Name </a></td>
-                                <td>@Html.CheckBoxFor(m => m.forms[i].Status)</td>
+                                <td><a href="">@Model.forms[i].Name </a></td>                            
+                                <td>@Html.RadioButton("Edit", new { })</td>
+                                <td>@Html.RadioButton("Edit", new { })</td>
                                 <td>
                                     @Html.TextBoxFor(m => m.forms[i].StartDate, null, new { @class = "date form-control" })
                                     @Html.TextBoxFor(m => m.forms[i].EndDate, null, new { @class = "date form-control" })
+
                                 </td>
+                                <td>@Html.CheckBoxFor(m => m.forms[i].Status)</td>
                             </tr>
                         }
                     </table>
