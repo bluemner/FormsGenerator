@@ -32,6 +32,9 @@ namespace FormsGeneratorWebApplication.Models
         [Display(Name = "Status")]
         public bool Status { get; set; }
 
+        //this is the GUID of the form
+        public Guid adminGUID { get; set; }
+
     }
    
 }

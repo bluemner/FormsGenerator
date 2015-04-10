@@ -21,7 +21,9 @@ namespace FormsGeneratorWebApplication.Utilities
         public DbSet<TextAreaModel> TextAreaModels { get; set; }
         public DbSet<TextBoxModel> TextBoxModels { get; set; }
         public DbSet<RadioButtonModel> RadioButtonModels { get; set; }
-        //public DbSet<ResultModel> ResultModels { get; set; }
+        public DbSet<OptionsModel> OptionsModels { get; set; }
+        public DbSet<SelectedModel> SelectedModels { get; set; }
+        public DbSet<ResultModel> ResultModels { get; set; }
 
  
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
