@@ -86,15 +86,5 @@ namespace FormsGeneratorWebApplication.Controllers
             FormsModel result = db.FormModels.First<FormsModel>(compare);
             return result;
         }
-
-        private bool formGUID(FormsModel form, Guid GUID)
-        {
-            if(form.adminGUID == GUID)
-            {
-                return true;
-            }
-            return false;
-        }
-
 	}
 }

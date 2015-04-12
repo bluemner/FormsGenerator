@@ -30,9 +30,8 @@ namespace FormsGeneratorWebApplication.Models
         public virtual IList<string> selected { get; set; }
 
         public int selectedOption { get; set; }
-        /// <summary>
-        /// TODO: Add description 
-        /// </summary>
+        
+        //foreign key for the database
         public virtual FormsModel FormsModel { get; set; }
 
     }
