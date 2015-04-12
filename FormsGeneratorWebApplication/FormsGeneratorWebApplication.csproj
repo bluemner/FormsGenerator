@@ -170,6 +170,7 @@
     <Compile Include="Models\AdminFormModel.cs" />
     <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\SelectedModel.cs" />
     <Compile Include="Utilities\FormsDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

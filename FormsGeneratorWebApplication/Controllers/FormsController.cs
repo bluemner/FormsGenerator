@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FormsGeneratorWebApplication.Models;
+using FormsGeneratorWebApplication.Utilities;
 using System.Net;
 
 namespace FormsGeneratorWebApplication.Controllers
 {
     public class FormsController : Controller
     {
-
+        private FormsDbContext db = new FormsDbContext();
         //
         // GET: /Forms/
   
@@ -20,7 +25,7 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Forms(string guid) {
+        public ActionResult Forms(Guid guid) {
             return View(loadContentFromDataBase(guid));
         }
 
@@ -47,7 +52,7 @@ namespace FormsGeneratorWebApplication.Controllers
             return View();
         }
 
-        private FormsModel loadContentFromDataBase(string guid) {
+        private FormsModel loadContentFromDataBase(Guid guid) {
 
             //TODO Load the content from database
             //FormsModel model = new FormsModel();
@@ -62,12 +67,24 @@ namespace FormsGeneratorWebApplication.Controllers
             //model.StartDate = DateTime.Now;
             //model.EndDate = DateTime.Now.AddDays(1);
             //return model;
-            return new FormsModel
+            
+            //return new FormsModel
+            //{
+
+            //};
+            Func<FormsModel, bool> compare = delegate(FormsModel form)
             {
-
+                if (form.adminGUID == guid)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             };
+            FormsModel result = db.FormModels.First<FormsModel>(compare);
+            return result;
         }
-
-
 	}
 }
