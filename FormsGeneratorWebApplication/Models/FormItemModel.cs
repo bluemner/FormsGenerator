@@ -27,7 +27,7 @@ namespace FormsGeneratorWebApplication.Models
         [Display(Name = "options")]
         public virtual IList<OptionsModel> options { get; set; }
 
-        public virtual IList<string> selected { get; set; }
+        public virtual IList<SelectedModel> selected { get; set; }
 
         public int selectedOption { get; set; }
         
