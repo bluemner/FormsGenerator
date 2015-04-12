@@ -5,11 +5,13 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using FormsGeneratorWebApplication.Models;
 using FormsGeneratorWebApplication.Utilities;
 namespace FormsGeneratorWebApplication.Controllers
+
 {
     public class FormsAdminController : Controller
     {
@@ -30,7 +32,7 @@ namespace FormsGeneratorWebApplication.Controllers
         // GET: /FormsAdmin/
         public ActionResult Index()
         {
-
+            //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
             var adminFormModel = new AdminFormModel()
             {
                 forms = new List<FormsModel>()
@@ -183,6 +185,38 @@ namespace FormsGeneratorWebApplication.Controllers
                     return View(fromModel);
             }
             return PartialView("Error");
+        }
+
+        [HttpGet]
+        public ActionResult EmailPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult Emailer(String recipients)
+        {
+            //if (ModelState.IsValid)
+            //{
+                MailMessage mail = new MailMessage();
+                mail.To.Add("bluemner@uwm.edu");
+                mail.Bcc.Add("njjakusz@uwm.edu");
+                mail.From = new MailAddress("dpatel.xxx23@gmail.com");
+                mail.Subject = "Brandon, where art thou?";
+                String Body = "Emailer works, BITCHES!";
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.UseDefaultCredentials = true;
+                client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
+                client.EnableSsl = true;
+                client.Send(mail);
+                return View();
+            //}
+            //else
+            //{
+              //  return View();
+            //}
         }
 
     }
