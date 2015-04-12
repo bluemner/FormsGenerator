@@ -60,13 +60,28 @@
         removeAccordion: function (selectedObject) {
 
             selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
-                console.log('remove header');
-                selectedObject.remove($(this));
+                var selectedHeader = $(".ui-accordion-header-active");
+                var selectedIndex = selectedHeader.attr('id').replace("ui-id-", "");
+                selectedHeader.remove();
+                var headers = $(".ui-accordion-header");
+                for(var i = Math.floor(selectedIndex/2);i<headers.length-1;++i)
+                {
+                    var curIndex = $(headers[i]).attr('id').replace("ui-id-", "");
+                    $(headers[i]).attr("id", "ui-id-" + (curIndex - 2));
+                    $(headers[i]).attr("aria-controls", "ui-id-" + (curIndex - 1));
+                }
             });
 
             selectedObject.parents('.ui-accordion-content').slideUp('slow', function (){
-                console.log('remove content');
-                selectedObject.remove($(this));
+                var selectedContent = $(".ui-accordion-content-active");
+                var selectedIndex = selectedContent.attr('id').replace("ui-id-", "");
+                selectedContent.remove();
+                var contents = $(".ui-accordion-content");
+                for (var i = (selectedIndex / 2)-1 ; i < contents.length; ++i) {
+                    var curIndex = $(contents[i]).attr('id').replace("ui-id-", "");
+                    $(contents[i]).attr("id", "ui-id-" + (curIndex - 2));
+                    $(contents[i]).attr("aria-labelledby", "ui-id-" + (curIndex - 3));
+                }
 
             });
         },
