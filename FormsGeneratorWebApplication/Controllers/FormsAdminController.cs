@@ -215,13 +215,34 @@ namespace FormsGeneratorWebApplication.Controllers
                 //TODO: Create new guid
                 //      Create form for data base
                 // form + guid
-            
+            //var newGuid = Guid.Parse(guid);                
+            //var recipientList = recipients.Split(',');
+            //foreach (String r in recipientList)
+            //{
+            //    String link = "";
+            //    EmailLink(r, link);
+            //}
+            //String link = "";
+            //var formModel = new FormsModel();
+            //var resultModel = new ResultModel();
+
+            EmailLink(recipients, guid);
+
+            return View();
+            //}
+            //else
+            //{
+              //  return View();
+            //}
+        }
+
+        private void EmailLink(String recipient, String link)
+        {
                 MailMessage mail = new MailMessage();
-                mail.To.Add(recipients);
-               // mail.Bcc.Add("njjakusz@uwm.edu");
-                mail.From = new MailAddress("dpatel.xxx23@gmail.com");
-                mail.Subject = "Brandon, where art thou?";
-                String Body = "Emailer works, BITCHES!";
+            mail.To.Add(recipient);
+            mail.From = new MailAddress("formsgenerator@gmail.com");
+            mail.Subject = "Please complete this Survey at your earliest convenience";
+            String Body = "Complete the survey here:  " + link;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
@@ -229,12 +250,6 @@ namespace FormsGeneratorWebApplication.Controllers
                 client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
                 client.EnableSsl = true;
                 client.Send(mail);
-                return View();
-            //}
-            //else
-            //{
-              //  return View();
-            //}
         }
 
     }

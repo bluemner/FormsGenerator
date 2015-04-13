@@ -29,8 +29,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Forms")</li>
                     <li>@Html.ActionLink("About", "About", "Forms")</li>
-                    <li>@Html.ActionLink("Admin", "Index", "FormsAdmin")</li>
-                    <li>@Html.ActionLink("Make Form", "MakeForm", "FormsAdmin")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "FormsAdmin")</li>
+                        <li>@Html.ActionLink("Make Form", "MakeForm", "FormsAdmin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
