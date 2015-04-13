@@ -71,8 +71,8 @@ namespace FormsGeneratorWebApplication.Controllers
             db.SaveChanges();
             Console.WriteLine("make forms ran");
 
-            string gui =model.adminGUID.ToString();
-            return View("Email", model);
+            ViewBag.GUID = model.adminGUID.ToString();
+            return View("Email");
         }
 
         private Guid createGuid()
@@ -84,7 +84,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult AddTextBox(int count)
         {
             ViewBag.TextBoxCount = count.ToString();
-            return PartialView("_EditTextBoxPartial", new TextBoxModel());
+            return PartialView("_EditTextBoxPartial", new TextBoxModel() { type = TYPE_TEXT_BOX});
         }
 
         [HttpGet]
@@ -98,6 +98,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult AddCheckBoxes(int count, int numberOfSubElements)
         {
             var CheckboxModel = new CheckBoxesModel();
+            CheckboxModel.type = TYPE_TEXT_CHECKBOX;
             CheckboxModel.checkboxes = new List<checkbox>();
 
             for (int i = 0; i < numberOfSubElements; ++i)
@@ -113,11 +114,11 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult AddRadioButton(int count, int numberOfSubElements)
         {
             var RadioMod = new RadioButtonModel();
-            RadioMod.options = new List<string>();
-
+            RadioMod.options = new List<OptionsModel>();
+            RadioMod.type = TYPE_TEXT_RADIO;
             for (int i = 0; i < numberOfSubElements; ++i)
             {
-                RadioMod.options.Add("option" + i);
+                RadioMod.options.Add(new OptionsModel(){ option ="" });
             }
             RadioMod.question = "Can pigs fly?";
 
@@ -139,10 +140,10 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var RadioMod = new RadioButtonModel();
-                        RadioMod.options = new List<string>();
+                        RadioMod.options = new List<OptionsModel>();
 
-                        RadioMod.options.Add("True");
-                        RadioMod.options.Add("False");
+                        RadioMod.options.Add(new OptionsModel() { option = "True" });
+                        RadioMod.options.Add(new OptionsModel() { option = "False" });
 
                         RadioMod.question = "Can pigs fly?";
                         formModel.FormItemIList.Add(RadioMod);
@@ -175,27 +176,27 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult CopyForm(int type, int numberOfSubElements)
         {
-            ViewBag.TextBoxCount = numberOfSubElements;
-            // Create instance of a form
-            var fromModel = new FormsModel();
-            switch (type)
-            {
-                case 0:
+            //ViewBag.TextBoxCount = numberOfSubElements;
+            //// Create instance of a form
+            //var fromModel = new FormsModel();
+            //switch (type)
+            //{
+            //    case 0:
 
-                    // populate form model with true or false
-                    for (int i = 0; i < numberOfSubElements; ++i)
-                    {
-                        var RadioMod = new RadioButtonModel();
-                        RadioMod.options = new List<string>();
+            //        // populate form model with true or false
+            //        for (int i = 0; i < numberOfSubElements; ++i)
+            //        {
+            //            var RadioMod = new RadioButtonModel();
+            //            RadioMod.options = new List<string>();
 
-                        RadioMod.options.Add("True");
-                        RadioMod.options.Add("False");
+            //            RadioMod.options.Add("True");
+            //            RadioMod.options.Add("False");
 
-                        RadioMod.question = "Can pigs fly?";
-                        fromModel.FormItemIList.Add(RadioMod);
-                    }
-                    return View(fromModel);
-            }
+            //            RadioMod.question = "Can pigs fly?";
+            //            fromModel.FormItemIList.Add(RadioMod);
+            //        }
+            //        return View(fromModel);
+            //}
             return PartialView("Error");
         }
 
@@ -215,18 +216,32 @@ namespace FormsGeneratorWebApplication.Controllers
                 //TODO: Create new guid
                 //      Create form for data base
                 // form + guid
-            //var newGuid = Guid.Parse(guid);                
+            //var newGuid = Guid.Parse(guid);
+            //Func<FormsModel, bool> compare = delegate(FormsModel form)
+            //{
+            //    if (form.adminGUID == newGuid)
+            //    {
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        return false;
+            //    }
+            //};
+            //FormsModel copy = db.FormModels.First<FormsModel>(compare);
             //var recipientList = recipients.Split(',');
             //foreach (String r in recipientList)
             //{
             //    String link = "";
             //    EmailLink(r, link);
             //}
-            //String link = "";
+
+            String link = Request.Url.ToString();
+            link = link.Remove(link.IndexOf("FormsAdmin"));
+            link = link + "Forms/Forms?guid=" + guid;
             //var formModel = new FormsModel();
             //var resultModel = new ResultModel();
-
-            EmailLink(recipients, guid);
+            EmailLink(recipients, link);
 
             return View();
             //}
