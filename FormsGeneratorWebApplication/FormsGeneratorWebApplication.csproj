@@ -358,6 +358,7 @@
     <Content Include="Views\Forms\QuestionNavBar.cshtml" />
     <Content Include="Views\FormsAdmin\t.cshtml" />
     <Content Include="Views\FormsAdmin\EditUserPermission.cshtml" />
+    <Content Include="Views\FormsAdmin\Email.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
