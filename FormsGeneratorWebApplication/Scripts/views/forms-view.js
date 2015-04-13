@@ -18,8 +18,9 @@
                 samplefunc($(this)); 
             });
 
-            $form.on('click', '.btn', function () { 
-               
+            $form.on('click', '#forms-submit', function () {
+                var url = "http://localhost:49477/Forms/Sucess";
+                $(location).attr('href', url);
             });
         },
         //Example of a function

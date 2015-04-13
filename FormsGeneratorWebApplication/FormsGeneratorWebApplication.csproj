@@ -363,6 +363,7 @@
     <Content Include="Views\FormsAdmin\Email.cshtml" />
     <Content Include="Views\Forms\_CheckBoxesPartial.cshtml" />
     <Content Include="Views\Forms\OutOfTime.cshtml" />
+    <Content Include="Views\Forms\Sucess.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -32,7 +32,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult Forms(FormsModel model)
         {
-            return View();
+            return View("Sucess");
         }
         [HttpGet]
         public ActionResult About() { 
@@ -41,6 +41,11 @@ namespace FormsGeneratorWebApplication.Controllers
 
         [HttpGet]
         public ActionResult OutOfTime() {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Sucess() {
             return View();
         }
 
