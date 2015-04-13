@@ -215,18 +215,32 @@ namespace FormsGeneratorWebApplication.Controllers
                 //TODO: Create new guid
                 //      Create form for data base
                 // form + guid
-            //var newGuid = Guid.Parse(guid);                
+            //var newGuid = Guid.Parse(guid);
+            //Func<FormsModel, bool> compare = delegate(FormsModel form)
+            //{
+            //    if (form.adminGUID == newGuid)
+            //    {
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        return false;
+            //    }
+            //};
+            //FormsModel copy = db.FormModels.First<FormsModel>(compare);
             //var recipientList = recipients.Split(',');
             //foreach (String r in recipientList)
             //{
             //    String link = "";
             //    EmailLink(r, link);
             //}
-            //String link = "";
+
+            String link = Request.Url.ToString();
+            link = link.Remove(link.IndexOf("FormsAdmin"));
+            link = link + "Forms/Forms?guid=" + guid;
             //var formModel = new FormsModel();
             //var resultModel = new ResultModel();
-
-            EmailLink(recipients, guid);
+            EmailLink(recipients, link);
 
             return View();
             //}
