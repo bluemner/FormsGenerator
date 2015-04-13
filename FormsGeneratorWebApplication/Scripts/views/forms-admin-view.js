@@ -105,6 +105,7 @@
 
 
             });
+            --form.arrayCount;
         },
 
         updatePostion: function (selectedObject) {
