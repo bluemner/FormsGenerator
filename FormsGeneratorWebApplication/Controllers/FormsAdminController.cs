@@ -8,6 +8,9 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using FormsGeneratorWebApplication.Models;
 using FormsGeneratorWebApplication.Utilities;
 namespace FormsGeneratorWebApplication.Controllers
@@ -28,6 +31,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
 
         private FormsDbContext db = new FormsDbContext();
+        private UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
         // GET: /FormsAdmin/
         public ActionResult Index()
@@ -35,7 +39,7 @@ namespace FormsGeneratorWebApplication.Controllers
             //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
             var adminFormModel = new AdminFormModel()
             {
-                forms = new List<FormsModel>()
+                //forms = new List<FormsModel>()
             };
 
 
@@ -58,6 +62,9 @@ namespace FormsGeneratorWebApplication.Controllers
             var x = 3;
             // This logic works, but when the view passes the model to 
             // this function, the model's FormItemList is null
+            //var user = userManager.FindById(User.Identity.GetUserId());
+            //user.forms.Add(model);
+            //model.user = user;
             db.FormModels.Add(model);
             db.SaveChanges();
             Console.WriteLine("make forms ran");
