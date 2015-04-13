@@ -10,7 +10,12 @@
     public static int TYPE_TEXT_RADIO = 2;
     public static int TYPE_TEXT_CHECKBOX = 3; *@
 <h2>Please fill out the folowing form:</h2>
-@using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
+@if (Model.EndDate < System.DateTime.Now) {
+    Response.Redirect("~/Forms/OutOfTime");
+}
+else { 
+    
+    using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
     for (var i = 0; i < items.Count(); ++i)
     {
@@ -33,6 +38,8 @@
             @Html.Partial("~/Views/Forms/_CheckBoxesPartial.cshtml", currentItem)
         }
     }
+}
+   
 }
     @*@using (Html.BeginForm())
         {
