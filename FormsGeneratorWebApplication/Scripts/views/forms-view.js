@@ -9,7 +9,7 @@
         },
 
         init: function () {
-            var $form = $('#form');
+            var $form = $('#new-form');
             var $sample = $('#sample');
           
             
@@ -18,7 +18,7 @@
                 samplefunc($(this)); 
             });
 
-            $form.on('click', '#forms-submit', function () {
+            $form.on('click', '#form-submit', function () {
                 var url = "http://localhost:49477/Forms/Sucess";
                 $(location).attr('href', url);
             });

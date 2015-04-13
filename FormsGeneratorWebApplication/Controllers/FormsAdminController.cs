@@ -248,14 +248,20 @@ namespace FormsGeneratorWebApplication.Controllers
                 EmailLink(r, uniqueLink);
             }
 
-            
 
-            return View();
+            ViewBag.GUID = link+guid;
+            return View("Sucess");
             //}
             //else
             //{
               //  return View();
             //}
+        }
+
+        [HttpGet]
+        public ActionResult Sucess() {
+            ViewBag.GUID = "";
+            return View();
         }
 
         private void EmailLink(String recipient, String link)
