@@ -216,32 +216,39 @@ namespace FormsGeneratorWebApplication.Controllers
                 //TODO: Create new guid
                 //      Create form for data base
                 // form + guid
-            //var newGuid = Guid.Parse(guid);
-            //Func<FormsModel, bool> compare = delegate(FormsModel form)
-            //{
-            //    if (form.adminGUID == newGuid)
-            //    {
-            //        return true;
-            //    }
-            //    else
-            //    {
-            //        return false;
-            //    }
-            //};
-            //FormsModel copy = db.FormModels.First<FormsModel>(compare);
-            //var recipientList = recipients.Split(',');
-            //foreach (String r in recipientList)
-            //{
-            //    String link = "";
-            //    EmailLink(r, link);
-            //}
-
+            var newGuid = Guid.Parse(guid);
             String link = Request.Url.ToString();
             link = link.Remove(link.IndexOf("FormsAdmin"));
-            link = link + "Forms/Forms?guid=" + guid;
-            //var formModel = new FormsModel();
-            //var resultModel = new ResultModel();
-            EmailLink(recipients, link);
+            link = link + "Forms/Forms?guid=";
+            Func<FormsModel, bool> compare = delegate(FormsModel form)
+            {
+                if (form.adminGUID == newGuid)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            FormsModel copy = db.FormModels.First<FormsModel>(compare);
+            var recipientList = recipients.Split(',');
+            foreach (String r in recipientList)
+            {
+                var formModel = FormsModel.clone(copy);
+                formModel.adminGUID = createGuid();
+                var resultModel = new ResultModel();
+                resultModel.adminGUID = newGuid;
+                resultModel.userGUID = formModel.adminGUID;
+                resultModel.active = true;
+                db.FormModels.Add(formModel);
+                db.ResultModels.Add(resultModel);
+                db.SaveChanges();
+                String uniqueLink = link + formModel.adminGUID.ToString();
+                EmailLink(r, uniqueLink);
+            }
+
+            
 
             return View();
             //}

@@ -46,6 +46,8 @@ namespace FormsGeneratorWebApplication.Models
                 result.FormItemIList.Add(FormItemModel.clone(i));
             }
             result.Name = toClone.Name;
+            result.StartDate = toClone.StartDate;
+            result.EndDate = toClone.EndDate;
             return result;
         }
 
