@@ -29,11 +29,12 @@
                     {
                         <div class="radio  col-lg-offset-1">
                             <div class="col-lg-10">
-                                <label class="col-lg-1 control-label label label-default">@Model.options[i] </label>
-                                @Html.RadioButtonFor(m => m.options[i].question, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
+                                @*<label class="col-lg-1 control-label label label-default">@Model.options[i].option </label>*@
+                               
                                 <div class="col-lg-4">
                                     @Html.DisplayFor(m => m.options[i].option, new { @class = "control-label label" })
                                 </div>
+                                @Html.RadioButtonFor(m => m.selectedOption, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
                             </div>
                         </div>
                     }
