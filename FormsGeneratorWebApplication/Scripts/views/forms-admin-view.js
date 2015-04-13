@@ -62,9 +62,9 @@
         removeAccordion: function (selectedObject) {
             form.arrayCount--;
             selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
-                var selectedHeader = $(".ui-accordion-header-active");
-                var selectedIndex = selectedHeader.attr('id').replace("ui-id-", "");
-                selectedHeader.remove();
+                var $selectedHeader = $(".ui-accordion-header-active");
+                var selectedIndex = $selectedHeader.attr('id').replace("ui-id-", "");
+                $selectedHeader.remove();
                 var headers = $(".ui-accordion-header");
                 for(var i = Math.floor(selectedIndex/2);i<headers.length-1;++i)
                 {
@@ -75,15 +75,34 @@
             });
 
             selectedObject.parents('.ui-accordion-content').slideUp('slow', function (){
-                var selectedContent = $(".ui-accordion-content-active");
-                var selectedIndex = selectedContent.attr('id').replace("ui-id-", "");
-                selectedContent.remove();
-                var contents = $(".ui-accordion-content");
-                for (var i = (selectedIndex / 2)-1 ; i < contents.length; ++i) {
-                    var curIndex = $(contents[i]).attr('id').replace("ui-id-", "");
-                    $(contents[i]).attr("id", "ui-id-" + (curIndex - 2));
-                    $(contents[i]).attr("aria-labelledby", "ui-id-" + (curIndex - 3));
+                var $selectedContent = $(".ui-accordion-content-active");
+                var selectedIndex = $selectedContent.attr('id').replace("ui-id-", "");//for ids
+                var selectedIListItem = $(".ui-accordion-content-active .form-control").first(); //for input names
+                var $listIndex = $(selectedIListItem).attr("name").replace("FormItemIList[","").replace("].question","");
+                $selectedContent.remove();
+                var $contents = $(".ui-accordion-content");
+                for (var i = (selectedIndex / 2)-1 ; i < $contents.length; ++i) {
+                    var curIndex = $($contents[i]).attr('id').replace("ui-id-", "");
+                    $($contents[i]).attr("id", "ui-id-" + (curIndex - 2));
+                    $($contents[i]).attr("aria-labelledby", "ui-id-" + (curIndex - 3));
                 }
+                var $inputs = $("#item-zone .form-control");
+                var name = "";
+                console.log($listIndex);
+                for(i = 0;i<$inputs.length;++i)
+                {
+
+                    name = $($inputs[i]).attr("name");
+                    var before = name.substr(0, name.indexOf("[")+1);
+                    var after = name.substr(name.indexOf("]"), name.length - 1);
+                    var number = name.replace(before, "").replace(after, "");
+                    if(number > $listIndex)
+                    {
+                        --number;
+                        $($inputs[i]).attr("name", before+number+after)
+                    }
+                }
+
 
             });
         },
