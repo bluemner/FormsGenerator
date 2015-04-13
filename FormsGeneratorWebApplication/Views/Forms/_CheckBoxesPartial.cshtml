@@ -5,10 +5,10 @@
 }
 
 @*<div class="ui-accordion-header">
-    <div class="form-item">
-        <h3 class="ui-header-height">Radio Button</h3>
-    </div>
-</div>*@
+        <div class="form-item">
+            <h3 class="ui-header-height">Radio Button</h3>
+        </div>
+    </div>*@
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -29,7 +29,9 @@
                     {
                         <div class="radio  col-lg-offset-1">
                             <div class="col-lg-10">
-                                @Html.RadioButtonFor(m => m.options[i], new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
+                                @*@Html.CheckBoxFor(m => m.options[i], new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })*@
+
+                                <label class="col-lg-2 control-label label label-default"> <input type="checkbox"></label>
                                 <div class="col-lg-4">
                                     @Html.DisplayFor(m => m.options[i].option, new { @class = "control-label label" })
                                 </div>
@@ -37,32 +39,32 @@
                         </div>
                     }
                 </div>
-                </fieldset>
-            </div>
+            </fieldset>
         </div>
     </div>
+</div>
 
 @*<div>
-    <div class="form-horizontal">
-        <fieldset>
-            <div class="row">
-                <div class="form-group">
-                    <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
-                    <div class="col-xs-10">
-                        @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
+        <div class="form-horizontal">
+            <fieldset>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
+                        <div class="col-xs-10">
+                            @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="button" class="btn btn-danger btn-remove-form-item" name="@index">Remove</button>
+                        </div>
                     </div>
                 </div>
-               
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="button" class="btn btn-danger btn-remove-form-item" name="@index">Remove</button>
-                    </div>
-                </div>
-            </div>
-            @Html.HiddenFor(m => m.postion, new { Name = "FormItemIList[" + index + "].postion" })
-        </fieldset>
-    </div>
-</div>*@
+                @Html.HiddenFor(m => m.postion, new { Name = "FormItemIList[" + index + "].postion" })
+            </fieldset>
+        </div>
+    </div>*@
 
 
 @*<div>
