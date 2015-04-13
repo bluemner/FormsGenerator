@@ -13,21 +13,21 @@
     {
 
         var currentItem = items.ElementAt(i);
-        if (currentItem.GetType() == typeof(CheckBoxesModel))
+        if (currentItem.GetType() == typeof(RadioButtonModel))
         {
-            @Html.Partial("~/Views/Forms/_RadioButtonPartial",currentItem)
+            @Html.Partial("~/Views/Forms/_RadioButtonPartial.cshtml",currentItem)
         }
         else if (currentItem.GetType() == typeof(TextAreaModel))
         {
-            @Html.Partial("~/Views/Forms/_TextAreaPartial", currentItem)
+            @Html.Partial("~/Views/Forms/_TextAreaPartial.cshtml", currentItem)
         }
         else if (currentItem.GetType() == typeof(TextBoxModel))
         {
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Questions :</div>
-                @Html.Partial("~/Views/Forms/_TextBoxPartial.cshtml", currentItem)
-            </div>
+            @Html.Partial("~/Views/Forms/_TextBoxPartial.cshtml", currentItem)
+        }
+        else if (currentItem.GetType() == typeof(CheckBoxesModel))
+        {
+            @Html.Partial("~/Views/Forms/_CheckBoxesPartial.cshtml", currentItem)
         }
     }
 }

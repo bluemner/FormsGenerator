@@ -14,18 +14,27 @@
 </div>*@
 
 
-@*<div class="panel panel-default">
-    <div class="panel-heading">Questions :</div>*@
-    <div class="panel-body">
-        <h3>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title pn-tl-font">
+            <span class="caret"></span>
             @Html.HiddenFor(m => m.question, new { Name = "[" + index + "].question" })
-            @*@Html.Display(m => Model.postion) @**@Html.Label(Model.question)
-        </h3>
-        <h3>
-            @Html.TextAreaFor(m => m.value, new { Name = "[" + index + "].value", @class = "form-control Answer-inputWidthHeight" })
+            @Html.Label(Model.question, new { @class = "control-label label" })
         </h3>
     </div>
-@*</div>*@
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="inputFormName" class="col-lg-1 control-label label label-default">Answer : </label>
+            <div class="col-xs-10">
+                @Html.TextBoxFor(m => m.value, new { Name = "[" + index + "].value", @class = "form-control Answer-inputWidthHeight" })
+            </div>
+        </div>
+        @*<h3>
+            @Html.Display(m => Model.postion) 
+        </h3>*@
+        
+    </div>
+</div>
 
 @*<div>
     <div class="form-horizontal">

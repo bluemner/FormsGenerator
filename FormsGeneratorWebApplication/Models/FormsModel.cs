@@ -16,6 +16,8 @@ namespace FormsGeneratorWebApplication.Models
 
     
         public virtual IList<FormItemModel> FormItemIList { get; set; }
+
+        public virtual ApplicationUser user { get; set; }
         
         [Display(Name = "Form Name")]
         [Required(ErrorMessage="Please enter a name")]

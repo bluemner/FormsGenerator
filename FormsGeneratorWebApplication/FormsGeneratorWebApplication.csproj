@@ -360,6 +360,7 @@
     <Content Include="Views\FormsAdmin\t.cshtml" />
     <Content Include="Views\FormsAdmin\EditUserPermission.cshtml" />
     <Content Include="Views\FormsAdmin\Email.cshtml" />
+    <Content Include="Views\Forms\_CheckBoxesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

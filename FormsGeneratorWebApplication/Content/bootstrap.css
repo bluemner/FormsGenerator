@@ -6800,3 +6800,7 @@ a.list-group-item-danger.active:focus {
     margin-top: 3.5px;
     margin-bottom: 3.5px;
 }
+
+.pn-tl-font{
+    font-size: 25px;
+}
