@@ -188,13 +188,13 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult EmailPage()
+        public ActionResult Email()
         {
             return View();
         }
 
         [HttpPost]
-        public ViewResult Emailer(String recipients)
+        public ViewResult Email(String recipients)
         {
             //if (ModelState.IsValid)
             //{
