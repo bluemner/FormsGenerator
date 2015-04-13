@@ -185,6 +185,7 @@
     <Compile Include="Models\TextBoxModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\QRCodeHtmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database1.mdf" />
@@ -357,6 +358,7 @@
     <Content Include="Views\Forms\QuestionNavBar.cshtml" />
     <Content Include="Views\FormsAdmin\t.cshtml" />
     <Content Include="Views\FormsAdmin\EditUserPermission.cshtml" />
+    <Content Include="Views\FormsAdmin\Email.cshtml" />
     <Content Include="Views\Forms\_CheckBoxesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
