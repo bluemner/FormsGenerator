@@ -91,7 +91,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult AddTextArea(int count)
         {
             ViewBag.TextBoxCount = count;
-            return PartialView("_TextAreaPartial", new TextAreaModel() { type = TYPE_TEXT_AREA });
+            return PartialView("_TextAreaPartial", new TextAreaModel() { type = TYPE_TEXT_AREA, options = new List<OptionsModel>() });
         }
 
         [HttpGet]

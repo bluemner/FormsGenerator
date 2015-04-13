@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.value)</label>
                     <div class="col-xs-10">
-                        @Html.TextAreaFor(m => m.value, new { Name = "FormItemIList[" + index + "].value", @class = "form-control Answer-inputWidthHeight" })
+                        @Html.TextAreaFor(m => m.value, new { Name = "FormItemIList[" + index + "].options[0].option", @class = "form-control Answer-inputWidthHeight" })
                     </div>
                 </div>
                 <div class="form-group">
