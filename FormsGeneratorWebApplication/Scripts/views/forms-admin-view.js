@@ -9,6 +9,8 @@
             AccordionHeightStyle: 'content',  
         },
 
+        arrayCount: 0,
+
         init: function () {
             var $formname = $('#new-form');
             var $itemZone = $('#item-zone');
@@ -58,7 +60,7 @@
         },
 
         removeAccordion: function (selectedObject) {
-
+            form.arrayCount--;
             selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
                 var selectedHeader = $(".ui-accordion-header-active");
                 var selectedIndex = selectedHeader.attr('id').replace("ui-id-", "");
@@ -91,30 +93,30 @@
         },
         addFormItem: function (selectedObject, url) {
 
-            var count = selectedObject.children(form.settings.AccordionHeader).length;
+           // var count = form.arrayCount;//selectedObject.children(form.settings.AccordionHeader).length;
             // var count = parseInt(form.settings.CurrentIndex);
             ///form.settings.CurrentIndex = (++count) + "";
             var addCount = parseInt($('.form-selection-count').val());
             for (var i = 0; i < addCount; ++i) {
-               
+                var count = form.arrayCount;
                 var subelem = $('.number-Of-sub-elements').val();
                 if (subelem < 0) {
                     // $('#test').html("");
-                    $('#test').load(url + '?count=' + count+i, function () {
+                    $('#test').load(url + '?count=' + count, function () {
                         /* When load is done */
                         selectedObject.append($(test).html());
                         form.refreshAccordion(selectedObject);
-                        selectedObject.accordion({ active: count+i });
+                        selectedObject.accordion({ active: count });
                     });
                 } else {
-                    $('#test').load(url + '?count=' + count+i + "&numberOfSubElements=" + subelem, function () {
+                    $('#test').load(url + '?count=' + count + "&numberOfSubElements=" + subelem, function () {
                         /* When load is done */
                         selectedObject.append($(test).html());
                         form.refreshAccordion(selectedObject);
-                        selectedObject.accordion({ active: count+i });
+                        selectedObject.accordion({ active: count });
                     });
                 }
-
+                form.arrayCount++;
             }
 
             //$.ajax({

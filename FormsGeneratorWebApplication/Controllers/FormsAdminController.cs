@@ -39,7 +39,8 @@ namespace FormsGeneratorWebApplication.Controllers
             //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
             var adminFormModel = new AdminFormModel()
             {
-                //forms = new List<FormsModel>()
+
+                forms = new List<FormsModel>()
             };
 
 
