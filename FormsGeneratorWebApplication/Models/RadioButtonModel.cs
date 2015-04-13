@@ -9,7 +9,7 @@ namespace FormsGeneratorWebApplication.Models
     public class RadioButtonModel : FormItemModel
     {
 
-        public IList<string> options { get; set; }
+        //public IList<> options { get; set; }
         public int selectedOption { get; set; }
 
         public bool val { get; set; }

@@ -1,7 +1,7 @@
-﻿@model  FormsGeneratorWebApplication.Models.TextBoxModel
+﻿@model  FormsGeneratorWebApplication.Models.FormItemModel
 
 @{
-    var index = Model.postion;
+    var index = ViewBag.index;
 }
 
 @*<div class="ui-accordion-header">
@@ -18,7 +18,7 @@
     <div class="panel-heading">
         <h3 class="panel-title pn-tl-font">
             <span class="caret"></span>
-            @Html.HiddenFor(m => m.question, new { Name = "[" + index + "].question" })
+            @Html.HiddenFor(m => m.question, new { Name = "FormsModel[" + index + "].question" })
             @Html.Label(Model.question, new { @class = "control-label label" })
         </h3>
     </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="inputFormName" class="col-lg-1 control-label label label-default">Answer : </label>
             <div class="col-xs-10">
-                @Html.TextBoxFor(m => m.value, new { Name = "[" + index + "].value", @class = "form-control Answer-inputWidthHeight" })
+                @Html.TextBoxFor(m=>m.options, new { Name = "FormsModel[" + index + "].options", @class = "form-control Answer-inputWidthHeight" , Value=""})
             </div>
         </div>
         @*<h3>
