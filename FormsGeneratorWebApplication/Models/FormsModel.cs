@@ -37,6 +37,18 @@ namespace FormsGeneratorWebApplication.Models
         //this is the GUID of the form
         public Guid adminGUID { get; set; }
 
+        public static FormsModel clone(FormsModel toClone)
+        {
+            FormsModel result = new FormsModel();
+            result.FormItemIList = new List<FormItemModel>();
+            foreach(FormItemModel i in toClone.FormItemIList)
+            {
+                result.FormItemIList.Add(FormItemModel.clone(i));
+            }
+            result.Name = toClone.Name;
+            return result;
+        }
+
     }
    
 }

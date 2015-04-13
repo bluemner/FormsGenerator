@@ -34,7 +34,7 @@ namespace FormsGeneratorWebApplication.Models
         //foreign key for the database
         public virtual FormsModel FormsModel { get; set; }
 
-        public FormItemModel clone(FormItemModel toClone)
+        public static FormItemModel clone(FormItemModel toClone)
         {
             FormItemModel result = new FormItemModel();
             result.postion = toClone.postion;
