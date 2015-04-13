@@ -39,6 +39,11 @@ namespace FormsGeneratorWebApplication.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult OutOfTime() {
+            return View();
+        }
+
         //TODO Define method to add iteams
         
         /// <summary>

@@ -362,6 +362,7 @@
     <Content Include="Views\FormsAdmin\EditUserPermission.cshtml" />
     <Content Include="Views\FormsAdmin\Email.cshtml" />
     <Content Include="Views\Forms\_CheckBoxesPartial.cshtml" />
+    <Content Include="Views\Forms\OutOfTime.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
