@@ -46,10 +46,10 @@ namespace FormsGeneratorWebApplication.Models
                 result.options.Add(new OptionsModel { option = o.option, question = result });
             }
             result.selected = new List<SelectedModel>();
-            foreach (SelectedModel s in toClone.selected)
-            {
-                result.selected.Add(new SelectedModel { selected = s.selected, question = result});
-            }
+            //foreach (SelectedModel s in toClone.selected)
+            //{
+            //    result.selected.Add(new SelectedModel { selected = s.selected, question = result});
+            //}
             result.selectedOption = toClone.selectedOption;
             return result;
         }
