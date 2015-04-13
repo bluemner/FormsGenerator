@@ -68,7 +68,7 @@ namespace FormsGeneratorWebApplication.Controllers
             db.FormModels.Add(model);
             db.SaveChanges();
             Console.WriteLine("make forms ran");
-            return View("Index");
+            return View("Email", model);
         }
 
         private Guid createGuid()
@@ -196,19 +196,25 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Email()
+        public ActionResult Email( FormsModel model )
         {
+            ViewBag.GUID = model.adminGUID.ToString();
+           /// ViewBag.GUID = "ABC123";
             return View();
         }
 
         [HttpPost]
-        public ViewResult Email(String recipients)
+        public ViewResult Email(String recipients, String guid)
         {
             //if (ModelState.IsValid)
             //{
+                //TODO: Create new guid
+                //      Create form for data base
+                // form + guid
+
                 MailMessage mail = new MailMessage();
-                mail.To.Add("bluemner@uwm.edu");
-                mail.Bcc.Add("njjakusz@uwm.edu");
+                mail.To.Add(recipients);
+               // mail.Bcc.Add("njjakusz@uwm.edu");
                 mail.From = new MailAddress("dpatel.xxx23@gmail.com");
                 mail.Subject = "Brandon, where art thou?";
                 String Body = "Emailer works, BITCHES!";

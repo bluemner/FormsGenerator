@@ -19,9 +19,25 @@
             $email.on('click', '#email-add-text', function () {
                 $('#email-error-message').hide();
             });
+
+            $email.on('click', '#email-submit-btn', function () {
+                form.sub();
+            });
             
         },
+        sub: function(){
+            var txt = "";
+            for (var i = 0; i < form.Email.length; ++i) {
+                if (i == 0) {
+                    txt += form.Email[i];
+                } else {
+                    txt += ",\n" + form.Email[i];
+                }
+            }
+            $('#email-recp').val(txt);
 
+            $('#Email-form').submit();
+        },
         addEmailItem: function () {
             var feild = $('#email-add-text').val();
             var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;

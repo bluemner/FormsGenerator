@@ -1,12 +1,18 @@
 ﻿
 @{
     ViewBag.Title = "Email";
+
+    var guid = ViewBag.GUID;
 }
 
 <h2>Email</h2>
 
+@using (Html.BeginForm("Email", "FormsAdmin", FormMethod.Post, new { id = "Email-form", @Class = "form-horizontal", enctype = "multipart/form-data" }))
+{
 
-<div id="Email-form">
+
+
+
     <div class="form-horizontal">
         <textarea class="email-text-area"></textarea>
         <br />
@@ -25,10 +31,12 @@
         </div>
         <div>
             <button id="email-submit-btn" class="btn btn-success btn-lg" >Submit</button>
+            @Html.Hidden("recipients", "", new { Name = "recipients", ID = "email-recp" })
+            @Html.Hidden("guid", "@guid", new { Name = "guid", ID = "email-guid", Value = @guid })
         </div>
 
     </div>
-</div>
+}
 
 @Scripts.Render("~/Scripts/views/forms-admin-email.js")
 <script type="text/javascript">
