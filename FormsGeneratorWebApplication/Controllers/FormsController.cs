@@ -25,8 +25,8 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Forms(Guid guid) {
-            return View(loadContentFromDataBase(guid));
+        public ActionResult Forms(String guid) {
+            return View(loadContentFromDataBase(Guid.Parse(guid)));
         }
 
         [HttpPost]

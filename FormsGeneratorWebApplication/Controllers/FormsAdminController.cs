@@ -70,6 +70,8 @@ namespace FormsGeneratorWebApplication.Controllers
             db.FormModels.Add(model);
             db.SaveChanges();
             Console.WriteLine("make forms ran");
+
+            string gui =model.adminGUID.ToString();
             return View("Email", model);
         }
 
@@ -198,22 +200,22 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Email( FormsModel model )
+        public ActionResult Email( FormsModel guid )
         {
-            ViewBag.GUID = model.adminGUID.ToString();
+            ViewBag.GUID = guid.adminGUID.ToString();
            /// ViewBag.GUID = "ABC123";
             return View();
         }
 
         [HttpPost]
-        public ViewResult Email(String recipients, String guid)
+        public ActionResult Email(String recipients, String guid)
         {
             //if (ModelState.IsValid)
             //{
                 //TODO: Create new guid
                 //      Create form for data base
                 // form + guid
-
+            
                 MailMessage mail = new MailMessage();
                 mail.To.Add(recipients);
                // mail.Bcc.Add("njjakusz@uwm.edu");
