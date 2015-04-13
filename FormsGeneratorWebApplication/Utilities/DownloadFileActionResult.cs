@@ -22,7 +22,7 @@ namespace FormsGeneratorWebApplication.Utilities
             this.fileName = fileName;
         }
 
-        public override void PerformResult(ControllerContext context)
+        public override void ExecuteResult(ControllerContext context)
         {
             HttpContext currentContext = HttpContext.Current;
             currentContext.Response.Clear();
