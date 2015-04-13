@@ -163,7 +163,8 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                     break;   
             }
-            return View(formModel);
+
+            return View("MakeForm", formModel);
         }
         //TODO: low- priority. 
         //makes a copy of a pre-existing form for sake of convenience.

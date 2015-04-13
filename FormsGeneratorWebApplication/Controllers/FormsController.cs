@@ -57,11 +57,60 @@ namespace FormsGeneratorWebApplication.Controllers
             //TODO Load the content from database
             //FormsModel model = new FormsModel();
             //model.FormItemIList = new List<FormItemModel>();
-            //model.FormItemIList.Add(new TextBoxModel());
+            //model.FormItemIList.Add(new TextAreaModel());
             //model.FormItemIList.ElementAt<FormItemModel>(0).id = 1;
             //model.FormItemIList.ElementAt<FormItemModel>(0).postion = 1;
             //model.FormItemIList.ElementAt<FormItemModel>(0).question = "What is your name?";
             //model.FormItemIList.ElementAt<FormItemModel>(0).type = 0;
+
+            //model.FormItemIList.Add(new TextBoxModel());
+            //model.FormItemIList.ElementAt<FormItemModel>(1).id = 2;
+            //model.FormItemIList.ElementAt<FormItemModel>(1).postion = 2;
+            //model.FormItemIList.ElementAt<FormItemModel>(1).question = "Do you like banana?";
+            //model.FormItemIList.ElementAt<FormItemModel>(1).type = 1;
+
+            //model.FormItemIList.Add(new RadioButtonModel() { 
+            //    id =3,
+            //    postion =3,
+            //    question ="Do you like radio button?",
+            //    type= 2
+            //});
+
+            //IList<OptionsModel> op = new List<OptionsModel>();
+            //var p = new OptionsModel();
+            //p.option = "IDK";
+            //p.question = model.FormItemIList.ElementAt<FormItemModel>(2);
+            //op.Add(p);
+            //p = new OptionsModel();
+            //p.option = "Yes, I love It.";
+            //op.Add(p);
+            //p = new OptionsModel();
+            //p.option = "No, I dont.";
+            //op.Add(p);
+            //model.FormItemIList.ElementAt<FormItemModel>(2).options = op;
+
+            //model.FormItemIList.Add(new CheckBoxesModel()
+            //{
+            //    id = 4,
+            //    postion = 4,
+            //    question = "Which checkbox option you want to select?",
+            //    type = 3,
+            //    maxCheckable = 3,
+            //    minCheckable = 1
+            //});
+
+            //IList<OptionsModel> list = new List<OptionsModel>();
+            //OptionsModel c = new OptionsModel();
+            //c.option = "IDK";
+            //list.Add(c);
+            //c = new OptionsModel();
+            //c.option = "Yes, I love It.";
+            //list.Add(c);
+            //c = new OptionsModel();
+            //c.option = "No, I dont.";
+            //list.Add(c);
+            //model.FormItemIList.ElementAt<FormItemModel>(3).options = list;
+
             //model.key = 1;
             //model.Name = "Survey 1";
             //model.StartDate = DateTime.Now;

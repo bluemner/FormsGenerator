@@ -15,22 +15,24 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-lg-4 col-lg-offset-1">
+            <div class="col-lg-8 col-lg-offset-1">
                 @if (Model.forms.Count > 0)
                 {
-                    <table style="width:100%">
-                        <tr>
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr class="danger">
                             <th>Name</th>
                             <th>Copy</th>
-                            <th>Edit</th>
+                            <th>Edit</th>                           
                             <th>Statistics</th>                           
                             <th>Date Range</th>
                             <th>Status</th>
                             <th>Total</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         @for (var i = 0; i < Model.forms.Count; ++i)
                         {
-
                             <tr>
                                 <td><a href="">@Model.forms[i].Name </a></td>                            
                                 <td><input type="button" class="btn" id="Admin-Form-Copy-Button-@i" value="Copy" /></td>
@@ -44,6 +46,7 @@
                                 <td><label>@Model.forms[i].</label></td>
                             </tr>
                         }
+                        </tbody>
                     </table>
                 }
                 else
