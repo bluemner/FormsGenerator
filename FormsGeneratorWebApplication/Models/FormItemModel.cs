@@ -34,6 +34,25 @@ namespace FormsGeneratorWebApplication.Models
         //foreign key for the database
         public virtual FormsModel FormsModel { get; set; }
 
+        public FormItemModel clone(FormItemModel toClone)
+        {
+            FormItemModel result = new FormItemModel();
+            result.postion = toClone.postion;
+            result.question = toClone.question;
+            result.type = toClone.type;
+            result.options = new List<OptionsModel>();
+            foreach (OptionsModel o in toClone.options)
+            {
+                result.options.Add(new OptionsModel { option = o.option, question = result });
+            }
+            result.selected = new List<SelectedModel>();
+            foreach (SelectedModel s in toClone.selected)
+            {
+                result.selected.Add(new SelectedModel { selected = s.selected, question = result});
+            }
+            result.selectedOption = toClone.selectedOption;
+            return result;
+        }
     }
 
     
