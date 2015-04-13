@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
                     <div class="col-xs-10">
-                        @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
+                        @Html.TextBoxFor(m => m.question, new { Name = "FormItemIList[" + index + "].question", @class = "form-control question-inputWidth" })
                     </div>
                 </div>
                 @for (var i = 0; i < Model.options.Count; ++i)

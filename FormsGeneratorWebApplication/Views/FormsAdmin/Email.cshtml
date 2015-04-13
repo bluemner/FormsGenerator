@@ -5,3 +5,40 @@
 
 <h2>Email</h2>
 
+
+<div id="Email-form">
+    <div class="form-horizontal">
+        <textarea class="email-text-area"></textarea>
+        <br />
+        <div>
+            <span>
+                <input type="text" id="email-add-text" />
+            </span>
+            <span>
+                <input type="button" id="email-add-btn" class="btn btn-primary btn-med btn-add-form-item" value="Add Email" />
+               
+            </span>
+            <br>
+            <span>
+                <label id="email-error-message" class="error" hidden>Please enter email in correct format</label>
+            </span>
+        </div>
+        <div>
+            <button id="email-submit-btn" class="btn btn-success btn-lg" >Submit</button>
+        </div>
+
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/views/forms-admin-email.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.extend(form, {
+            settings: {
+   
+            }
+        });
+        window.form.init();
+    })
+
+</script>
