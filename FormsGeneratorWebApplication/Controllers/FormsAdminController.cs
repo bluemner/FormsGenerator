@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using FormsGeneratorWebApplication.Models;
 using FormsGeneratorWebApplication.Utilities;
+using System.Threading.Tasks;
 namespace FormsGeneratorWebApplication.Controllers
 
 {
@@ -30,8 +31,10 @@ namespace FormsGeneratorWebApplication.Controllers
 
 
 
-        private FormsDbContext db = new FormsDbContext();
-        private UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+        private static FormsDbContext db = new FormsDbContext();
+        private static UserStore<ApplicationUser> store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+        private static UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(store);
+
 
         // GET: /FormsAdmin/
         public ActionResult Index()
@@ -64,10 +67,13 @@ namespace FormsGeneratorWebApplication.Controllers
             var x = 3;
             // This logic works, but when the view passes the model to 
             // this function, the model's FormItemList is null
-            //var user = userManager.FindById(User.Identity.GetUserId());
-            //user.forms.Add(model);
+            var curUser = userManager.FindById(User.Identity.GetUserId());
+            curUser.forms.Add(new UserForm() { formGUID = model.adminGUID, user = curUser });
             //model.user = user;
             db.FormModels.Add(model);
+            Task<IdentityResult> task = userManager.UpdateAsync(curUser);
+            //IdentityResult done = await task;
+            //store.Context.SaveChanges();
             db.SaveChanges();
             Console.WriteLine("make forms ran");
 

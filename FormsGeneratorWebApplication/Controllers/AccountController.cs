@@ -78,7 +78,7 @@ namespace FormsGeneratorWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, forms = new List<FormsModel>() };
+                var user = new ApplicationUser() { UserName = model.UserName, forms = new List<UserForm>() };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
