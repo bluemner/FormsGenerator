@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="form-group">
                     <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
-                    <div class="col-xs-10">
+                    <div class="col-lg-10">
                         @Html.TextBoxFor(m => m.question, new { Name = "FormItemIList[" + index + "].question", @class = "form-control question-inputWidth" })
                     </div>
                 </div>
@@ -29,16 +29,14 @@
                             </div>
                         </div>*@
                     <div class="checkboxes form-group">
-                        <div class="radio">
-                            <label class="col-lg-2 control-label label label-default">Option @i:</label>
-                            <div class="col-lg-4">                         
-                           
-                                @Html.TextBoxFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option",@class = "form-control" })
-                             
+                        <label class="col-lg-2 control-label label label-default">Option @i:</label>
+                        <div class="col-lg-10">
+                            <div class="radio">
+                                <label>
+                                    @Html.RadioButtonFor(m => m.val, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
+                                    @Html.TextBoxFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option", @class = "form-control radio-btn-input-width" })
+                                </label>
                             </div>
-                            <label class="col-lg-1 control-label">
-                                @Html.RadioButtonFor(m => m.val, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
-                            </label>
                         </div>
                     </div>
                 }

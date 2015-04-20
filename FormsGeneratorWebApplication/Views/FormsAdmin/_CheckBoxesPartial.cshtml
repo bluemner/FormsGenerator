@@ -42,10 +42,13 @@
                         </div>
                     </div>*@
                     <div class="checkboxes form-group">
-                        <div class="checkbox">
-                            <label class="col-lg-2 control-label label label-default"> <input type="checkbox"></label>
-                            <div class="col-xs-10">
-                                @Html.TextBoxFor(m => m.checkboxes[i].answer, new { Name = "FormItemIList[" + index + "].selected["+@i+"]", @class = "form-control" })
+                        <label class="col-lg-2 control-label label label-default"> Option @i</label>
+                        <div class="col-lg-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">
+                                    @Html.TextBoxFor(m => m.checkboxes[i].answer, new { Name = "FormItemIList[" + index + "].selected[" + @i + "]", @class = "form-control checkbox-btn-input-width" })
+                                </label>
                             </div>
                         </div>
                     </div>

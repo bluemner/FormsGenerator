@@ -6814,3 +6814,10 @@ a.list-group-item-danger.active:focus {
 {
     font-size: 12px;
 }
+
+.radio-btn-input-width{
+    width: 245px;
+} 
+.checkbox-btn-input-width{
+    width: 245px;
+}
