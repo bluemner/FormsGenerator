@@ -60,6 +60,7 @@
         },
 
         removeAccordion: function (selectedObject) {
+            $(test).html("");
             form.arrayCount--;
             selectedObject.parents('.ui-accordion-content').prev().slideUp('slow', function () {
                 var $selectedHeader = $(".ui-accordion-header-active");
