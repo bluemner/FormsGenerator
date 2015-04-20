@@ -6804,3 +6804,13 @@ a.list-group-item-danger.active:focus {
 .pn-tl-font{
     font-size: 25px;
 }
+
+.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+
+.glyphicon
+{
+    font-size: 12px;
+}

@@ -5,48 +5,48 @@
     var guid = ViewBag.GUID;
 }
 
-
-@using (Html.BeginForm("Email", "FormsAdmin", FormMethod.Post, new { id = "Email-form", @Class = "form-horizontal", enctype = "multipart/form-data" }))
-{
-
-    <div class="form-horizontal">
-        <fieldset>
-            <legend>Email </legend>
-            <div class="form-group">
-                <label for="textArea" class="col-lg-2 control-label">List of Emails:</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control email-text-area" rows="8" id="textArea"></textarea>
-                    <span class="help-block">Above is the list of Form recipients.</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="select" class="col-lg-2 control-label">Select Email to Remove</label>
-                <div class="col-lg-4">
-                    <input type="text" class="form-control" id="email-remove-text" placeholder="Email">
-                </div>
-                <input type="button" id="email-remove-btn" class="btn btn-primary btn-med btn-add-form-item" value="Remove" />
-            </div>
-            <div class="form-group">
-                <label for="textArea" class="col-lg-2 control-label">Enter a Email:</label>
-                <div class="col-lg-4">
-                    <input type="text" class="form-control" id="email-add-text" placeholder="Email">
-                </div>
-                <input type="button" id="email-add-btn" class="btn btn-primary btn-med btn-add-form-item" value="Add Email" />
-            </div>
-            <div class="form-group">
-                <label id="email-error-message" class="error col-lg-4" hidden>Please enter email in correct format</label>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button id="email-submit-btn" class="btn btn-success btn-lg">Submit</button>                   
-                    @Html.Hidden("recipients", "", new { Name = "recipients", ID = "email-recp" })
-                    @Html.Hidden("guid", "@guid", new { Name = "guid", ID = "email-guid", Value = @guid })
-                </div>
-            </div>
-        </fieldset>
-
+<div class="form-horizontal">
+    <fieldset>
+        <legend>Email</legend>
+        <div class="form-group">
+            <label id="email-error-message" class="col-lg-4 text-danger" hidden>Please enter email in correct format</label>
+        </div>
+    </fieldset>
 </div>
-}
+
+
+        <div class="container">
+            <div class="row">
+                <div class="control-group" id="fields">
+                    <label class="control-label" for="field1">Enter a Correct Formatted Email for a Recipients.</label>
+                    <div class="controls">
+                        <form role="form" autocomplete="off">
+                            <div class="entry input-group col-xs-3">
+                                <input class="form-control" name="fields[]" type="text" id="email-add-text" placeholder="Type something" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success btn-add" type="button">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                        <br>
+                        <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
+                        @using (Html.BeginForm("Email", "FormsAdmin", FormMethod.Post, new { id = "Email-form", @Class = "form-horizontal", enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button id="email-submit-btn" class="btn btn-success btn-lg">Submit</button>
+                                    @Html.Hidden("recipients", "", new { Name = "recipients", ID = "email-recp" })
+                                    @Html.Hidden("guid", "@guid", new { Name = "guid", ID = "email-guid", Value = @guid })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 @Scripts.Render("~/Scripts/views/forms-admin-email.js")
 <script type="text/javascript">
