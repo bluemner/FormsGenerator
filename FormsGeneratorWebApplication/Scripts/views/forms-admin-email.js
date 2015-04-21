@@ -32,12 +32,12 @@
 
 
             $document.on('click', '.btn-add', function (e) {
-                form.addEmail();
+                form.addEmail($(this));
                
             });
 
             $document.on('click', '.btn-remove', function (e) {
-                  form.removeEmail();
+                  form.removeEmail($(this));
 
             }
 
@@ -45,11 +45,11 @@
             
         },
         
-        addEmail: function(){
+        addEmail: function(selectedIteam){
               e.preventDefault();
 
                 $("input[name='fields[]']").each(function () {
-                    form.Email.push($(this).val());
+                    form.Email.push(selectedIteam.val());
                 });
                 var feild = form.Email[form.Email.length -1];
                 var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -61,7 +61,7 @@
                 }
                 else {
                     var controlForm = $('.controls form:first'),
-                            currentEntry = $(this).parents('.entry:first'),
+                            currentEntry = selectedIteam.parents('.entry:first'),
                             newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
                     newEntry.find('input').val('');
@@ -77,10 +77,10 @@
              
         },
 
-        removeEmail: function(){      
+        removeEmail: function(selectedIteam){      
                  e.preventDefault();
 
-                 $(this).parents('.entry:first').remove();
+                 selectedIteam.parents('.entry:first').remove();
              
         },
         
