@@ -32,7 +32,21 @@
 
 
             $document.on('click', '.btn-add', function (e) {
-                e.preventDefault();
+                form.addEmail();
+               
+            });
+
+            $document.on('click', '.btn-remove', function (e) {
+                  form.removeEmail();
+
+            }
+
+
+            
+        },
+        
+        addEmail: function(){
+              e.preventDefault();
 
                 $("input[name='fields[]']").each(function () {
                     form.Email.push($(this).val());
@@ -60,16 +74,16 @@
                     $('#email-error-message').hide();
                 }
 
-             }).on('click', '.btn-remove', function (e) {
+             
+        },
+
+        removeEmail: function(){      
                  e.preventDefault();
 
                  $(this).parents('.entry:first').remove();
-               
-            });
-
-
-            
+             
         },
+        
         sub: function () {
             $("input[name='fields[]']").each(function () {
                 form.Email.push($(this).val());
@@ -131,5 +145,3 @@
 
     });//extend
 })(window.jQuery, window.form || (window.form = {}));
-
-
