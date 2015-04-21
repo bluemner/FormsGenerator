@@ -6821,3 +6821,8 @@ a.list-group-item-danger.active:focus {
 .checkbox-btn-input-width{
     width: 245px;
 }
+
+.span-space { 
+    margin-right: 10px 
+
+}
