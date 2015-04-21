@@ -32,31 +32,28 @@
 
 
             $document.on('click', '.btn-add', function (e) {
-                form.addEmail($(this));
+                form.addEmail($(this), e);
                
             });
 
             $document.on('click', '.btn-remove', function (e) {
-                  form.removeEmail($(this));
+                form.removeEmail($(this), e);
 
-            }
+            });
 
 
             
         },
         
-        addEmail: function(selectedIteam){
+        addEmail: function(selectedIteam, e){
               e.preventDefault();
 
                 $("input[name='fields[]']").each(function () {
                     form.Email.push(selectedIteam.val());
                 });
-                var feild = form.Email[form.Email.length -1];
-                var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-
-                if (!regex.test(feild)) {
-                    form.Email = [];
-                    $('#email-error-message').show();
+          
+                if (!form.emailValidation()) {
+                 
                     return;
                 }
                 else {
@@ -77,7 +74,7 @@
              
         },
 
-        removeEmail: function(selectedIteam){      
+        removeEmail: function(selectedIteam,e){      
                  e.preventDefault();
 
                  selectedIteam.parents('.entry:first').remove();
@@ -100,29 +97,16 @@
 
             $('#Email-form').submit();
         },
-        //emailValidation: function () {
-        //    var feild = $('#email-add-text').val();
-        //    var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        emailValidation: function () {
+            var feild = $('#email-add-text').val();
+            var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     
-        //    if (!regex.test(feild)) {
-        //        $('#email-error-message').show();
-        //        return;
-        //    }
-
-
-            //$('.email-text-area').val(" ");
-            //var txt = "";
-            //for (var i=0; i < form.Email.length; ++i) {
-            //    if (i == 0) {
-            //        txt += form.Email[i];
-            //    } else {
-            //       txt+=",\n"+ form.Email[i];
-            //    }
-            //}
-            //$('.email-text-area').val(txt);
-
+            if (!regex.test(feild)) {
+                $('#email-error-message').show();
+                return;
+            }
          
-        //},
+        },
 
         //removeEmailItem: function () {
         //    var emailToRemove = $('#email-remove-text').val();
