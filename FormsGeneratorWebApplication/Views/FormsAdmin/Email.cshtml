@@ -15,37 +15,37 @@
 </div>
 
 
-        <div class="container">
-            <div class="row">
-                <div class="control-group" id="fields">
-                    <label class="control-label" for="field1">Enter a Correct Formatted Email for a Recipients.</label>
-                    <div class="controls">
-                        <form role="form" autocomplete="off">
-                            <div class="entry input-group col-xs-3">
-                                <input class="form-control" name="fields[]" type="text" id="email-add-text" placeholder="Type something" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-success btn-add" type="button">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                        <br>
-                        <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
-                        @using (Html.BeginForm("Email", "FormsAdmin", FormMethod.Post, new { id = "Email-form", @Class = "form-horizontal", enctype = "multipart/form-data" }))
-                        {
-                            <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button id="email-submit-btn" class="btn btn-success btn-lg">Submit</button>
-                                    @Html.Hidden("recipients", "", new { Name = "recipients", ID = "email-recp" })
-                                    @Html.Hidden("guid", "@guid", new { Name = "guid", ID = "email-guid", Value = @guid })
-                                </div>
-                            </div>
-                        }
+<div class="container">
+    <div class="row">
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Enter a Correct Formatted Email for a Recipients.</label>
+            <div class="controls">
+                <form role="form" autocomplete="off">
+                    <div class="entry input-group col-xs-3">
+                        <input class="form-control" name="fields[]" type="text" id="email-add-text" placeholder="Type something" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-success btn-add" type="button">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
                     </div>
-                </div>
+                </form>
+                <br>
+                <small>Press <span class="glyphicon glyphicon-plus"></span> to add another form field :)</small>
+                @using (Html.BeginForm("Email", "FormsAdmin", FormMethod.Post, new { id = "Email-form", @Class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button id="email-submit-btn" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-send span-space"></span>Send</button>
+                            @Html.Hidden("recipients", "", new { Name = "recipients", ID = "email-recp" })
+                            @Html.Hidden("guid", "@guid", new { Name = "guid", ID = "email-guid", Value = @guid })
+                        </div>
+                    </div>
+                }
             </div>
         </div>
+    </div>
+</div>
 
 
 @Scripts.Render("~/Scripts/views/forms-admin-email.js")
