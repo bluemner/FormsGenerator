@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace FormsGeneratorWebApplication.Controllers
 
 {
+    [Authorize]
     public class FormsAdminController : Controller
     {
         public static int TYPE_TEXT_BOX = 0;
