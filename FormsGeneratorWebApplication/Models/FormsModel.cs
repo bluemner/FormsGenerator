@@ -41,9 +41,12 @@ namespace FormsGeneratorWebApplication.Models
         {
             FormsModel result = new FormsModel();
             result.FormItemIList = new List<FormItemModel>();
-            foreach(FormItemModel i in toClone.FormItemIList)
+            if (toClone.FormItemIList != null)
             {
-                result.FormItemIList.Add(FormItemModel.clone(i));
+                foreach (FormItemModel i in toClone.FormItemIList)
+                {
+                    result.FormItemIList.Add(FormItemModel.clone(i));
+                }
             }
             result.Name = toClone.Name;
             result.StartDate = toClone.StartDate;
