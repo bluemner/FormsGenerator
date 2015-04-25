@@ -248,6 +248,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 resultModel.adminGUID = newGuid;
                 resultModel.userGUID = formModel.adminGUID;
                 resultModel.active = true;
+                resultModel.email = r;
                 db.FormModels.Add(formModel);
                 db.ResultModels.Add(resultModel);
                 db.SaveChanges();
