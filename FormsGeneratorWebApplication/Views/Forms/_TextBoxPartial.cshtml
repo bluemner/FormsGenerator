@@ -18,7 +18,7 @@
     <div class="panel-heading">
         <h3 class="panel-title pn-tl-font">
             <span class="caret"></span>
-            @Html.HiddenFor(m => m.question, new { Name = "FormsModel[" + index + "].question" })
+            @Html.HiddenFor(m => m.question, new { Name = "FormItemIList[" + index + "].question" })
             @Html.Label(Model.question, new { @class = "control-label label" })
         </h3>
     </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="inputFormName" class="col-lg-1 control-label label label-default">Answer : </label>
             <div class="col-lg-10">
-                @Html.TextBoxFor(m=>m.options, new { Name = "FormsModel[" + index + "].options", @class = "form-control Answer-inputWidthHeight" , Value=""})
+                @Html.TextBoxFor(m => m.options, new { Name = "FormItemIList[" + index + "].options", @class = "form-control Answer-inputWidthHeight", Value = "" })
             </div>
         </div>
         @*<h3>
