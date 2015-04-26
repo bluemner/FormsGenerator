@@ -46,8 +46,6 @@ namespace FormsGeneratorWebApplication.Controllers
                 forms = db.FormModels.ToList<FormsModel>()
             };
 
-            Email("njjakusz@uwm.edu,njjakusz@uwm.edu", "e77a69ed-9574-4daa-b714-748879f7d5ad");
-            Analytic("e77a69ed-9574-4daa-b714-748879f7d5ad");
 
             return View(adminFormModel);
         }
