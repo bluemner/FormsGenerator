@@ -48,8 +48,6 @@ namespace FormsGeneratorWebApplication.Controllers
 
 
 
-
-
             return View(adminFormModel);
         }
 
@@ -286,6 +284,41 @@ namespace FormsGeneratorWebApplication.Controllers
                 client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
                 client.EnableSsl = true;
                 client.Send(mail);
+        }
+
+        [HttpGet]
+        public ActionResult Analytic(string guid)
+        {
+            var form = Guid.Parse(guid);
+            var resultsList = db.ResultModels.ToList<ResultModel>();
+            var correctList = new List<ResultModel>();
+            foreach(ResultModel rL in resultsList)
+            {
+                if(rL.adminGUID == form && rL.active == false)
+                {
+                    correctList.Add(rL);
+                }
+            }
+            var formsList = new FormsListModel() { listOfForms = new List<FormsModel>() };
+            
+            foreach (ResultModel r in correctList)
+            {
+                Func<FormsModel, bool> compare = delegate(FormsModel f)
+                {
+                    if (f.adminGUID == r.userGUID)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+
+                formsList.listOfForms.Add(db.FormModels.First<FormsModel>(compare));
+            }
+
+            return View(formsList);
         }
 
     }
