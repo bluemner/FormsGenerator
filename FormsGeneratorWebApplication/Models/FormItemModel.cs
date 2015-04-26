@@ -50,10 +50,13 @@ namespace FormsGeneratorWebApplication.Models
                 }
             }
             result.selected = new List<SelectedModel>();
-            //foreach (SelectedModel s in toClone.selected)
-            //{
-            //    result.selected.Add(new SelectedModel { selected = s.selected, question = result});
-            //}
+            if (toClone.selected != null)
+            {
+                foreach (SelectedModel s in toClone.selected)
+                {
+                    result.selected.Add(new SelectedModel { selected = s.selected, question = result});
+                }
+            }
             result.selectedOption = toClone.selectedOption;
             return result;
         }
