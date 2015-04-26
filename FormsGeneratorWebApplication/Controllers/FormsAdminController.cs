@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace FormsGeneratorWebApplication.Controllers
 
 {
+    [Authorize]
     public class FormsAdminController : Controller
     {
         public static int TYPE_TEXT_BOX = 0;
@@ -247,6 +248,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 resultModel.adminGUID = newGuid;
                 resultModel.userGUID = formModel.adminGUID;
                 resultModel.active = true;
+                resultModel.email = r;
                 db.FormModels.Add(formModel);
                 db.ResultModels.Add(resultModel);
                 db.SaveChanges();

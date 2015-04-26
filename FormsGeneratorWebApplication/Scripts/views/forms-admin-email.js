@@ -32,12 +32,12 @@
 
 
             $document.on('click', '.btn-add', function (e) {
-                form.addEmail($(this), e);
+                form.addEmail($(this),e);
                
             });
 
             $document.on('click', '.btn-remove', function (e) {
-                form.removeEmail($(this), e);
+                form.removeEmail($(this),e);
 
             });
 
@@ -45,15 +45,14 @@
             
         },
         
-        addEmail: function(selectedIteam, e){
+        addEmail: function(selectedIteam,e){
               e.preventDefault();
 
                 $("input[name='fields[]']").each(function () {
                     form.Email.push(selectedIteam.val());
                 });
-          
-                if (!form.emailValidation()) {
-                 
+       
+                if (!form.emailValidation()) {                 
                     return;
                 }
                 else {
@@ -70,7 +69,7 @@
 
                     $('#email-error-message').hide();
                 }
-
+            
              
         },
 
@@ -103,9 +102,9 @@
     
             if (!regex.test(feild)) {
                 $('#email-error-message').show();
-                return;
+                return false;
             }
-         
+            return true;
         },
 
         //removeEmailItem: function () {
