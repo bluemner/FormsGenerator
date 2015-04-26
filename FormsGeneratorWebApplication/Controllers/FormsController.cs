@@ -26,23 +26,53 @@ namespace FormsGeneratorWebApplication.Controllers
 
         [HttpGet]
         public ActionResult Forms(String guid) {
-            //var model = loadContentFromDataBase(Guid.Parse(guid));
+            var model = loadContentFromDataBase(Guid.Parse(guid));
 
-            //model.FormItemIList[0].selected.Add(new SelectedModel() {question = model.FormItemIList[0], selected = "Worked"});
+            model.FormItemIList[0].selected.Add(new SelectedModel() {question = model.FormItemIList[0], selected = "Worked"});
 
-            //db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            var guid1 = model.adminGUID;
+
+            Func<ResultModel, bool> compare = delegate(ResultModel result)
+            {
+                if (result.userGUID == guid1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            var changeResult = db.ResultModels.First<ResultModel>(compare);
+            changeResult.active = false;
 
             //4. call SaveChanges
-            //db.SaveChanges();
+            db.SaveChanges();
 
-            //return View(model);
-            return View(loadContentFromDataBase(Guid.Parse(guid)));
+            return View(model);
+            //return View(loadContentFromDataBase(Guid.Parse(guid)));
         }
 
         [HttpPost]
         public ActionResult Forms(FormsModel model)
         {
             db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            var guid = model.adminGUID;
+
+            Func<ResultModel, bool> compare = delegate(ResultModel result)
+            {
+                if (result.userGUID == guid)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            var changeResult = db.ResultModels.First<ResultModel>(compare);
+            changeResult.active = false;
 
             //4. call SaveChanges
             db.SaveChanges();

@@ -170,6 +170,9 @@
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\AdminFormModel.cs" />
+    <Compile Include="Models\FormsListModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\OptionsModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\SelectedModel.cs" />
