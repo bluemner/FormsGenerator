@@ -6,11 +6,15 @@ using System.Web;
 namespace FormsGeneratorWebApplication.Models
 {
     /// <summary>
-    /// used to pass completed forms to analytic view
+    /// used to pass completed data to analytic view
     /// </summary>
     public class FormsListModel
     {
-        //used to pass completed forms to analytic view
-        public IList<FormsModel> listOfForms { get; set; }
+        //form to grab questions and response from
+        public FormsModel form { get; set; }
+
+        public List<List<int>> selectable { get; set; }
+
+        public List<List<String>> text { get; set; }
     }
 }

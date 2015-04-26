@@ -46,7 +46,8 @@ namespace FormsGeneratorWebApplication.Controllers
                 forms = db.FormModels.ToList<FormsModel>()
             };
 
-
+            Email("njjakusz@uwm.edu,njjakusz@uwm.edu", "e77a69ed-9574-4daa-b714-748879f7d5ad");
+            Analytic("e77a69ed-9574-4daa-b714-748879f7d5ad");
 
             return View(adminFormModel);
         }
@@ -243,7 +244,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 var formModel = FormsModel.clone(copy);
                 formModel.adminGUID = createGuid();
                 var resultModel = new ResultModel();
-                resultModel.adminGUID = newGuid;
+                resultModel.adminGUID = copy.adminGUID;
                 resultModel.userGUID = formModel.adminGUID;
                 resultModel.active = true;
                 resultModel.email = r;
@@ -294,16 +295,43 @@ namespace FormsGeneratorWebApplication.Controllers
             var correctList = new List<ResultModel>();
             foreach(ResultModel rL in resultsList)
             {
-                if(rL.adminGUID == form && rL.active == false)
+                if(rL.adminGUID == form) //&& rL.active == false)
                 {
                     correctList.Add(rL);
                 }
             }
-            var formsList = new FormsListModel() { listOfForms = new List<FormsModel>() };
+            Func<FormsModel, bool> compare = delegate(FormsModel f)
+            {
+                if (f.adminGUID == form)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            var baseForm = db.FormModels.First<FormsModel>(compare);
+            var formsList = new FormsListModel() { selectable = new List<List<int>>(), form = baseForm, text = new List<List<string>>() };
+            foreach(FormItemModel q in baseForm.FormItemIList)
+            {
+                if(q.type > 1)
+                {
+                    formsList.selectable.Add(new List<int>());
+                    for(int i = 0; i < q.options.Count; ++i)
+                    {
+                        formsList.selectable.Last<List<int>>().Add(0);
+                    }
+                }
+                else
+                {
+                    formsList.text.Add(new List<string>());
+                }
+            }
             
             foreach (ResultModel r in correctList)
             {
-                Func<FormsModel, bool> compare = delegate(FormsModel f)
+                Func<FormsModel, bool> compare1 = delegate(FormsModel f)
                 {
                     if (f.adminGUID == r.userGUID)
                     {
@@ -315,7 +343,57 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 };
 
-                formsList.listOfForms.Add(db.FormModels.First<FormsModel>(compare));
+                var resultForm = db.FormModels.First<FormsModel>(compare1);
+                var selectCounter = 0;
+                var textCounter = 0;
+                foreach(FormItemModel item in resultForm.FormItemIList)
+                {
+                    //radio buttons
+                    if (item.type == 2)
+                    {
+                        var question = formsList.selectable.ElementAt<List<int>>(selectCounter);
+                        question[item.selectedOption] = question.ElementAt<int>(item.selectedOption) + 1;
+                        selectCounter++;
+                    }
+                    //text
+                    //text boxes are not working yet
+                    else if (item.type < 2)
+                    {
+                        var question = formsList.text.ElementAt<List<String>>(textCounter);
+                        if (item.options.Count > 0)
+                        {
+                            question.Add(item.options[0].option);
+                        }
+                        textCounter++;
+                    }
+                    //checkboxes
+                    else
+                    {
+                        var question = formsList.selectable.ElementAt<List<int>>(selectCounter);
+                        foreach(SelectedModel sM in item.selected)
+                        {
+                            var resp = sM.selected;
+                            int index = 0;
+                            var found = false;
+                            var optionsList = item.options;
+                            for(int i = 0; i <optionsList.Count; ++i)
+                            {
+                                if(resp == optionsList[i].option)
+                                {
+                                    index = i;
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(found)
+                            {
+                                question[index]++;
+                            }
+                        }
+
+                        selectCounter++;
+                    }
+                }
             }
 
             return View(formsList);
