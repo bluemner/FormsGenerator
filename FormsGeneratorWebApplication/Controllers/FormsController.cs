@@ -26,12 +26,27 @@ namespace FormsGeneratorWebApplication.Controllers
 
         [HttpGet]
         public ActionResult Forms(String guid) {
+            //var model = loadContentFromDataBase(Guid.Parse(guid));
+
+            //model.FormItemIList[0].selected.Add(new SelectedModel() {question = model.FormItemIList[0], selected = "Worked"});
+
+            //db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+
+            //4. call SaveChanges
+            //db.SaveChanges();
+
+            //return View(model);
             return View(loadContentFromDataBase(Guid.Parse(guid)));
         }
 
         [HttpPost]
         public ActionResult Forms(FormsModel model)
         {
+            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+
+            //4. call SaveChanges
+            db.SaveChanges();
+
             return View("Sucess");
         }
         [HttpGet]
