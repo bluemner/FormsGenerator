@@ -209,6 +209,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\views\Chart.js" />
+    <Content Include="Scripts\views\Chart.min.js" />
     <Content Include="Scripts\vender\bootstrap.js" />
     <Content Include="Scripts\vender\bootstrap.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
