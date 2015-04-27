@@ -18,11 +18,6 @@
                 samplefunc($(this)); 
             });
 
-            $form.on('click', '#form-submit', function () {
-                //var url = "http://localhost:49477/Forms/Sucess";
-                //$(location).attr('href', url);
-              //  $(this).Submit();
-            });
         },
         //Example of a function
         samplefunc: function(selectedObject){

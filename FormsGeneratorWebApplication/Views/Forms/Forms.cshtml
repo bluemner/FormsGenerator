@@ -15,7 +15,7 @@
 }
 else { 
     
-    using (Html.BeginForm("Form", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
+    using (Html.BeginForm("Forms", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
     for (var i = 0; i < items.Count(); ++i)
     {
@@ -38,7 +38,14 @@ else {
             @Html.Partial("~/Views/Forms/_CheckBoxesPartial.cshtml", currentItem)
         }
     }
-      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+    @Html.HiddenFor(m => m.adminGUID);
+    @Html.HiddenFor(m => m.EndDate);
+    @Html.HiddenFor(m => m.StartDate);
+    @Html.HiddenFor(m => m.Status);
+    @Html.HiddenFor(m => m.key);
+    @Html.HiddenFor(m => m.Name);  
+                               
+        <button type="submit" class="btn btn-success btn-lg">Submit</button>
     }
 
 }
