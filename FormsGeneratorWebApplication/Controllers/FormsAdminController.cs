@@ -63,6 +63,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 forms = formList
             };
 
+            Analytic("39951b69-b8c1-4a0b-8f19-02223bd6b403");
 
             return View(adminFormModel);
         }
@@ -327,7 +328,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             };
             var baseForm = db.FormModels.First<FormsModel>(compare);
-            var formsList = new FormsListModel() { selectable = new List<List<int>>(), form = baseForm, text = new List<List<string>>() };
+            var formsList = new FormsListModel() { selectable = new List<IList<int>>(), form = baseForm, text = new List<IList<String>>() };
             foreach(FormItemModel q in baseForm.FormItemIList)
             {
                 if(q.type > 1)
@@ -335,7 +336,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     formsList.selectable.Add(new List<int>());
                     for(int i = 0; i < q.options.Count; ++i)
                     {
-                        formsList.selectable.Last<List<int>>().Add(0);
+                        formsList.selectable.Last<IList<int>>().Add(0);
                     }
                 }
                 else
@@ -366,7 +367,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     //radio buttons
                     if (item.type == 2)
                     {
-                        var question = formsList.selectable.ElementAt<List<int>>(selectCounter);
+                        var question = formsList.selectable.ElementAt<IList<int>>(selectCounter);
                         question[item.selectedOption] = question.ElementAt<int>(item.selectedOption) + 1;
                         selectCounter++;
                     }
@@ -374,7 +375,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     //text boxes are not working yet
                     else if (item.type < 2)
                     {
-                        var question = formsList.text.ElementAt<List<String>>(textCounter);
+                        var question = formsList.text.ElementAt<IList<String>>(textCounter);
                         if (item.options.Count > 0)
                         {
                             question.Add(item.options[0].option);
@@ -384,7 +385,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     //checkboxes
                     else
                     {
-                        var question = formsList.selectable.ElementAt<List<int>>(selectCounter);
+                        var question = formsList.selectable.ElementAt<IList<int>>(selectCounter);
                         foreach(SelectedModel sM in item.selected)
                         {
                             var resp = sM.selected;
