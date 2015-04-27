@@ -41,9 +41,26 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult Index()
         {
             //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
+            var curUser = userManager.FindById(User.Identity.GetUserId());
+            var formList = new List<FormsModel>();
+            foreach(UserForm uF in curUser.forms)
+            {
+                Func<FormsModel, bool> compare = delegate(FormsModel form)
+                {
+                    if (form.adminGUID == uF.formGUID)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+                formList.Add(db.FormModels.First<FormsModel>(compare));
+            }
             var adminFormModel = new AdminFormModel()
             {
-                forms = db.FormModels.ToList<FormsModel>()
+                forms = formList
             };
 
 
