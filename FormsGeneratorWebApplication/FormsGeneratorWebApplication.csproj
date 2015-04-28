@@ -377,6 +377,7 @@
     <Content Include="Views\Forms\Sucess.cshtml" />
     <Content Include="Views\FormsAdmin\Sucess.cshtml" />
     <Content Include="Views\FormsAdmin\Analytic.cshtml" />
+    <Content Include="Views\FormsAdmin\EditForm.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

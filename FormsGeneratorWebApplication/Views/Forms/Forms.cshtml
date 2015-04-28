@@ -49,47 +49,5 @@ else {
     }
 
 }
-    @*@using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <h1 >Question</h1>
-                <hr />
-                <p>
-                    @Html.ActionLink("Add Auestion", "AddQuesitonForm")
-                </p>
-                <div class="form-group">
-                    <table class="table table-striped table-hover ">
-                        <thead>
-                            <tr class="col-lg-2 control-label">
-                                <th><h4>@Html.DisplayNameFor(model => model.Question)</h4></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach(var item in Model)
-                        {
-                            <tr class="col-lg-10 control-label">
-                                <td>
-                                    @Html.DisplayFor(model => item.Question)
-                                </td>
-                            </tr>
-
-                            <tr class="col-lg-10 control-label">
-                                <td>
-                                    @Html.DisplayFor(model => item.Options)
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        }
-
-        <div>
-            @Html.ActionLink("Back to List", "Forms")
-        </div>*@
-
+  
     @Scripts.Render("~/Scripts/views/forms-view.js")
