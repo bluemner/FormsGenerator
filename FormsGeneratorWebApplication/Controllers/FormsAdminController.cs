@@ -63,7 +63,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 forms = formList
             };
 
-            Analytic("39951b69-b8c1-4a0b-8f19-02223bd6b403");
+            //Analytic("39951b69-b8c1-4a0b-8f19-02223bd6b403");
 
             return View(adminFormModel);
         }
