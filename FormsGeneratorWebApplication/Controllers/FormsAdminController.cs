@@ -235,49 +235,60 @@ namespace FormsGeneratorWebApplication.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                //TODO: Create new guid
-                //      Create form for data base
-                // form + guid
-            var newGuid = Guid.Parse(guid);
-            String link = Request.Url.ToString();
-            link = link.Remove(link.IndexOf("FormsAdmin"));
-            link = link + "Forms/Forms?guid=";
-            Func<FormsModel, bool> compare = delegate(FormsModel form)
+            //TODO: Create new guid
+            //      Create form for data base
+            // form + guid
+            recipients = recipients.Replace("\r\n", "");
+            if (!String.IsNullOrEmpty(recipients))
             {
-                if (form.adminGUID == newGuid)
+                var newGuid = Guid.Parse(guid);
+                String link = Request.Url.ToString();
+                link = link.Remove(link.IndexOf("FormsAdmin"));
+                link = link + "Forms/Forms?guid=";
+                Func<FormsModel, bool> compare = delegate(FormsModel form)
                 {
-                    return true;
-                }
-                else
+                    if (form.adminGUID == newGuid)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+                FormsModel copy = db.FormModels.First<FormsModel>(compare);
+                var recipientList = recipients.Split(',');
+                foreach (String r in recipientList)
                 {
-                    return false;
+                    if (String.IsNullOrEmpty(r))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        var formModel = FormsModel.clone(copy);
+                        formModel.adminGUID = createGuid();
+                        var resultModel = new ResultModel();
+                        resultModel.adminGUID = copy.adminGUID;
+                        resultModel.userGUID = formModel.adminGUID;
+                        resultModel.active = true;
+                        resultModel.email = r;
+                        db.FormModels.Add(formModel);
+                        db.ResultModels.Add(resultModel);
+                        db.SaveChanges();
+                        String uniqueLink = link + formModel.adminGUID.ToString();
+                        EmailLink(r, uniqueLink);
+                    }
                 }
-            };
-            FormsModel copy = db.FormModels.First<FormsModel>(compare);
-            var recipientList = recipients.Split(',');
-            foreach (String r in recipientList)
-            {
-                var formModel = FormsModel.clone(copy);
-                formModel.adminGUID = createGuid();
-                var resultModel = new ResultModel();
-                resultModel.adminGUID = copy.adminGUID;
-                resultModel.userGUID = formModel.adminGUID;
-                resultModel.active = true;
-                resultModel.email = r;
-                db.FormModels.Add(formModel);
-                db.ResultModels.Add(resultModel);
-                db.SaveChanges();
-                String uniqueLink = link + formModel.adminGUID.ToString();
-                EmailLink(r, uniqueLink);
+
+                ViewBag.GUID = link + guid;
             }
 
-
-            ViewBag.GUID = link+guid;
             return View("Sucess");
             //}
             //else
             //{
-              //  return View();
+            //  return View();
             //}
         }
 
