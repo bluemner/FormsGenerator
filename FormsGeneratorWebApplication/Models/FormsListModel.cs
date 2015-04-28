@@ -13,8 +13,8 @@ namespace FormsGeneratorWebApplication.Models
         //form to grab questions and response from
         public FormsModel form { get; set; }
 
-        public List<List<int>> selectable { get; set; }
+        public IList<IList<int>> selectable { get; set; }
 
-        public List<List<String>> text { get; set; }
+        public IList<IList<String>> text { get; set; }
     }
 }
