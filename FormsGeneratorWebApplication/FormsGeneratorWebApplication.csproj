@@ -209,8 +209,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\views\Chart.js" />
-    <Content Include="Scripts\views\Chart.min.js" />
     <Content Include="Scripts\vender\bootstrap.js" />
     <Content Include="Scripts\vender\bootstrap.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -288,11 +286,14 @@
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
     <None Include="Scripts\vender\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\vender\Chart.js" />
+    <Content Include="Scripts\vender\Chart.min.js" />
     <Content Include="Scripts\vender\jquery-ui-1.11.4.custom.js" />
     <Content Include="Scripts\vender\jquery-ui-1.11.4.custom.min.js" />
     <Content Include="Scripts\vender\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\views\forms-admin-email.js" />
     <Content Include="Scripts\views\forms-admin-view.js" />
+    <Content Include="Scripts\views\forms-analytic-view.js" />
     <Content Include="Scripts\views\forms-view.js" />
     <Content Include="Scripts\vender\jquery-1.10.2.js" />
     <Content Include="Scripts\vender\jquery-1.10.2.min.js" />

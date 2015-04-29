@@ -6826,3 +6826,14 @@ a.list-group-item-danger.active:focus {
     margin-right: 10px 
 
 }
+
+.wrap-paragraph{
+    word-wrap: break-word;
+}
+
+.convas-size {
+    max-width: 800px;
+    width: 800px;
+    max-height: 400px;
+    height: 400px;
+}

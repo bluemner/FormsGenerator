@@ -1,7 +1,75 @@
-﻿
+﻿@using FormsGeneratorWebApplication.Models;
+@model  FormsGeneratorWebApplication.Models.FormsListModel
 @{
     ViewBag.Title = "Analytic";
+    ViewBag.Response = "Overall Responses";
+    
 }
 
-<h2>Analytic</h2>
+@*this is a test code*@
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm("Forms", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" }))
+{
 
+    <h2 >@Model.form.Name</h2>
+    <h5>Date Range:- @Model.form.StartDate - @Model.form.EndDate</h5>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <ul class="nav nav-tabs" id="graph-list">
+                    <li class="active"><a href="#" data->Change a Chart :</a></li>
+                    <li><a href="#Bar" data->Bar</a></li>
+                    <li><a href="#Line">Line</a></li>
+                    <li><a href="#Radar">Radar</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h3>@ViewBag.Response</h3>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-lg-12 col-lg-offset-1">
+                        <canvas id="big-chart" class="convas-size"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <ul class="nav nav-tabs" id="q-graph-list">
+                        <li class="active"><a href="#" data->Change a Chart :</a></li>
+                        <li><a href="#Bar" data->Bar</a></li>
+                        <li><a href="#Line">Line</a></li>
+                        <li><a href="#Radar">Radar</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="questions-graphs"> </div> 
+        </div>
+    </div>
+
+}
+
+@Scripts.Render("~/Scripts/views/forms-analytic-view.js")
+@Scripts.Render("~/Scripts/vender/chart.js")
+@Scripts.Render("~/Scripts/vender/chart.min.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.extend(chart, {
+            settings: {
+
+            }
+        });
+        window.chart.init('@Html.Raw(Json.Encode(Model))');
+    })
+
+</script>

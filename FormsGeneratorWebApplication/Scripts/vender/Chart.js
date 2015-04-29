@@ -79,7 +79,7 @@
 			scaleStartValue: null,
 
 			// String - Colour of the scale line
-			scaleLineColor: "rgba(255,255,255,.1)",
+			scaleLineColor: "rgba(255,255,255,.1)" ,
 
 			// Number - Pixel width of the scale line
 			scaleLineWidth: 2,
@@ -2036,10 +2036,10 @@
 		scaleShowGridLines : true,
 
 		//String - Colour of the grid lines
-		scaleGridLineColor : "rgba(0,0,0,.05)",
+		scaleGridLineColor : "rgba(255,255,255,.05)",
 
 		//Number - Width of the grid lines
-		scaleGridLineWidth : 1,
+		scaleGridLineWidth : 2,
 
 		//Boolean - Whether to show horizontal lines (except X axis)
 		scaleShowHorizontalLines: true,
@@ -3172,7 +3172,7 @@
 			pointLabelFontSize : 10,
 
 			//String - Point label font colour
-			pointLabelFontColor : "#666",
+			pointLabelFontColor : "#FFFFFF",
 
 			//Boolean - Whether to show a dot for each point
 			pointDot : true,
