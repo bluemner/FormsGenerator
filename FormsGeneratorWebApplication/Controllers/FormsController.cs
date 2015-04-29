@@ -57,7 +57,12 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult Forms(FormsModel model)
         {
+            //model.FormItemIList.First<FormItemModel>().answer = "answer";
             db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            //foreach(FormItemModel item in model.FormItemIList)
+            //{
+               // db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            //}
             var guid = model.adminGUID;
 
             Func<ResultModel, bool> compare = delegate(ResultModel result)
