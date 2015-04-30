@@ -32,7 +32,8 @@
         @*<h3>
             @Html.Display(m => Model.postion) 
         </h3>*@
-        
+        @Html.HiddenFor(m => m.id, new { Name = "FormItemIList[" + index + "].id" })
+        @Html.HiddenFor(m => m.type, new { Name = "FormItemIList[" + index + "].type" })
     </div>
 </div>
 

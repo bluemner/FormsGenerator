@@ -41,6 +41,8 @@
                 </div>
             </fieldset>
         </div>
+        @Html.HiddenFor(m => m.id, new { Name = "FormItemIList[" + index + "].id" })
+        @Html.HiddenFor(m => m.type, new { Name = "FormItemIList[" + index + "].type" })
     </div>
 </div>
 

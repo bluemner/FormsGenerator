@@ -17,6 +17,8 @@ else {
     
     using (Html.BeginForm("Forms", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
 
+        @Html.HiddenFor(m => m.adminGUID);
+        
     for (var i = 0; i < items.Count(); ++i)
     {
         ViewBag.index = i;
