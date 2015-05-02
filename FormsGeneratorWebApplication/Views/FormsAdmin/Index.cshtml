@@ -7,7 +7,7 @@
     @Html.ActionLink("Make a new Form", "MakeForm", "FormsAdmin")*@
 @model FormsGeneratorWebApplication.Models.AdminFormModel
 
-<div>
+<div id="top-div">
     <div class="form-horizontal">
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-1">
@@ -23,33 +23,35 @@
                             <tr class="danger">
                                 <th>Name</th>
                                 <th>Copy</th>
-                                <th>Edit</th>                           
-                                <th>Statistics</th>                           
+                                <th>Edit</th>
+                                <th>Statistics</th>
                                 <th>Date Range</th>
                                 <th>Status</th>
+                                <th>Download</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @for (var i = 0; i < Model.forms.Count; ++i)
-                        {
-                            <tr class="active">
-                                <td>
-                                    <a href="" class="btn btn-link btn-sm text-warning">@Model.forms[i].Name </a>
-                                </td>                            
-                                <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Copy-Button-@i" value="Copy" /></td>
-                                <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Edit-Button-@i" value="Edit" /></td>
-                                <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Statistics-Button-@i" value="Statistics" /></td>
-                                <td>
-                                    @*@Html.TextBoxFor(m => m.forms[i].StartDate, null, new { @class = "date" })
-                                    @Html.TextBoxFor(m => m.forms[i].EndDate, null, new { @class = "date" })*@
+                            @for (var i = 0; i < Model.forms.Count; ++i)
+                            {
+                                <tr class="active">
+                                    <td>
+                                        <a href="" class="btn btn-link btn-sm text-warning">@Model.forms[i].Name </a>
+                                    </td>
+                                    <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Copy-Button-@i" value="Copy" /></td>
+                                    <td><input type="button" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-edit btn-sm" id="Admin-Form-Edit-Button-@i" value="Edit" /></td>
+                                    <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Statistics-Button-@i" value="Statistics" /></td>
+                                    <td>
+                                        @*@Html.TextBoxFor(m => m.forms[i].StartDate, null, new { @class = "date" })
+                                            @Html.TextBoxFor(m => m.forms[i].EndDate, null, new { @class = "date" })*@
 
-                                    <label class="text-warning">@Html.DisplayFor(m => m.forms[i].StartDate) - @Html.DisplayFor(m => m.forms[i].EndDate)</label>
-                                </td>
-                                <td>@Html.CheckBoxFor(m => m.forms[i].Status)</td>
-                                <td><label>@Model.forms[i].</label></td>
-                            </tr>
-                        }
+                                        <label class="text-warning">@Html.DisplayFor(m => m.forms[i].StartDate) - @Html.DisplayFor(m => m.forms[i].EndDate)</label>
+                                    </td>
+                                    <td>@Html.CheckBoxFor(m => m.forms[i].Status)</td>
+                                    <td><input type="button" value="Download" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-sm btn-download" id="Admin-Form-Download-Button-@i" /></td>
+                                    <td><label>@Model.forms[i].</label></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 }
@@ -76,3 +78,16 @@
 
     </div>
 </div>
+@Scripts.Render("~/Scripts/views/forms-admin-index.js")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.extend(form, {
+            settings: {
+                UrlDownload: '@Url.Content("~/FormsAdmin/DownloadAnalytic")',
+                UrlEdit: '@Url.Content("~/FormsAdmin/EditForm")'
+            }
+        });
+        window.form.init();
+    })
+
+</script>

@@ -292,6 +292,7 @@
     <Content Include="Scripts\vender\jquery-ui-1.11.4.custom.min.js" />
     <Content Include="Scripts\vender\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\views\forms-admin-email.js" />
+    <Content Include="Scripts\views\forms-admin-index.js" />
     <Content Include="Scripts\views\forms-admin-view.js" />
     <Content Include="Scripts\views\forms-analytic-view.js" />
     <Content Include="Scripts\views\forms-view.js" />

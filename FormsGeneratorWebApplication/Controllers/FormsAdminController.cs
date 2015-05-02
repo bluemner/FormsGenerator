@@ -554,5 +554,139 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             }
         }
+        [HttpGet]
+        public DownloadFileActionResult DownloadAnalytic(string guid)
+        {
+            var form = Guid.Parse(guid);
+            var resultsList = db.ResultModels.ToList<ResultModel>();
+            var correctList = new List<ResultModel>();
+            var textdt = new DataTable();
+            var selectdt = new DataTable();
+
+            foreach (ResultModel rL in resultsList)
+            {
+                if (rL.adminGUID == form) //&& rL.active == false)
+                {
+                    correctList.Add(rL);
+                }
+            }
+            Func<FormsModel, bool> compare = delegate(FormsModel f)
+            {
+                if (f.adminGUID == form)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            var baseForm = db.FormModels.First<FormsModel>(compare);
+            var formsList = new FormsListModel() { selectable = new List<IList<int>>(), form = baseForm, text = new List<IList<String>>() };
+            foreach (FormItemModel q in baseForm.FormItemIList)
+            {
+                if (q.type > 1)
+                {
+                    formsList.selectable.Add(new List<int>());
+                    selectdt.Columns.Add(q.question, typeof(int));
+                    for (int i = 0; i < q.options.Count; ++i)
+                    {
+                        formsList.selectable.Last<IList<int>>().Add(0);
+                    }
+                }
+                else
+                {
+                    formsList.text.Add(new List<string>());
+                    textdt.Columns.Add(q.question, typeof(string));
+
+                }
+            }
+
+            foreach (ResultModel r in correctList)
+            {
+                Func<FormsModel, bool> compare1 = delegate(FormsModel f)
+                {
+                    if (f.adminGUID == r.userGUID)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+
+                var resultForm = db.FormModels.First<FormsModel>(compare1);
+                var selectCounter = 0;
+                var textCounter = 0;
+                foreach (FormItemModel item in resultForm.FormItemIList)
+                {
+                    //radio buttons
+                    if (item.type == 2)
+                    {
+                        var question = formsList.selectable.ElementAt<IList<int>>(selectCounter);
+                        question[item.selectedOption] = question.ElementAt<int>(item.selectedOption) + 1;
+                        selectCounter++;
+                    }
+                    //text
+                    //text boxes are not working yet
+                    else if (item.type < 2)
+                    {
+                        var question = formsList.text.ElementAt<IList<String>>(textCounter);
+                        if (item.options.Count > 0)
+                        {
+                            question.Add(item.options[0].option);
+                        }
+                        textCounter++;
+                    }
+                    //checkboxes
+                    else
+                    {
+                        var question = formsList.selectable.ElementAt<IList<int>>(selectCounter);
+                        foreach (SelectedModel sM in item.selected)
+                        {
+                            var resp = sM.selected;
+                            int index = 0;
+                            var found = false;
+                            var optionsList = item.options;
+                            for (int i = 0; i < optionsList.Count; ++i)
+                            {
+                                if (resp == optionsList[i].option)
+                                {
+                                    index = i;
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (found)
+                            {
+                                question[index]++;
+                            }
+                        }
+
+                        selectCounter++;
+                    }
+                }
+            }
+            listodataTable<String>(formsList.text, textdt, baseForm.FormItemIList);
+            listodataTable<int>(formsList.selectable, selectdt, baseForm.FormItemIList);
+            
+            return new DownloadFileActionResult(textdt, "Download.xls");
+        }
+        private void listodataTable<T>(IList<IList<T>> list, DataTable dt, IList<FormItemModel> itemlist)
+        {
+            for(int i=0;i<list.Count;++i)
+            {
+                                    var row = dt.NewRow();
+
+                for(int j=0;j<list[j].Count;++j)
+                {
+                    row[itemlist[i].question] = list[i][j];
+                }
+                dt.Rows.Add(row);
+
+            }
+            return;
+      
     }
 }
