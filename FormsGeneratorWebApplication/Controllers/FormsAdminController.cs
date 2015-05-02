@@ -64,6 +64,7 @@ namespace FormsGeneratorWebApplication.Controllers
             };
 
             //Analytic("39951b69-b8c1-4a0b-8f19-02223bd6b403");
+            //reminder("6099f5d9-b3bf-4846-b8fa-5d3191f64e18");
 
             return View(adminFormModel);
         }
@@ -80,7 +81,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult MakeForm(FormsModel model)
         {
             model.adminGUID = createGuid();
-            var x = 3;
+            //var x = 3;
             // This logic works, but when the view passes the model to 
             // this function, the model's FormItemList is null
             var curUser = userManager.FindById(User.Identity.GetUserId());
@@ -426,5 +427,22 @@ namespace FormsGeneratorWebApplication.Controllers
             return View(formsList);
         }
 
+        private void reminder(String guid)
+        {
+            var baseGUID = Guid.Parse(guid);
+
+            var resultsList = db.ResultModels.ToList<ResultModel>();
+            var correctList = new List<ResultModel>();
+            String link = Request.Url.ToString();
+            link = link.Remove(link.IndexOf("FormsAdmin"));
+            link = link + "Forms/Forms?guid=";
+            foreach (ResultModel rL in resultsList)
+            {
+                if (rL.adminGUID == baseGUID && rL.active == true)
+                {
+                    EmailLink(rL.email, link + rL.userGUID.ToString());
+                }
+            }
+        }
     }
 }
