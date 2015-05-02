@@ -60,4 +60,17 @@ namespace FormsGeneratorWebApplication.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class ForgotPasswordViewModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "EmailAddress")]
+        public string EmailAddress { get; set; }
+
+    }
 }

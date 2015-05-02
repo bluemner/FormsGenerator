@@ -301,11 +301,13 @@ namespace FormsGeneratorWebApplication.Controllers
 
         private void EmailLink(String recipient, String link)
         {
+            try
+            {
                 MailMessage mail = new MailMessage();
-            mail.To.Add(recipient);
-            mail.From = new MailAddress("formsgenerator@gmail.com");
-            mail.Subject = "Please complete this Survey at your earliest convenience";
-            String Body = "Complete the survey here:  " + link;
+                mail.To.Add(recipient);
+                mail.From = new MailAddress("formsgenerator@gmail.com");
+                mail.Subject = "Please complete this Survey at your earliest convenience";
+                String Body = "Complete the survey here:  " + link;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
@@ -313,6 +315,11 @@ namespace FormsGeneratorWebApplication.Controllers
                 client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
                 client.EnableSsl = true;
                 client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         [HttpGet]

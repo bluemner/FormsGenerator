@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -101,6 +102,58 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult ForgotPassword()
         {
             return View();
+        }
+
+        //
+        // POST: /Account/ForgotPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.UserName);
+                if (user != null)
+                {
+                    //await SignInAsync(user, model.RememberMe);
+                    //Change user password
+                    UserManager.RemovePassword(user.Id);
+                    UserManager.AddPassword(user.Id, "newPassword");
+                    SendNewPassword(model.EmailAddress, model.UserName, "newPassword");
+                    return View("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void SendNewPassword(String recipient, String username, String password)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(recipient);
+                mail.From = new MailAddress("formsgenerator@gmail.com");
+                mail.Subject = "New Password";
+                String Body = "Your new password for username " + username + " is:  " + password;
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.UseDefaultCredentials = true;
+                client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
+                client.EnableSsl = true;
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         //
