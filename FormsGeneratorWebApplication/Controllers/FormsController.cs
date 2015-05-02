@@ -64,6 +64,7 @@ namespace FormsGeneratorWebApplication.Controllers
         {
             //model.FormItemIList[0].answer = "answer";
             //model.FormItemIList[1].answer = "answer2";
+            model.Status = false;
             db.Entry(model).State = System.Data.Entity.EntityState.Modified;
             foreach(FormItemModel item in model.FormItemIList)
             {
