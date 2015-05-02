@@ -27,7 +27,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public const int TEMPLATE_FORM_TRUE_OR_FALSE = 0;
         public const int TEMPLATE_FORM_TEXTAREA = 1;
         public const int TEMPLATE_FORM_TEXTBOX = 2;
-        
+
 
 
 
@@ -70,7 +70,7 @@ namespace FormsGeneratorWebApplication.Controllers
                         if (rM.active == false)
                         {
                             completedList[index]++;
-            }
+                        }
                     }
                 }
                 index++;
@@ -95,7 +95,7 @@ namespace FormsGeneratorWebApplication.Controllers
             return View(new FormsModel());
 
         }
- 
+
         [HttpPost]
         public ActionResult MakeForm(FormsModel model)
         {
@@ -133,7 +133,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             };
             FormsModel result = db.FormModels.First<FormsModel>(compare);
-            
+
             return View(result);
         }
 
@@ -148,15 +148,15 @@ namespace FormsGeneratorWebApplication.Controllers
             db.SaveChanges();
             var guid = model.adminGUID;
             var deleteList = new List<ResultModel>();
-            foreach(ResultModel rM in db.ResultModels)
+            foreach (ResultModel rM in db.ResultModels)
             {
-                if(rM.adminGUID == guid)
+                if (rM.adminGUID == guid)
                 {
                     deleteList.Add(rM);
                 }
             }
 
-            foreach(ResultModel rM in deleteList)
+            foreach (ResultModel rM in deleteList)
             {
                 Func<FormsModel, bool> compare = delegate(FormsModel form)
                 {
@@ -170,20 +170,20 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 };
                 var deleteThisForm = db.FormModels.First<FormsModel>(compare);
-                if(deleteThisForm.FormItemIList != null)
+                if (deleteThisForm.FormItemIList != null)
                 {
-                    foreach(FormItemModel fIM in deleteThisForm.FormItemIList)
+                    foreach (FormItemModel fIM in deleteThisForm.FormItemIList)
                     {
-                        if(fIM.options != null)
+                        if (fIM.options != null)
                         {
-                            foreach(OptionsModel oM in fIM.options)
+                            foreach (OptionsModel oM in fIM.options)
                             {
                                 db.Entry(oM).State = System.Data.Entity.EntityState.Deleted;
                             }
                         }
-                        if(fIM.selected != null)
+                        if (fIM.selected != null)
                         {
-                            foreach(SelectedModel sM in fIM.selected)
+                            foreach (SelectedModel sM in fIM.selected)
                             {
                                 db.Entry(sM).State = System.Data.Entity.EntityState.Deleted;
                             }
@@ -195,7 +195,7 @@ namespace FormsGeneratorWebApplication.Controllers
             }
 
             //4. call SaveChanges
-            
+
 
             return View("Email");
         }
@@ -291,7 +291,7 @@ namespace FormsGeneratorWebApplication.Controllers
                         TextBoxMod.value = "Pigs do fly.";
                         formModel.FormItemIList.Add(TextBoxMod);
                     }
-                    break;   
+                    break;
             }
 
             return View("MakeForm", formModel);
@@ -329,7 +329,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult Email(FormsModel guid)
         {
             ViewBag.GUID = guid.adminGUID.ToString();
-           /// ViewBag.GUID = "ABC123";
+            /// ViewBag.GUID = "ABC123";
             return View();
         }
 
@@ -407,10 +407,10 @@ namespace FormsGeneratorWebApplication.Controllers
             try
             {
                 MailMessage mail = new MailMessage();
-            mail.To.Add(recipient);
-            mail.From = new MailAddress("formsgenerator@gmail.com");
-            mail.Subject = "Please complete this Survey at your earliest convenience";
-            String Body = "Complete the survey here:  " + link;
+                mail.To.Add(recipient);
+                mail.From = new MailAddress("formsgenerator@gmail.com");
+                mail.Subject = "Please complete this Survey at your earliest convenience";
+                String Body = "Complete the survey here:  " + link;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
@@ -418,7 +418,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
                 client.EnableSsl = true;
                 client.Send(mail);
-        }
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -466,7 +466,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     formsList.text.Add(new List<string>());
                 }
             }
-            
+
             foreach (ResultModel r in correctList)
             {
                 Func<FormsModel, bool> compare1 = delegate(FormsModel f)
@@ -670,16 +670,16 @@ namespace FormsGeneratorWebApplication.Controllers
             }
             listodataTable<String>(formsList.text, textdt, baseForm.FormItemIList);
             listodataTable<int>(formsList.selectable, selectdt, baseForm.FormItemIList);
-            
+
             return new DownloadFileActionResult(textdt, "Download.xls");
         }
         private void listodataTable<T>(IList<IList<T>> list, DataTable dt, IList<FormItemModel> itemlist)
         {
-            for(int i=0;i<list.Count;++i)
+            for (int i = 0; i < list.Count; ++i)
             {
-                                    var row = dt.NewRow();
+                var row = dt.NewRow();
 
-                for(int j=0;j<list[j].Count;++j)
+                for (int j = 0; j < list[j].Count; ++j)
                 {
                     row[itemlist[i].question] = list[i][j];
                 }
@@ -687,6 +687,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
             }
             return;
-      
+
+        }
     }
 }
