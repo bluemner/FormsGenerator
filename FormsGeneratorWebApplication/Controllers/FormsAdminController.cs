@@ -15,7 +15,6 @@ using FormsGeneratorWebApplication.Models;
 using FormsGeneratorWebApplication.Utilities;
 using System.Threading.Tasks;
 namespace FormsGeneratorWebApplication.Controllers
-
 {
     [Authorize]
     public class FormsAdminController : Controller
@@ -43,7 +42,10 @@ namespace FormsGeneratorWebApplication.Controllers
             //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
             var curUser = userManager.FindById(User.Identity.GetUserId());
             var formList = new List<FormsModel>();
-            foreach(UserForm uF in curUser.forms)
+            var totalList = new List<int>();
+            var completedList = new List<int>();
+            var index = 0;
+            foreach (UserForm uF in curUser.forms)
             {
                 Func<FormsModel, bool> compare = delegate(FormsModel form)
                 {
@@ -56,11 +58,28 @@ namespace FormsGeneratorWebApplication.Controllers
                         return false;
                     }
                 };
-                formList.Add(db.FormModels.First<FormsModel>(compare));
+                var formToReturn = db.FormModels.First<FormsModel>(compare);
+                formList.Add(formToReturn);
+                totalList.Add(0);
+                completedList.Add(0);
+                foreach (ResultModel rM in db.ResultModels)
+                {
+                    if (rM.adminGUID == formToReturn.adminGUID)
+                    {
+                        totalList[index]++;
+                        if (rM.active == false)
+                        {
+                            completedList[index]++;
+            }
+                    }
+                }
+                index++;
             }
             var adminFormModel = new AdminFormModel()
             {
-                forms = formList
+                forms = formList,
+                total = totalList,
+                completed = completedList
             };
 
             //Analytic("39951b69-b8c1-4a0b-8f19-02223bd6b403");
@@ -107,7 +126,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult AddTextBox(int count)
         {
             ViewBag.TextBoxCount = count.ToString();
-            return PartialView("_EditTextBoxPartial", new TextBoxModel() { type = TYPE_TEXT_BOX});
+            return PartialView("_EditTextBoxPartial", new TextBoxModel() { type = TYPE_TEXT_BOX });
         }
 
         [HttpGet]
@@ -141,7 +160,7 @@ namespace FormsGeneratorWebApplication.Controllers
             RadioMod.type = TYPE_TEXT_RADIO;
             for (int i = 0; i < numberOfSubElements; ++i)
             {
-                RadioMod.options.Add(new OptionsModel(){ option ="" });
+                RadioMod.options.Add(new OptionsModel() { option = "" });
             }
             RadioMod.question = "Can pigs fly?";
 
@@ -183,7 +202,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     break;
                 case TEMPLATE_FORM_TEXTBOX:
                     //populate form model with textbox questions
-                    for(int i = 0; i < numberOfSubElements; ++i)
+                    for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextBoxMod = new TextBoxModel();
                         TextBoxMod.value = "Pigs do fly.";
@@ -224,7 +243,7 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Email( FormsModel guid )
+        public ActionResult Email(FormsModel guid)
         {
             ViewBag.GUID = guid.adminGUID.ToString();
            /// ViewBag.GUID = "ABC123";
@@ -294,7 +313,8 @@ namespace FormsGeneratorWebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Sucess() {
+        public ActionResult Sucess()
+        {
             ViewBag.GUID = "";
             return View();
         }
@@ -304,10 +324,10 @@ namespace FormsGeneratorWebApplication.Controllers
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add(recipient);
-                mail.From = new MailAddress("formsgenerator@gmail.com");
-                mail.Subject = "Please complete this Survey at your earliest convenience";
-                String Body = "Complete the survey here:  " + link;
+            mail.To.Add(recipient);
+            mail.From = new MailAddress("formsgenerator@gmail.com");
+            mail.Subject = "Please complete this Survey at your earliest convenience";
+            String Body = "Complete the survey here:  " + link;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
@@ -315,7 +335,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 client.Credentials = new System.Net.NetworkCredential("formsgenerator@gmail.com", "weakpassword");
                 client.EnableSsl = true;
                 client.Send(mail);
-            }
+        }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -328,9 +348,9 @@ namespace FormsGeneratorWebApplication.Controllers
             var form = Guid.Parse(guid);
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
-            foreach(ResultModel rL in resultsList)
+            foreach (ResultModel rL in resultsList)
             {
-                if(rL.adminGUID == form) //&& rL.active == false)
+                if (rL.adminGUID == form) //&& rL.active == false)
                 {
                     correctList.Add(rL);
                 }
@@ -348,12 +368,12 @@ namespace FormsGeneratorWebApplication.Controllers
             };
             var baseForm = db.FormModels.First<FormsModel>(compare);
             var formsList = new FormsListModel() { selectable = new List<IList<int>>(), form = baseForm, text = new List<IList<String>>() };
-            foreach(FormItemModel q in baseForm.FormItemIList)
+            foreach (FormItemModel q in baseForm.FormItemIList)
             {
-                if(q.type > 1)
+                if (q.type > 1)
                 {
                     formsList.selectable.Add(new List<int>());
-                    for(int i = 0; i < q.options.Count; ++i)
+                    for (int i = 0; i < q.options.Count; ++i)
                     {
                         formsList.selectable.Last<IList<int>>().Add(0);
                     }
@@ -381,7 +401,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 var resultForm = db.FormModels.First<FormsModel>(compare1);
                 var selectCounter = 0;
                 var textCounter = 0;
-                foreach(FormItemModel item in resultForm.FormItemIList)
+                foreach (FormItemModel item in resultForm.FormItemIList)
                 {
                     //radio buttons
                     if (item.type == 2)
@@ -405,22 +425,22 @@ namespace FormsGeneratorWebApplication.Controllers
                     else
                     {
                         var question = formsList.selectable.ElementAt<IList<int>>(selectCounter);
-                        foreach(SelectedModel sM in item.selected)
+                        foreach (SelectedModel sM in item.selected)
                         {
                             var resp = sM.selected;
                             int index = 0;
                             var found = false;
                             var optionsList = item.options;
-                            for(int i = 0; i <optionsList.Count; ++i)
+                            for (int i = 0; i < optionsList.Count; ++i)
                             {
-                                if(resp == optionsList[i].option)
+                                if (resp == optionsList[i].option)
                                 {
                                     index = i;
                                     found = true;
                                     break;
                                 }
                             }
-                            if(found)
+                            if (found)
                             {
                                 question[index]++;
                             }

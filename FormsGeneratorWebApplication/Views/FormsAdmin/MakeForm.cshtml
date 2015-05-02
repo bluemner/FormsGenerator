@@ -14,7 +14,7 @@
     <div class="form-horizontal">
         <fieldset>
             <legend>MakeForm</legend>
-
+            @Html.HiddenFor(m => m.Status, new { @Value = true })
             <div class="form-group">
                 <label class="col-lg-2 control-label">@Html.LabelFor(m => m.Name)</label>
                 <div class="col-lg-10">

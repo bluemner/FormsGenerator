@@ -51,7 +51,12 @@ namespace FormsGeneratorWebApplication.Controllers
             //db.SaveChanges();
 
             //return View(model);
-            return View(loadContentFromDataBase(Guid.Parse(guid)));
+
+            var vw = loadContentFromDataBase(Guid.Parse(guid));
+            if(vw !=null)
+               return View(vw);
+
+            return View("OutOfTime");
         }
 
         [HttpPost]
@@ -59,6 +64,7 @@ namespace FormsGeneratorWebApplication.Controllers
         {
             //model.FormItemIList[0].answer = "answer";
             //model.FormItemIList[1].answer = "answer2";
+            model.Status = false;
             db.Entry(model).State = System.Data.Entity.EntityState.Modified;
             foreach(FormItemModel item in model.FormItemIList)
             {
@@ -193,7 +199,13 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             };
             FormsModel result = db.FormModels.First<FormsModel>(compare);
-            return result;
+            if (result.Status)
+            {
+                return result;
+            }
+            else {
+                return null;
+            }
         }
 	}
 }

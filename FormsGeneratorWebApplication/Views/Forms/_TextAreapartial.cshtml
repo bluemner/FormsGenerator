@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="inputFormName" class="col-lg-1 control-label label label-default">Answer : </label>
             <div class="col-lg-10">
-                @Html.TextAreaFor(m => m.options[0].option, new { Name = "FormItemIList["+index+"].options", @class = "form-control Answer-inputWidthHeight", @Value = "", @Text = "" })
+                @Html.TextAreaFor(m => m.options[0].option, new { Name = "FormItemIList["+index+"].answer", @class = "form-control Answer-inputWidthHeight", @Value = "", @Text = "" })
             </div>
         </div>
         @Html.HiddenFor(m => m.id, new { Name = "FormItemIList[" + index + "].id" })
