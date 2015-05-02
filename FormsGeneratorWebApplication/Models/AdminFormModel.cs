@@ -14,7 +14,10 @@ namespace FormsGeneratorWebApplication.Models
         public int key { get; set; }
 
         public IList<FormsModel> forms { get; set; }
-        
-        
+
+        public IList<int> total { get; set; }
+
+        public IList<int> completed { get; set; }
+        //comment!
     }
 }
