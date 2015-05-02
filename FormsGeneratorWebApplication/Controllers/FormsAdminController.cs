@@ -117,6 +117,89 @@ namespace FormsGeneratorWebApplication.Controllers
             return View("Email");
         }
 
+        [HttpGet]
+        public ActionResult EditForm(String guid)
+        {
+            var compGUID = Guid.Parse(guid);
+            Func<FormsModel, bool> compare = delegate(FormsModel form)
+            {
+                if (form.adminGUID == compGUID)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            FormsModel result = db.FormModels.First<FormsModel>(compare);
+            
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult EditForm(FormsModel model)
+        {
+            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            foreach (FormItemModel item in model.FormItemIList)
+            {
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            }
+            db.SaveChanges();
+            var guid = model.adminGUID;
+            var deleteList = new List<ResultModel>();
+            foreach(ResultModel rM in db.ResultModels)
+            {
+                if(rM.adminGUID == guid)
+                {
+                    deleteList.Add(rM);
+                }
+            }
+
+            foreach(ResultModel rM in deleteList)
+            {
+                Func<FormsModel, bool> compare = delegate(FormsModel form)
+                {
+                    if (form.adminGUID == rM.userGUID)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                };
+                var deleteThisForm = db.FormModels.First<FormsModel>(compare);
+                if(deleteThisForm.FormItemIList != null)
+                {
+                    foreach(FormItemModel fIM in deleteThisForm.FormItemIList)
+                    {
+                        if(fIM.options != null)
+                        {
+                            foreach(OptionsModel oM in fIM.options)
+                            {
+                                db.Entry(oM).State = System.Data.Entity.EntityState.Deleted;
+                            }
+                        }
+                        if(fIM.selected != null)
+                        {
+                            foreach(SelectedModel sM in fIM.selected)
+                            {
+                                db.Entry(sM).State = System.Data.Entity.EntityState.Deleted;
+                            }
+                        }
+                    }
+                }
+                db.Entry(deleteThisForm).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+            }
+
+            //4. call SaveChanges
+            
+
+            return View("Email");
+        }
+
         private Guid createGuid()
         {
             return Guid.NewGuid();
