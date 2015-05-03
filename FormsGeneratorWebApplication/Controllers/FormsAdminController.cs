@@ -190,7 +190,7 @@ namespace FormsGeneratorWebApplication.Controllers
             }
 
             //4. call SaveChanges
-
+            ViewBag.GUID = model.adminGUID.ToString();
 
             return View("Email");
         }
@@ -532,7 +532,13 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 }
             }
+            ViewBag.Jsn = Json(new
+            {
+                form = formsList.form,
+                selectable = formsList.selectable,
+                text = formsList.text
 
+            });
             return View(formsList);
         }
 
