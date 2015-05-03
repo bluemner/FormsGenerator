@@ -536,7 +536,7 @@ namespace FormsGeneratorWebApplication.Controllers
             return View(formsList);
         }
 
-        private void reminder(String guid)
+        public ActionResult reminder(String guid)
         {
             var baseGUID = Guid.Parse(guid);
 
@@ -552,6 +552,8 @@ namespace FormsGeneratorWebApplication.Controllers
                     EmailLink(rL.email, link + rL.userGUID.ToString());
                 }
             }
+
+            return View("EmailSucess");
         }
         [HttpGet]
         public DownloadFileActionResult DownloadAnalytic(string guid)

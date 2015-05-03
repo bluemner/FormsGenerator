@@ -25,6 +25,10 @@
                 form.stats($(this));
             });
 
+            $formname.on('click', '.btn-reminder', function () {
+                form.reminder($(this));
+            });
+
         },
 
 
@@ -42,6 +46,12 @@
         stats: function (selectedObject) {
             var guid = selectedObject.attr('name');
             location.href = form.settings.UrlStats + '?guid=' + guid;
+
+        },
+
+        reminder: function (selectedObject) {
+            var guid = selectedObject.attr('name');
+            location.href = form.settings.UrlReminder + '?guid=' + guid;
 
         },
 

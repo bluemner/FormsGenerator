@@ -373,6 +373,7 @@
     <Content Include="Views\FormsAdmin\Analytic.cshtml" />
     <Content Include="Views\FormsAdmin\EditForm.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\FormsAdmin\EmailSucess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
