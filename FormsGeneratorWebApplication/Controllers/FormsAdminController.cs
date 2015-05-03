@@ -432,7 +432,7 @@ namespace FormsGeneratorWebApplication.Controllers
             var correctList = new List<ResultModel>();
             foreach (ResultModel rL in resultsList)
             {
-                if (rL.adminGUID == form) //&& rL.active == false)
+                if (rL.adminGUID == form && rL.active == false)
                 {
                     correctList.Add(rL);
                 }
@@ -566,7 +566,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
             foreach (ResultModel rL in resultsList)
             {
-                if (rL.adminGUID == form) //&& rL.active == false)
+                if (rL.adminGUID == form && rL.active == false)
                 {
                     correctList.Add(rL);
                 }
