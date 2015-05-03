@@ -49,7 +49,7 @@
                                     </td>
                                     <td>@Html.CheckBoxFor(m => m.forms[i].Status)</td>
                                     <td><input type="button" value="Download" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-sm btn-download" id="Admin-Form-Download-Button-@i" /></td>
-                                    <td><label>@Model.forms[i].</label></td>
+                                    <td><label>@Model.completed[i] / @Model.total[i]</label></td>
                                 </tr>
                             }
                         </tbody>
