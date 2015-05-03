@@ -28,6 +28,7 @@
                                 <th>Date Range</th>
                                 <th>Status</th>
                                 <th>Download</th>
+                                <th>Reminder</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -47,8 +48,17 @@
 
                                         <label class="text-warning">@Html.DisplayFor(m => m.forms[i].StartDate) - @Html.DisplayFor(m => m.forms[i].EndDate)</label>
                                     </td>
-                                    <td>@Html.CheckBoxFor(m => m.forms[i].Status)</td>
+                                    <td>
+                                        @if (Model.forms[i].Status)
+                                        {
+                                            <label>Enabled</label>
+                                        }
+                                        else
+                                        {  <label>Disabled</label>
+                                        }
+                                    </td>
                                     <td><input type="button" value="Download" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-sm btn-download" id="Admin-Form-Download-Button-@i" /></td>
+                                    <td><input type="button" value="Reminder" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-sm btn-reminder" id="Admin-Form-Reminder-Button-@i" /></td>
                                     <td><label>@Model.completed[i] / @Model.total[i]</label></td>
                                 </tr>
                             }
@@ -85,7 +95,8 @@
             settings: {
                 UrlDownload: '@Url.Content("~/FormsAdmin/DownloadAnalytic")',
                 UrlEdit: '@Url.Content("~/FormsAdmin/EditForm")',
-                UrlStats: '@Url.Content("~/FormsAdmin/Analytic")'
+                UrlStats: '@Url.Content("~/FormsAdmin/Analytic")',
+                UrlReminder: '@Url.Content("~/FormsAdmin/reminder")'
             }
         });
         window.form.init();
