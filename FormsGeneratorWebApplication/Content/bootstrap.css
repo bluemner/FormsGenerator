@@ -6831,9 +6831,15 @@ a.list-group-item-danger.active:focus {
     word-wrap: break-word;
 }
 
-.convas-size {
+/*.convas-size {
     max-width: 800px;
     width: 800px;
     max-height: 400px;
     height: 400px;
+}*/
+
+canvas{
+    width: 100% !important;
+    max-width: 800px;
+    height: auto !important;
 }

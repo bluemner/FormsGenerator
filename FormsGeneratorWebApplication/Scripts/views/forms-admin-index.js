@@ -21,6 +21,13 @@
             $formname.on('click', '.btn-edit', function () {
                 form.edit($(this));
             });
+            $formname.on('click', '.btn-stats', function () {
+                form.stats($(this));
+            });
+
+            $formname.on('click', '.btn-reminder', function () {
+                form.reminder($(this));
+            });
 
         },
 
@@ -35,7 +42,18 @@
             var guid = selectedObject.attr('name');
             location.href = form.settings.UrlEdit + '?guid=' + guid;
 
-        }
+        },
+        stats: function (selectedObject) {
+            var guid = selectedObject.attr('name');
+            location.href = form.settings.UrlStats + '?guid=' + guid;
+
+        },
+
+        reminder: function (selectedObject) {
+            var guid = selectedObject.attr('name');
+            location.href = form.settings.UrlReminder + '?guid=' + guid;
+
+        },
 
     });//extend
 })(window.jQuery, window.form || (window.form = {}));

@@ -21,10 +21,10 @@
                         @Html.TextBoxFor(m => m.question, new { Name = "FormItemIList[" + index + "].question", @class = "form-control question-inputWidth" })
                     </div>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.minCheckable)</label>
                     <div class="col-xs-10">
-                        @Html.TextBoxFor(m => m.minCheckable, new { Name = "FormItemIList[" + index + "].question", @class = "form-control" })
+                        @Html.TextBoxFor(m => m., new { Name = "FormItemIList[" + index + "].question", @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -32,8 +32,8 @@
                     <div class="col-xs-10">
                         @Html.TextBoxFor(m => m.maxCheckable, new { Name = "FormItemIList[" + index + "].question", @class = "form-control" })
                     </div>
-                </div>
-                @for (var i = 0; i < Model.checkboxes.Count; ++i)
+                </div>*@
+                @for (var i = 0; i < Model.selected.Count; ++i)
                 {
                     @*<div class=" checkboxes form-group">
                         <label for="inputFormName" class="col-lg-2 control-label">@Html.LabelFor(m => m.checkboxes[i].answer)</label>
@@ -47,7 +47,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox">
-                                    @Html.TextBoxFor(m => m.checkboxes[i].answer, new { Name = "FormItemIList[" + index + "].selected[" + @i + "]", @class = "form-control checkbox-btn-input-width" })
+                                    @Html.TextBoxFor(m => m.selected[i].selected, new { Name = "FormItemIList[" + index + "].selected[" + @i + "]", @class = "form-control checkbox-btn-input-width" })
                                 </label>
                             </div>
                         </div>
