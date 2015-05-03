@@ -51,6 +51,7 @@ namespace FormsGeneratorWebApplication.Models
             result.Name = toClone.Name;
             result.StartDate = toClone.StartDate;
             result.EndDate = toClone.EndDate;
+            result.Status = toClone.Status;
             return result;
         }
 

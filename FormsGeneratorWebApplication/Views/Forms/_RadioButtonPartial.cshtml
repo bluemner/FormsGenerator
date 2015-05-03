@@ -2,6 +2,10 @@
 
 @{
     var index = ViewBag.index;
+    var bbb =false;
+
+    
+    
 }
 
 @*<div class="ui-accordion-header">
@@ -13,12 +17,16 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title pn-tl-font">
-            <span class="caret"></span>
-            @Html.HiddenFor(m => m.question, new { Name = "[" + index + "].question" })
-            @Html.Label(Model.question, new { @class = "control-label label" })
+            <span class="caret"> </span>
+          @Html.Label(Model.question, new { @class = "control-label label" })
         </h3>
     </div>
     <div class="panel-body">
+        @Html.HiddenFor(m => m.question, new { Name = "[" + index + "].question" })
+  
+        @Html.HiddenFor(m => m.postion, new { Name = "FormItemIList[" + index + "].postion" })
+        @Html.HiddenFor(m => m.type, new { Name = "FormItemIList[" + index + "].type" })
+        @Html.HiddenFor(m => m.id, new { Name = "FormItemIList[" + index + "].id" })
         <div class="form-horizontal">
             <fieldset>
                 <div class="form-group">
@@ -27,14 +35,21 @@
                 <div class="form-group">
                     @for (var i = 0; i < Model.options.Count; ++i)
                     {
-                        <div class="radio  col-lg-offset-1">
-                            <div class="col-lg-10">
-                                @*<label class="col-lg-1 control-label label label-default">@Model.options[i].option </label>*@
+                       
 
-                                <div class="col-lg-4">
-                                    @Html.DisplayFor(m => m.options[i].option, new { @class = "control-label label" })
+                        <div class="checkboxes form-group">
+                            
+                            <div class="col-lg-10">
+                                <div class="radio">
+                                    <label>
+                                        @Html.HiddenFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option", @class = "form-control radio-btn-input-width" })
+                                        @Html.DisplayFor(m => m.options[i].option, new { @class = "control-label label" })
+                                      
+
+                                       
+                                    </label>
+                                    @Html.RadioButtonFor(m => m.selectedOption, "" + @i, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
                                 </div>
-                                @Html.RadioButtonFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option", @class = "radio-btn-value" })
                             </div>
                         </div>
                     }
@@ -43,43 +58,3 @@
         </div>
     </div>
 </div>
-
-@*<div>
-        <div class="form-horizontal">
-            <fieldset>
-                <div class="row">
-                    <div class="form-group">
-                        <label for="inputFormName" class="col-lg-2 control-label label label-default">@Html.LabelFor(m => m.question)</label>
-                        <div class="col-xs-10">
-                            @Html.TextBoxFor(m => m.question, new { Name = "[" + index + "].question", @class = "form-control question-inputWidth" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="button" class="btn btn-danger btn-remove-form-item" name="@index">Remove</button>
-                        </div>
-                    </div>
-                </div>
-                @Html.HiddenFor(m => m.postion, new { Name = "FormItemIList[" + index + "].postion" })
-            </fieldset>
-        </div>
-    </div>*@
-
-
-@*<div>
-        <div class="form-horizontal">
-            <fieldset>
-                <div class="row">
-
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="button" class="btn btn-danger btn-remove-form-item">Remove</button>
-                        </div>
-                    </div>
-                    @Html.HiddenFor(m => m.postion, new { Name = "[" + index + "].postion" })
-                </div>
-
-            </fieldset>
-        </div>
-    </div>*@

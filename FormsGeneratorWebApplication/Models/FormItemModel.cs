@@ -42,7 +42,7 @@ namespace FormsGeneratorWebApplication.Models
             result.postion = toClone.postion;
             result.question = toClone.question;
             result.type = toClone.type;
-            
+    
             if (toClone.options != null)
             {
                 result.options = new List<OptionsModel>();

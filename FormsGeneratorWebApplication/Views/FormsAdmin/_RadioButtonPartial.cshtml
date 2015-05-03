@@ -33,7 +33,8 @@
                         <div class="col-lg-10">
                             <div class="radio">
                                 <label>
-                                    @Html.RadioButtonFor(m => m.val, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
+                                    @Html.RadioButtonFor(m => m.selectedOption,""+@i ,new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
+                                  
                                     @Html.TextBoxFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option", @class = "form-control radio-btn-input-width" })
                                 </label>
                             </div>

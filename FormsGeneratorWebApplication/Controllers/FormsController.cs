@@ -53,8 +53,13 @@ namespace FormsGeneratorWebApplication.Controllers
             //return View(model);
 
             var vw = loadContentFromDataBase(Guid.Parse(guid));
-            if(vw !=null)
-               return View(vw);
+
+            if (vw.Status)
+            {
+                return View(vw);;
+            }
+           
+              
 
             return View("OutOfTime");
         }
@@ -199,13 +204,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             };
             FormsModel result = db.FormModels.First<FormsModel>(compare);
-            if (result.Status)
-            {
-                return result;
-            }
-            else {
-                return null;
-            }
+            return result;
         }
 	}
 }
