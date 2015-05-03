@@ -14,7 +14,6 @@ using Microsoft.Owin.Security;
 using FormsGeneratorWebApplication.Models;
 using FormsGeneratorWebApplication.Utilities;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 namespace FormsGeneratorWebApplication.Controllers
 {
     [Authorize]
@@ -218,7 +217,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult AddCheckBoxes(int count, int numberOfSubElements)
         {
-            var CheckboxModel = new FormItemModel  ();
+            var CheckboxModel = new FormItemModel();
             CheckboxModel.type = TYPE_TEXT_CHECKBOX;
             CheckboxModel.selected = new List<SelectedModel>();
             CheckboxModel.options = new List<OptionsModel>();
@@ -533,17 +532,11 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 }
             }
-            var jsn = Json(new {
-                form = formsList.form,
-                selecctable = formsList.selectable,
-                text = formsList.text
-            }, JsonRequestBehavior.AllowGet);
 
-            ViewBag.Jsn = jsn;
             return View(formsList);
         }
 
-        public ActionResult reminder(String guid)
+        private void reminder(String guid)
         {
             var baseGUID = Guid.Parse(guid);
 
@@ -559,8 +552,6 @@ namespace FormsGeneratorWebApplication.Controllers
                     EmailLink(rL.email, link + rL.userGUID.ToString());
                 }
             }
-
-            return View("EmailSucess");
         }
         [HttpGet]
         public DownloadFileActionResult DownloadAnalytic(string guid)
@@ -596,7 +587,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 if (q.type > 1)
                 {
                     formsList.selectable.Add(new List<int>());
-                    selectdt.Columns.Add(q.question, typeof(int));
+                    textdt.Columns.Add(q.question, typeof(int));
                     for (int i = 0; i < q.options.Count; ++i)
                     {
                         formsList.selectable.Last<IList<int>>().Add(0);
@@ -677,7 +668,18 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             }
             listodataTable<String>(formsList.text, textdt, baseForm.FormItemIList);
-            listodataTable<int>(formsList.selectable, selectdt, baseForm.FormItemIList);
+            //listodataTable<int>(formsList.selectable, selectdt, baseForm.FormItemIList);
+            for (int i = 0; i < formsList.selectable.Count; ++i)
+            {
+                var row = textdt.NewRow();
+
+                for (int j = 0; j < formsList.selectable[i].Count; ++j)
+                {
+                    row[baseForm.FormItemIList[i].question] = formsList.selectable[i][j].ToString();
+                }
+                textdt.Rows.Add(row);
+
+            }
 
             return new DownloadFileActionResult(textdt, "Download.xls");
         }
@@ -687,7 +689,7 @@ namespace FormsGeneratorWebApplication.Controllers
             {
                 var row = dt.NewRow();
 
-                for (int j = 0; j < list[j].Count; ++j)
+                for (int j = 0; j < list[i].Count; ++j)
                 {
                     row[itemlist[i].question] = list[i][j];
                 }
