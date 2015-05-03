@@ -209,26 +209,26 @@ namespace FormsGeneratorWebApplication.Controllers
         public ActionResult AddTextBox(int count)
         {
             ViewBag.TextBoxCount = count.ToString();
-            return PartialView("_EditTextBoxPartial", new TextBoxModel() { type = TYPE_TEXT_BOX });
+            return PartialView("_EditTextBoxPartial", new FormItemModel() { type = TYPE_TEXT_BOX });
         }
 
         [HttpGet]
         public ActionResult AddTextArea(int count)
         {
             ViewBag.TextBoxCount = count;
-            return PartialView("_TextAreaPartial", new TextAreaModel() { type = TYPE_TEXT_AREA, options = new List<OptionsModel>() });
+            return PartialView("_TextAreaPartial", new FormItemModel() { type = TYPE_TEXT_AREA, options = new List<OptionsModel>() });
         }
 
         [HttpGet]
         public ActionResult AddCheckBoxes(int count, int numberOfSubElements)
         {
-            var CheckboxModel = new CheckBoxesModel();
+            var CheckboxModel = new FormItemModel  ();
             CheckboxModel.type = TYPE_TEXT_CHECKBOX;
-            CheckboxModel.checkboxes = new List<checkbox>();
+            CheckboxModel.selected = new List<SelectedModel>();
 
             for (int i = 0; i < numberOfSubElements; ++i)
             {
-                CheckboxModel.checkboxes.Add(new checkbox());
+                CheckboxModel.selected.Add(new SelectedModel());
             }
 
             ViewBag.TextBoxCount = count;
@@ -238,7 +238,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult AddRadioButton(int count, int numberOfSubElements)
         {
-            var RadioMod = new RadioButtonModel();
+            var RadioMod = new FormItemModel();
             RadioMod.options = new List<OptionsModel>();
             RadioMod.type = TYPE_TEXT_RADIO;
             for (int i = 0; i < numberOfSubElements; ++i)

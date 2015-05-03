@@ -14,7 +14,7 @@
 <h2>Edit Form Informaiton</h2>
 
 
- @using (Html.BeginForm("Forms", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" }))
+ @using (Html.BeginForm("MakeForm", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" }))
  {
      @Html.HiddenFor(m => m.adminGUID);
      
@@ -67,12 +67,16 @@
             }
         }
 
-
+    <div id="test" hidden></div>
 
     @Html.HiddenFor(m => m.key);
-     
-    <button type="submit" class="btn btn-success btn-lg">Submit</button>
-    }
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="button" class="btn btn-primary btn-lg btn-add-form-item"><span class="glyphicon glyphicon-plus span-space" aria-hidden="true"></span>Add FormItem</button>
+        </div>
+    </div>
+       <button type="submit" class="btn btn-success btn-lg">Submit</button>
+ }
 
 
 
