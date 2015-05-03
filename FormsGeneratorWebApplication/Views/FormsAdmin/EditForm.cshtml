@@ -47,9 +47,10 @@
      for (var i = 0; i < items.Count(); ++i)
      {
          ViewBag.index = i;
+         ViewBag.TextBoxCount = i;
          var currentItem = items.ElementAt(i);
-         if (currentItem.type == 2)
-         {
+         if (currentItem.type == 2)         {
+     
                 @Html.Partial("~/Views/FormsAdmin/_RadioButtonPartial.cshtml", currentItem)
             }
             else if (currentItem.type == 1)
