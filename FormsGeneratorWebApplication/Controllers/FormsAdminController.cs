@@ -158,6 +158,42 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             };
             FormsModel result = db.FormModels.First<FormsModel>(keyCompare);
+            var deleteQuestionList = new List<FormItemModel>();
+            if (result.FormItemIList != null)
+            {
+                foreach (FormItemModel fIM in result.FormItemIList)
+                {
+                    deleteQuestionList.Add(fIM);
+                    if (fIM.options != null)
+                    {
+                        var deleteOptionsList = new List<OptionsModel>();
+                        foreach (OptionsModel oM in fIM.options)
+                        {
+                            deleteOptionsList.Add(oM);
+                        }
+                        foreach (OptionsModel oM in deleteOptionsList)
+                        {
+                            db.OptionsModels.Remove(oM);
+                        }
+                    }
+                    if (fIM.selected != null)
+                    {
+                        var deleteSelectedList = new List<SelectedModel>();
+                        foreach (SelectedModel oM in fIM.selected)
+                        {
+                            deleteSelectedList.Add(oM);
+                        }
+                        foreach (SelectedModel oM in deleteSelectedList)
+                        {
+                            db.SelectedModels.Remove(oM);
+                        }
+                    }
+                }
+                foreach (FormItemModel fIM in deleteQuestionList)
+                {
+                    db.FormItemModels.Remove(fIM);
+                }
+            }
             db.FormModels.Remove(result);
             db.SaveChanges();
             db.FormModels.Add(model);
@@ -171,7 +207,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     deleteList.Add(rM);
                 }
             }
-
+            var deleteResultModels = new List<ResultModel>();
             foreach (ResultModel rM in deleteList)
             {
                 Func<FormsModel, bool> compare = delegate(FormsModel form)
@@ -186,12 +222,61 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 };
                 var deleteThisForm = db.FormModels.First<FormsModel>(compare);
-                db.Entry(deleteThisForm).State = System.Data.Entity.EntityState.Deleted;
+                if (deleteThisForm.FormItemIList != null)
+                {
+                    foreach (FormItemModel fIM in deleteThisForm.FormItemIList)
+                    {
+                        deleteQuestionList.Add(fIM);
+                        if (fIM.options != null)
+                        {
+                            var deleteOptionsList = new List<OptionsModel>();
+                            foreach (OptionsModel oM in fIM.options)
+                            {
+                                deleteOptionsList.Add(oM);
+                            }
+                            foreach (OptionsModel oM in deleteOptionsList)
+                            {
+                                db.OptionsModels.Remove(oM);
+                            }
+                        }
+                        if (fIM.selected != null)
+                        {
+                            var deleteSelectedList = new List<SelectedModel>();
+                            foreach (SelectedModel oM in fIM.selected)
+                            {
+                                deleteSelectedList.Add(oM);
+                            }
+                            foreach (SelectedModel oM in deleteSelectedList)
+                            {
+                                db.SelectedModels.Remove(oM);
+                            }
+                        }
+                    }
+                    foreach (FormItemModel fIM in deleteQuestionList)
+                    {
+                        fIM.FormsModel = null;
+                        try
+                        {
+                            db.FormItemModels.Remove(fIM);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                }
+                deleteResultModels.Add(rM);
+                db.FormModels.Remove(deleteThisForm);
+                db.SaveChanges();
+            }
+            foreach(ResultModel rM in deleteResultModels)
+            {
+                db.ResultModels.Remove(rM);
                 db.SaveChanges();
             }
 
             //4. call SaveChanges
-            ViewBag.GUID = model.adminGUID.ToString();
+
 
             return View("Email");
         }
