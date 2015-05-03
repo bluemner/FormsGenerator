@@ -69,7 +69,8 @@
 
             }
         });
-        window.chart.init('@Html.Raw(Json.Encode(Model))');
+
+        window.chart.init('@ViewBag.Jsn');
     })
 
 </script>

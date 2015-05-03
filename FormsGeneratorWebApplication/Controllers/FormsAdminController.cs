@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using FormsGeneratorWebApplication.Models;
 using FormsGeneratorWebApplication.Utilities;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 namespace FormsGeneratorWebApplication.Controllers
 {
     [Authorize]
@@ -532,7 +533,13 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 }
             }
+            var jsn = Json(new {
+                form = formsList.form,
+                selecctable = formsList.selectable,
+                text = formsList.text
+            }, JsonRequestBehavior.AllowGet);
 
+            ViewBag.Jsn = jsn;
             return View(formsList);
         }
 
