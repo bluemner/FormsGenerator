@@ -220,12 +220,16 @@ namespace FormsGeneratorWebApplication.Controllers
             var CheckboxModel = new FormItemModel  ();
             CheckboxModel.type = TYPE_TEXT_CHECKBOX;
             CheckboxModel.selected = new List<SelectedModel>();
+            CheckboxModel.options = new List<OptionsModel>();
 
             for (int i = 0; i < numberOfSubElements; ++i)
             {
                 CheckboxModel.selected.Add(new SelectedModel());
             }
-
+            for (int i = 0; i < numberOfSubElements; ++i)
+            {
+                CheckboxModel.options.Add(new OptionsModel());
+            }
             ViewBag.TextBoxCount = count;
             return PartialView("_CheckBoxesPartial", CheckboxModel);
         }
