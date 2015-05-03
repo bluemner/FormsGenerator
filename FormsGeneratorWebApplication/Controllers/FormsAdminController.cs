@@ -277,6 +277,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
             //4. call SaveChanges
 
+            ViewBag.GUID = model.adminGUID.ToString();
 
             return View("Email");
         }
