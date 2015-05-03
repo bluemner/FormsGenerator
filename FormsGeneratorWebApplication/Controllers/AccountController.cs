@@ -118,14 +118,15 @@ namespace FormsGeneratorWebApplication.Controllers
                 {
                     //await SignInAsync(user, model.RememberMe);
                     //Change user password
+                    String newPassword = System.Web.Security.Membership.GeneratePassword(15, 0);
                     UserManager.RemovePassword(user.Id);
-                    UserManager.AddPassword(user.Id, "newPassword");
-                    SendNewPassword(model.EmailAddress, model.UserName, "newPassword");
+                    UserManager.AddPassword(user.Id, newPassword);
+                    SendNewPassword(model.EmailAddress, model.UserName, newPassword);
                     return View("Login");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "Invalid username or email.");
                 }
             }
 
@@ -141,8 +142,9 @@ namespace FormsGeneratorWebApplication.Controllers
                 mail.To.Add(recipient);
                 mail.From = new MailAddress("formsgenerator@gmail.com");
                 mail.Subject = "New Password";
-                String Body = "Your new password for username " + username + " is:  " + password;
-                mail.Body = Body;
+                String passwordBody = "Your new password for username " + username + " is:  " + password;
+                String Body = "You may now go change your password.";
+                mail.Body = passwordBody + "<br/>" + Body;
                 mail.IsBodyHtml = true;
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 client.UseDefaultCredentials = true;
