@@ -140,11 +140,26 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult EditForm(FormsModel model)
         {
-            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-            foreach (FormItemModel item in model.FormItemIList)
+            //db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            //foreach (FormItemModel item in model.FormItemIList)
+            //{
+            //    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            //}
+            Func<FormsModel, bool> keyCompare = delegate(FormsModel form)
             {
-                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
-            }
+                if (form.key == model.key)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            FormsModel result = db.FormModels.First<FormsModel>(keyCompare);
+            db.FormModels.Remove(result);
+            db.SaveChanges();
+            db.FormModels.Add(model);
             db.SaveChanges();
             var guid = model.adminGUID;
             var deleteList = new List<ResultModel>();
@@ -170,26 +185,6 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 };
                 var deleteThisForm = db.FormModels.First<FormsModel>(compare);
-                if (deleteThisForm.FormItemIList != null)
-                {
-                    foreach (FormItemModel fIM in deleteThisForm.FormItemIList)
-                    {
-                        if (fIM.options != null)
-                        {
-                            foreach (OptionsModel oM in fIM.options)
-                            {
-                                db.Entry(oM).State = System.Data.Entity.EntityState.Deleted;
-                            }
-                        }
-                        if (fIM.selected != null)
-                        {
-                            foreach (SelectedModel sM in fIM.selected)
-                            {
-                                db.Entry(sM).State = System.Data.Entity.EntityState.Deleted;
-                            }
-                        }
-                    }
-                }
                 db.Entry(deleteThisForm).State = System.Data.Entity.EntityState.Deleted;
                 db.SaveChanges();
             }

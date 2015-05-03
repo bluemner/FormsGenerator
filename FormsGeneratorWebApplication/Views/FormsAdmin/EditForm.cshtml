@@ -14,7 +14,7 @@
 <h2>Edit Form Informaiton</h2>
 
 
- @using (Html.BeginForm("MakeForm", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" }))
+ @using (Html.BeginForm("EditForm", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" }))
  {
      @Html.HiddenFor(m => m.adminGUID);
      
@@ -59,7 +59,7 @@
             }
             else if (currentItem.type == 0)
             {
-                @Html.Partial("~/Views/FormsAdmin/_TextBoxPartial.cshtml", currentItem)
+                @Html.Partial("~/Views/FormsAdmin/_EditTextBoxPartial.cshtml", currentItem)
             }
             else if (currentItem.type == 3)
             {
