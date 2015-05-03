@@ -22,7 +22,7 @@
         </h3>
     </div>
     <div class="panel-body">
-        @Html.HiddenFor(m => m.question, new { Name = "[" + index + "].question" })
+        @Html.HiddenFor(m => m.question, new { Name = "FormItemIList[" + index + "].question" })
   
         @Html.HiddenFor(m => m.postion, new { Name = "FormItemIList[" + index + "].postion" })
         @Html.HiddenFor(m => m.type, new { Name = "FormItemIList[" + index + "].type" })
@@ -35,20 +35,21 @@
                 <div class="form-group">
                     @for (var i = 0; i < Model.options.Count; ++i)
                     {
-                       
+
 
                         <div class="checkboxes form-group">
-                            
+
                             <div class="col-lg-10">
                                 <div class="radio">
                                     <label>
-                                        @Html.HiddenFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option", @class = "form-control radio-btn-input-width" })
-                                        @Html.DisplayFor(m => m.options[i].option, new { @class = "control-label label" })
-                                      
 
-                                       
+                                        @Html.DisplayFor(m => m.options[i].option, new { @class = "control-label label" })
+                                        @Html.HiddenFor(m => m.options[i].option, new { Name = "FormItemIList[" + index + "].options[" + i + "].option", @class = "form-control radio-btn-input-width" })
+
+
                                     </label>
                                     @Html.RadioButtonFor(m => m.selectedOption, "" + @i, new { Name = "FormItemIList[" + index + "].selectedOption", @class = "radio-btn-value" })
+
                                 </div>
                             </div>
                         </div>

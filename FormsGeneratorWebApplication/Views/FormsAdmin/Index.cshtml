@@ -38,9 +38,9 @@
                                     <td>
                                         <a href="" class="btn btn-link btn-sm text-warning">@Model.forms[i].Name </a>
                                     </td>
-                                    <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Copy-Button-@i" value="Copy" /></td>
+                                    <td><input type="button" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-sm" id="Admin-Form-Copy-Button-@i" value="Copy" /></td>
                                     <td><input type="button" name="@Model.forms[i].adminGUID" class="btn btn-warning btn-edit btn-sm" id="Admin-Form-Edit-Button-@i" value="Edit" /></td>
-                                    <td><input type="button" class="btn btn-warning btn-sm" id="Admin-Form-Statistics-Button-@i" value="Statistics" /></td>
+                                    <td><input type="button" name="@Model.forms[i].adminGUID"  class="btn btn-warning btn-sm btn-stats" id="Admin-Form-Statistics-Button-@i" value="Statistics" /></td>
                                     <td>
                                         @*@Html.TextBoxFor(m => m.forms[i].StartDate, null, new { @class = "date" })
                                             @Html.TextBoxFor(m => m.forms[i].EndDate, null, new { @class = "date" })*@
@@ -67,7 +67,7 @@
                 <div class="btn-group">
                     <a href="#" class="btn btn-success btn-lg"> <span class="glyphicon glyphicon-list-alt span-space"></span> Create form template</a>
                     <a href="#" class="btn btn-success btn-lg dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                    <ul class="dropdown-menu btn-block">
+                    <ul class="dropdown-menu btn btn-block">
                         <li>@Html.ActionLink("True or False Template", "Template?type=0&numberOfSubElements=1", "FormsAdmin")</li>
                         <li>@Html.ActionLink("TextBox Template", "MakeForm", "FormsAdmin")</li>
                         <li>@Html.ActionLink("TextArea Template", "MakeForm", "FormsAdmin")</li>
@@ -84,7 +84,8 @@
         $.extend(form, {
             settings: {
                 UrlDownload: '@Url.Content("~/FormsAdmin/DownloadAnalytic")',
-                UrlEdit: '@Url.Content("~/FormsAdmin/EditForm")'
+                UrlEdit: '@Url.Content("~/FormsAdmin/EditForm")',
+                UrlStats: '@Url.Content("~/FormsAdmin/Analytic")'
             }
         });
         window.form.init();
