@@ -9,47 +9,56 @@
     public static int TYPE_TEXT_AREA = 1;
     public static int TYPE_TEXT_RADIO = 2;
     public static int TYPE_TEXT_CHECKBOX = 3; *@
-<h2>Please fill out the folowing form:</h2>
-@if (Model.EndDate < System.DateTime.Now) {
-    Response.Redirect("~/Forms/OutOfTime");
-}
-else { 
-    
-    using (Html.BeginForm("Forms", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" })) {
+<div class="form-horizontal">
+    <fieldset>
+        <legend>Please fill out the folowing form:</legend>
+        <h2 class="text-primary">@Model.Name</h2>
+        <h5 class="text-danger">Date Range:- @Model.StartDate - @Model.EndDate</h5>
+        @if (Model.EndDate < System.DateTime.Now)
+        {
+            Response.Redirect("~/Forms/OutOfTime");
+        }
+        else
+        {
 
-        @Html.HiddenFor(m => m.adminGUID);
-        
-    for (var i = 0; i < items.Count(); ++i)
-    {
-        ViewBag.index = i;
-        var currentItem = items.ElementAt(i);
-        if (currentItem.type == 2)
-        {
-            @Html.Partial("~/Views/Forms/_RadioButtonPartial.cshtml",currentItem)
-        }
-        else if (currentItem.type == 1 )
-        {
-            @Html.Partial("~/Views/Forms/_TextAreaPartial.cshtml", currentItem)
-        }
-        else if (currentItem.type ==0 )
-        {
-            @Html.Partial("~/Views/Forms/_TextBoxPartial.cshtml", currentItem)
-        }
-        else if (currentItem.type == 3)
-        {
-            @Html.Partial("~/Views/Forms/_CheckBoxesPartial.cshtml", currentItem)
-        }
-    }
-    @Html.HiddenFor(m => m.adminGUID);
-    @Html.HiddenFor(m => m.EndDate);
-    @Html.HiddenFor(m => m.StartDate);
-    @Html.HiddenFor(m => m.Status);
-    @Html.HiddenFor(m => m.key);
-    @Html.HiddenFor(m => m.Name);  
-                               
-        <button type="submit" class="btn btn-success btn-lg">Submit</button>
-    }
+            using (Html.BeginForm("Forms", "Forms", FormMethod.Post, new { @class = "full", @id = "new-form" }))
+            {
 
-}
-  
-    @Scripts.Render("~/Scripts/views/forms-view.js")
+                @Html.HiddenFor(m => m.adminGUID);
+
+                                                 for (var i = 0; i < items.Count(); ++i)
+                                                 {
+                                                     ViewBag.index = i;
+                                                     var currentItem = items.ElementAt(i);
+                                                     if (currentItem.type == 2)
+                                                     {
+                                                        @Html.Partial("~/Views/Forms/_RadioButtonPartial.cshtml", currentItem)
+                                                     }
+                                                     else if (currentItem.type == 1)
+                                                     {
+                                                        @Html.Partial("~/Views/Forms/_TextAreaPartial.cshtml", currentItem)
+                                                     }
+                                                     else if (currentItem.type == 0)
+                                                     {
+                                                        @Html.Partial("~/Views/Forms/_TextBoxPartial.cshtml", currentItem)
+                                                     }
+                                                     else if (currentItem.type == 3)
+                                                     {
+                                                        @Html.Partial("~/Views/Forms/_CheckBoxesPartial.cshtml", currentItem)
+                                                     }
+                                                 }
+                                                @Html.HiddenFor(m => m.adminGUID);
+            @Html.HiddenFor(m => m.EndDate);
+            @Html.HiddenFor(m => m.StartDate);
+            @Html.HiddenFor(m => m.Status);
+            @Html.HiddenFor(m => m.key);
+            @Html.HiddenFor(m => m.Name);
+
+            <button type="submit" class="btn btn-success btn-lg">Submit</button>
+            }
+
+        }
+
+    </fieldset>
+</div>
+@Scripts.Render("~/Scripts/views/forms-view.js")
