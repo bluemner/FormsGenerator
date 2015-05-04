@@ -619,13 +619,34 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 }
             }
-            ViewBag.Jsn = Json(new
-            {
-                form = formsList.form,
-                selectable = formsList.selectable,
-                text = formsList.text
 
-            });
+            for (var i = 0; i < formsList.form.FormItemIList.Count; ++i)
+            {
+                var formItem = formsList.form.FormItemIList[i];
+                if (formItem.selected != null)
+                {
+                    for (var j = 0; j < formItem.selected.Count; j++)
+                    {
+                        formItem.selected[j].question = null;
+                    }
+                }
+                if (formItem.options != null)
+                {
+                    for (var j = 0; j < formItem.options.Count; j++)
+                    {
+                        formItem.options[j].question = null;
+                    }
+                }
+                formItem.FormsModel = null;
+            }
+
+                //ViewBag.Jsn = Json(new
+                //{
+                //    form = formsList.form,
+                //    selectable = formsList.selectable,
+                //    text = formsList.text
+
+                //});
             return View(formsList);
         }
 

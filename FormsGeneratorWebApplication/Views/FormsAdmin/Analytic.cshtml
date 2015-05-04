@@ -70,7 +70,7 @@
             }
         });
 
-        window.chart.init('@ViewBag.Jsn');
+        window.chart.init('@Html.Raw(Json.Encode(Model))');
     })
 
 </script>
