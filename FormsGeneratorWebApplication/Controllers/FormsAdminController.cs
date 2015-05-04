@@ -517,6 +517,7 @@ namespace FormsGeneratorWebApplication.Controllers
             var form = Guid.Parse(guid);
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
+            //building the list of resultModels that are linked to base form
             foreach (ResultModel rL in resultsList)
             {
                 if (rL.adminGUID == form && rL.active == false)
@@ -535,8 +536,10 @@ namespace FormsGeneratorWebApplication.Controllers
                     return false;
                 }
             };
+            //getting base form
             var baseForm = db.FormModels.First<FormsModel>(compare);
             var formsList = new FormsListModel() { selectable = new List<IList<int>>(), form = baseForm, text = new List<IList<String>>() };
+            //building the lists
             foreach (FormItemModel q in baseForm.FormItemIList)
             {
                 if (q.type > 1)
@@ -552,7 +555,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     formsList.text.Add(new List<string>());
                 }
             }
-
+            //populating the list
             foreach (ResultModel r in correctList)
             {
                 Func<FormsModel, bool> compare1 = delegate(FormsModel f)
@@ -586,7 +589,7 @@ namespace FormsGeneratorWebApplication.Controllers
                         var question = formsList.text.ElementAt<IList<String>>(textCounter);
                         if (item.options.Count > 0)
                         {
-                            question.Add(item.options[0].option);
+                            question.Add(item.answer);
                         }
                         textCounter++;
                     }
