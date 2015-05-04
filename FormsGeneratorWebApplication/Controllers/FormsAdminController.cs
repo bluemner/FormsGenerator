@@ -31,7 +31,7 @@ namespace FormsGeneratorWebApplication.Controllers
 
 
 
-        private static FormsDbContext db = new FormsDbContext();
+        //private static FormsDbContext db = new FormsDbContext();
         private static UserStore<ApplicationUser> store = new UserStore<ApplicationUser>(new ApplicationDbContext());
         private static UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(store);
 
@@ -39,6 +39,7 @@ namespace FormsGeneratorWebApplication.Controllers
         // GET: /FormsAdmin/
         public ActionResult Index()
         {
+            FormsDbContext db = new FormsDbContext();
             //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
             var curUser = userManager.FindById(User.Identity.GetUserId());
             var formList = new List<FormsModel>();
@@ -99,6 +100,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult MakeForm(FormsModel model)
         {
+            FormsDbContext db = new FormsDbContext();
+
             model.adminGUID = createGuid();
             //var x = 3;
             // This logic works, but when the view passes the model to 
@@ -120,6 +123,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult EditForm(String guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var compGUID = Guid.Parse(guid);
             Func<FormsModel, bool> compare = delegate(FormsModel form)
             {
@@ -141,6 +146,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult EditForm(FormsModel model)
         {
+            FormsDbContext db = new FormsDbContext();
             //db.Entry(model).State = System.Data.Entity.EntityState.Modified;
             //foreach (FormItemModel item in model.FormItemIList)
             //{
@@ -422,6 +428,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult Email(String recipients, String guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             //if (ModelState.IsValid)
             //{
             //TODO: Create new guid
@@ -514,6 +522,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult Analytic(string guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var form = Guid.Parse(guid);
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
@@ -652,6 +662,8 @@ namespace FormsGeneratorWebApplication.Controllers
 
         private void reminder(String guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var baseGUID = Guid.Parse(guid);
 
             var resultsList = db.ResultModels.ToList<ResultModel>();
@@ -670,6 +682,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public DownloadFileActionResult DownloadAnalytic(string guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var form = Guid.Parse(guid);
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
