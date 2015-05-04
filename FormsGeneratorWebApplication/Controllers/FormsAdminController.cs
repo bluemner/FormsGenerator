@@ -715,7 +715,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 if (q.type > 1)
                 {
                     formsList.selectable.Add(new List<int>());
-                    textdt.Columns.Add(q.question, typeof(int));
+                    //textdt.Columns.Add(q.question, typeof(int));
                     for (int i = 0; i < q.options.Count; ++i)
                     {
                         formsList.selectable.Last<IList<int>>().Add(0);
@@ -724,7 +724,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 else
                 {
                     formsList.text.Add(new List<string>());
-                    textdt.Columns.Add(q.question, typeof(string));
+                    //textdt.Columns.Add(q.question, typeof(string));
 
                 }
             }
@@ -798,33 +798,98 @@ namespace FormsGeneratorWebApplication.Controllers
 
             var sCount = 0;
             var tCount = 0;
-            foreach (FormItemModel q in baseForm.FormItemIList)
-            {
-                
-                if (q.type > 1)
-                {
-                    textdt.Columns.Add(q.question, typeof(string));
-                    for(var j=0; j<formsList.selectable[sCount].Count;++j){
-                    var row = textdt.NewRow();
-                    row[q.question] = q.options[j] + " - " + formsList.selectable[sCount][j].ToString();
-                    textdt.Rows.Add(row);
-                    }
-                    sCount++;
-                   
-                }
-                else
-                {
-                    textdt.Columns.Add(q.question, typeof(string));
-                    for (var j = 0; j < formsList.text[tCount].Count; ++j)
-                    {
-                        var row = textdt.NewRow();
-                        row[q.question] = formsList.text[tCount][j].ToString();
-                        textdt.Rows.Add(row);
-                    }
-                    tCount++;
+            int max =0;
 
+            for (int j = 0; j < formsList.selectable.Count; ++j)
+            {
+                if (formsList.selectable[j].Count > max)
+                {
+                    max = formsList.selectable[j].Count;
                 }
             }
+            for(int j=0;j<formsList.text.Count;++j)
+            {
+                if (formsList.text[j].Count > max)
+                {
+                    max = formsList.text[j].Count;
+                }
+            }
+            for (int i = 0; i < max; ++i)
+            {
+                var row = textdt.NewRow();
+                textdt.Rows.Add(row);
+            }
+            for (int i = 0; i < formsList.form.FormItemIList.Count;++i)
+            {
+                if(formsList.form.FormItemIList[i].type >1) //selectable
+                {
+                    textdt.Columns.Add(formsList.form.FormItemIList[i].question, typeof(string));
+                    foreach(DataColumn column in textdt.Columns)
+                    {
+                        if(column.ColumnName == formsList.form.FormItemIList[i].question)
+                        {
+                            int j = 0;
+                            foreach(DataRow row in textdt.Rows)
+                            {
+                                if (j < formsList.selectable[sCount].Count)
+                                {
+                                    row[column] = formsList.form.FormItemIList[i].options[j].option + formsList.selectable[sCount][j].ToString();
+                                }
+                                j++;
+                            }
+                        }
+                    }
+                    sCount++;
+                }
+                else//text
+                {
+                    textdt.Columns.Add(formsList.form.FormItemIList[i].question, typeof(string));
+                    foreach (DataColumn column in textdt.Columns)
+                    {
+                        if (column.ColumnName == formsList.form.FormItemIList[i].question)
+                        {
+                            int j = 0;
+                            foreach (DataRow row in textdt.Rows)
+                            {
+                                if (j < formsList.text[tCount].Count)
+                                {
+                                    row[column] = formsList.form.FormItemIList[i].options[j].option + formsList.text[tCount][j];
+                                }
+                                j++;
+                            }
+                        }
+                    }
+                }
+            }
+                //foreach (FormItemModel q in baseForm.FormItemIList)
+                //{
+
+                //    if (q.type > 1)
+                //    {
+                //        textdt.Columns.Add(q.question, typeof(string));
+                //        for (var j = 0; j < formsList.selectable[sCount].Count; ++j)
+                //        {
+                //            var row = textdt.NewRow();
+                //            row[q.question] = q.options[j] + " - " + formsList.selectable[sCount][j].ToString();
+                //            textdt.Rows.Add(row);
+                //        }
+                //        sCount++;
+
+                //    }
+                //    else
+                //    {
+                //        textdt.Columns.Add(q.question, typeof(string));
+                //        for (var j = 0; j < formsList.text[tCount].Count; ++j)
+                //        {
+                //            var row = textdt.NewRow();
+                //            row[q.question] = formsList.text[tCount][j].ToString();
+                //            textdt.Rows.Add(row);
+
+                //        }
+                //        tCount++;
+
+                //    }
+                //}
 
             return new DownloadFileActionResult(textdt, "Download.xls");
         }
