@@ -138,7 +138,7 @@
         createBigChart: function (questions, overallResponses) {
 
             var context = $("#big-chart").get(0).getContext("2d");
-            chart.chartSwtichContext = chart.bigchartContext = new Chart(context).Line(chart.makeData(questions, overallResponses), chart.options());
+            chart.chartSwtichContext = new Chart(context).Line(chart.makeData(questions, overallResponses), chart.options());
 
 
         },

@@ -27,11 +27,12 @@ namespace FormsGeneratorWebApplication.Controllers
         public const int TEMPLATE_FORM_TRUE_OR_FALSE = 0;
         public const int TEMPLATE_FORM_TEXTAREA = 1;
         public const int TEMPLATE_FORM_TEXTBOX = 2;
+        public const int TEMPLATE_FORM_MIX = 3;
 
 
 
 
-        private static FormsDbContext db = new FormsDbContext();
+        //private static FormsDbContext db = new FormsDbContext();
         private static UserStore<ApplicationUser> store = new UserStore<ApplicationUser>(new ApplicationDbContext());
         private static UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(store);
 
@@ -39,6 +40,7 @@ namespace FormsGeneratorWebApplication.Controllers
         // GET: /FormsAdmin/
         public ActionResult Index()
         {
+            FormsDbContext db = new FormsDbContext();
             //Emailer("bluemner@uwm.edu, njjakusz@uwm.edu");
             var curUser = userManager.FindById(User.Identity.GetUserId());
             var formList = new List<FormsModel>();
@@ -99,6 +101,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult MakeForm(FormsModel model)
         {
+            FormsDbContext db = new FormsDbContext();
+
             model.adminGUID = createGuid();
             //var x = 3;
             // This logic works, but when the view passes the model to 
@@ -120,6 +124,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult EditForm(String guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var compGUID = Guid.Parse(guid);
             Func<FormsModel, bool> compare = delegate(FormsModel form)
             {
@@ -132,6 +138,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     return false;
                 }
             };
+
             FormsModel result = db.FormModels.First<FormsModel>(compare);
 
             return View(result);
@@ -140,6 +147,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult EditForm(FormsModel model)
         {
+            FormsDbContext db = new FormsDbContext();
             //db.Entry(model).State = System.Data.Entity.EntityState.Modified;
             //foreach (FormItemModel item in model.FormItemIList)
             //{
@@ -157,6 +165,42 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             };
             FormsModel result = db.FormModels.First<FormsModel>(keyCompare);
+            var deleteQuestionList = new List<FormItemModel>();
+            if (result.FormItemIList != null)
+            {
+                foreach (FormItemModel fIM in result.FormItemIList)
+                {
+                    deleteQuestionList.Add(fIM);
+                    if (fIM.options != null)
+                    {
+                        var deleteOptionsList = new List<OptionsModel>();
+                        foreach (OptionsModel oM in fIM.options)
+                        {
+                            deleteOptionsList.Add(oM);
+                        }
+                        foreach (OptionsModel oM in deleteOptionsList)
+                        {
+                            db.OptionsModels.Remove(oM);
+                        }
+                    }
+                    if (fIM.selected != null)
+                    {
+                        var deleteSelectedList = new List<SelectedModel>();
+                        foreach (SelectedModel oM in fIM.selected)
+                        {
+                            deleteSelectedList.Add(oM);
+                        }
+                        foreach (SelectedModel oM in deleteSelectedList)
+                        {
+                            db.SelectedModels.Remove(oM);
+                        }
+                    }
+                }
+                foreach (FormItemModel fIM in deleteQuestionList)
+                {
+                    db.FormItemModels.Remove(fIM);
+                }
+            }
             db.FormModels.Remove(result);
             db.SaveChanges();
             db.FormModels.Add(model);
@@ -170,7 +214,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     deleteList.Add(rM);
                 }
             }
-
+            var deleteResultModels = new List<ResultModel>();
             foreach (ResultModel rM in deleteList)
             {
                 Func<FormsModel, bool> compare = delegate(FormsModel form)
@@ -185,12 +229,62 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 };
                 var deleteThisForm = db.FormModels.First<FormsModel>(compare);
-                db.Entry(deleteThisForm).State = System.Data.Entity.EntityState.Deleted;
+                if (deleteThisForm.FormItemIList != null)
+                {
+                    foreach (FormItemModel fIM in deleteThisForm.FormItemIList)
+                    {
+                        deleteQuestionList.Add(fIM);
+                        if (fIM.options != null)
+                        {
+                            var deleteOptionsList = new List<OptionsModel>();
+                            foreach (OptionsModel oM in fIM.options)
+                            {
+                                deleteOptionsList.Add(oM);
+                            }
+                            foreach (OptionsModel oM in deleteOptionsList)
+                            {
+                                db.OptionsModels.Remove(oM);
+                            }
+                        }
+                        if (fIM.selected != null)
+                        {
+                            var deleteSelectedList = new List<SelectedModel>();
+                            foreach (SelectedModel oM in fIM.selected)
+                            {
+                                deleteSelectedList.Add(oM);
+                            }
+                            foreach (SelectedModel oM in deleteSelectedList)
+                            {
+                                db.SelectedModels.Remove(oM);
+                            }
+                        }
+                    }
+                    foreach (FormItemModel fIM in deleteQuestionList)
+                    {
+                        fIM.FormsModel = null;
+                        try
+                        {
+                            db.FormItemModels.Remove(fIM);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                }
+                deleteResultModels.Add(rM);
+                db.FormModels.Remove(deleteThisForm);
+                db.SaveChanges();
+            }
+            foreach(ResultModel rM in deleteResultModels)
+            {
+                db.ResultModels.Remove(rM);
                 db.SaveChanges();
             }
 
             //4. call SaveChanges
 
+            ViewBag.GUID = model.adminGUID.ToString();
 
             return View("Email");
         }
@@ -217,7 +311,7 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult AddCheckBoxes(int count, int numberOfSubElements)
         {
-            var CheckboxModel = new FormItemModel  ();
+            var CheckboxModel = new FormItemModel();
             CheckboxModel.type = TYPE_TEXT_CHECKBOX;
             CheckboxModel.selected = new List<SelectedModel>();
             CheckboxModel.options = new List<OptionsModel>();
@@ -265,12 +359,12 @@ namespace FormsGeneratorWebApplication.Controllers
                     {
                         var RadioMod = new RadioButtonModel();
                         RadioMod.options = new List<OptionsModel>();
-
                         RadioMod.options.Add(new OptionsModel() { option = "True" });
                         RadioMod.options.Add(new OptionsModel() { option = "False" });
 
                         RadioMod.question = "Can pigs fly?";
                         formModel.FormItemIList.Add(RadioMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_RADIO;
                     }
                     break;
                 case TEMPLATE_FORM_TEXTAREA:
@@ -278,8 +372,9 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextAreaMod = new TextAreaModel();
-                        TextAreaMod.value = "Pigs do fly.";
+                        TextAreaMod.question = "Argue that pigs do fly.";
                         formModel.FormItemIList.Add(TextAreaMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_AREA;
                     }
                     break;
                 case TEMPLATE_FORM_TEXTBOX:
@@ -287,13 +382,38 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextBoxMod = new TextBoxModel();
-                        TextBoxMod.value = "Pigs do fly.";
+                        TextBoxMod.question = "Describe pigs beauty in the three words.";
                         formModel.FormItemIList.Add(TextBoxMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_BOX;
+                    }
+                    break;
+                case TEMPLATE_FORM_MIX:
+                    //populate form model with textbox questions
+                    for (int i = 0; i < numberOfSubElements; ++i)
+                    {
+
+                        var RadioMod = new RadioButtonModel();
+                        RadioMod.options = new List<OptionsModel>();
+                        RadioMod.options.Add(new OptionsModel() { option = "True" });
+                        RadioMod.options.Add(new OptionsModel() { option = "False" });
+                        RadioMod.question = "Can pigs fly?";
+                        formModel.FormItemIList.Add(RadioMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_RADIO;
+
+                        var TextAreaMod = new TextAreaModel();
+                        TextAreaMod.question = "Argue that pigs do fly.";
+                        formModel.FormItemIList.Add(TextAreaMod);
+                        formModel.FormItemIList[i+1].type = TYPE_TEXT_AREA;
+
+                        var TextBoxMod = new TextBoxModel();
+                        TextBoxMod.question = "Describe pigs beauty in the three words.";
+                        formModel.FormItemIList.Add(TextBoxMod);
+                        formModel.FormItemIList[i+2].type = TYPE_TEXT_BOX;
                     }
                     break;
             }
 
-            return View("MakeForm", formModel);
+            return View("EditForm", formModel);
         }
         //TODO: low- priority. 
         //makes a copy of a pre-existing form for sake of convenience.
@@ -335,6 +455,8 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpPost]
         public ActionResult Email(String recipients, String guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             //if (ModelState.IsValid)
             //{
             //TODO: Create new guid
@@ -427,9 +549,12 @@ namespace FormsGeneratorWebApplication.Controllers
         [HttpGet]
         public ActionResult Analytic(string guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var form = Guid.Parse(guid);
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
+            //building the list of resultModels that are linked to base form
             foreach (ResultModel rL in resultsList)
             {
                 if (rL.adminGUID == form && rL.active == false)
@@ -448,8 +573,10 @@ namespace FormsGeneratorWebApplication.Controllers
                     return false;
                 }
             };
+            //getting base form
             var baseForm = db.FormModels.First<FormsModel>(compare);
             var formsList = new FormsListModel() { selectable = new List<IList<int>>(), form = baseForm, text = new List<IList<String>>() };
+            //building the lists
             foreach (FormItemModel q in baseForm.FormItemIList)
             {
                 if (q.type > 1)
@@ -465,7 +592,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     formsList.text.Add(new List<string>());
                 }
             }
-
+            //populating the list
             foreach (ResultModel r in correctList)
             {
                 Func<FormsModel, bool> compare1 = delegate(FormsModel f)
@@ -497,10 +624,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     else if (item.type < 2)
                     {
                         var question = formsList.text.ElementAt<IList<String>>(textCounter);
-                        if (item.options.Count > 0)
-                        {
-                            question.Add(item.options[0].option);
-                        }
+                        question.Add(item.answer);
                         textCounter++;
                     }
                     //checkboxes
@@ -533,11 +657,40 @@ namespace FormsGeneratorWebApplication.Controllers
                 }
             }
 
+            for (var i = 0; i < formsList.form.FormItemIList.Count; ++i)
+            {
+                var formItem = formsList.form.FormItemIList[i];
+                if (formItem.selected != null)
+                {
+                    for (var j = 0; j < formItem.selected.Count; j++)
+                    {
+                        formItem.selected[j].question = null;
+                    }
+                }
+                if (formItem.options != null)
+                {
+                    for (var j = 0; j < formItem.options.Count; j++)
+                    {
+                        formItem.options[j].question = null;
+                    }
+                }
+                formItem.FormsModel = null;
+            }
+
+                //ViewBag.Jsn = Json(new
+                //{
+                //    form = formsList.form,
+                //    selectable = formsList.selectable,
+                //    text = formsList.text
+
+                //});
             return View(formsList);
         }
 
-        public ActionResult reminder(String guid)
+        private void reminder(String guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var baseGUID = Guid.Parse(guid);
 
             var resultsList = db.ResultModels.ToList<ResultModel>();
@@ -552,17 +705,17 @@ namespace FormsGeneratorWebApplication.Controllers
                     EmailLink(rL.email, link + rL.userGUID.ToString());
                 }
             }
-
-            return View("EmailSucess");
         }
         [HttpGet]
         public DownloadFileActionResult DownloadAnalytic(string guid)
         {
+            FormsDbContext db = new FormsDbContext();
+
             var form = Guid.Parse(guid);
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
             var textdt = new DataTable();
-            var selectdt = new DataTable();
+            //var selectdt = new DataTable();
 
             foreach (ResultModel rL in resultsList)
             {
@@ -589,7 +742,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 if (q.type > 1)
                 {
                     formsList.selectable.Add(new List<int>());
-                    selectdt.Columns.Add(q.question, typeof(int));
+                    //textdt.Columns.Add(q.question, typeof(int));
                     for (int i = 0; i < q.options.Count; ++i)
                     {
                         formsList.selectable.Last<IList<int>>().Add(0);
@@ -598,7 +751,7 @@ namespace FormsGeneratorWebApplication.Controllers
                 else
                 {
                     formsList.text.Add(new List<string>());
-                    textdt.Columns.Add(q.question, typeof(string));
+                    //textdt.Columns.Add(q.question, typeof(string));
 
                 }
             }
@@ -669,26 +822,103 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 }
             }
-            listodataTable<String>(formsList.text, textdt, baseForm.FormItemIList);
-            listodataTable<int>(formsList.selectable, selectdt, baseForm.FormItemIList);
+
+            var sCount = 0;
+            var tCount = 0;
+            int max =0;
+
+            for (int j = 0; j < formsList.selectable.Count; ++j)
+            {
+                if (formsList.selectable[j].Count > max)
+                {
+                    max = formsList.selectable[j].Count;
+                }
+            }
+            for(int j=0;j<formsList.text.Count;++j)
+            {
+                if (formsList.text[j].Count > max)
+                {
+                    max = formsList.text[j].Count;
+                }
+            }
+            for (int i = 0; i < max; ++i)
+            {
+                var row = textdt.NewRow();
+                textdt.Rows.Add(row);
+            }
+            for (int i = 0; i < formsList.form.FormItemIList.Count;++i)
+            {
+                if(formsList.form.FormItemIList[i].type >1) //selectable
+                {
+                    textdt.Columns.Add(formsList.form.FormItemIList[i].question, typeof(string));
+                    foreach(DataColumn column in textdt.Columns)
+                    {
+                        if(column.ColumnName == formsList.form.FormItemIList[i].question)
+                        {
+                            int j = 0;
+                            foreach(DataRow row in textdt.Rows)
+                            {
+                                if (j < formsList.selectable[sCount].Count)
+                                {
+                                    row[column] = formsList.form.FormItemIList[i].options[j].option + formsList.selectable[sCount][j].ToString();
+                                }
+                                j++;
+                            }
+                        }
+                    }
+                    sCount++;
+                }
+                else//text
+                {
+                    textdt.Columns.Add(formsList.form.FormItemIList[i].question, typeof(string));
+                    foreach (DataColumn column in textdt.Columns)
+                    {
+                        if (column.ColumnName == formsList.form.FormItemIList[i].question)
+                        {
+                            int j = 0;
+                            foreach (DataRow row in textdt.Rows)
+                            {
+                                if (j < formsList.text[tCount].Count)
+                                {
+                                    row[column] = formsList.form.FormItemIList[i].options[j].option + formsList.text[tCount][j];
+                                }
+                                j++;
+                            }
+                        }
+                    }
+                }
+            }
+                //foreach (FormItemModel q in baseForm.FormItemIList)
+                //{
+
+                //    if (q.type > 1)
+                //    {
+                //        textdt.Columns.Add(q.question, typeof(string));
+                //        for (var j = 0; j < formsList.selectable[sCount].Count; ++j)
+                //        {
+                //            var row = textdt.NewRow();
+                //            row[q.question] = q.options[j] + " - " + formsList.selectable[sCount][j].ToString();
+                //            textdt.Rows.Add(row);
+                //        }
+                //        sCount++;
+
+                //    }
+                //    else
+                //    {
+                //        textdt.Columns.Add(q.question, typeof(string));
+                //        for (var j = 0; j < formsList.text[tCount].Count; ++j)
+                //        {
+                //            var row = textdt.NewRow();
+                //            row[q.question] = formsList.text[tCount][j].ToString();
+                //            textdt.Rows.Add(row);
+
+                //        }
+                //        tCount++;
+
+                //    }
+                //}
 
             return new DownloadFileActionResult(textdt, "Download.xls");
-        }
-        private void listodataTable<T>(IList<IList<T>> list, DataTable dt, IList<FormItemModel> itemlist)
-        {
-            for (int i = 0; i < list.Count; ++i)
-            {
-                var row = dt.NewRow();
-
-                for (int j = 0; j < list[j].Count; ++j)
-                {
-                    row[itemlist[i].question] = list[i][j];
-                }
-                dt.Rows.Add(row);
-
-            }
-            return;
-
         }
     }
 }

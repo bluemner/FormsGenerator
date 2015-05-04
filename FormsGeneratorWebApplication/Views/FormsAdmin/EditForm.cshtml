@@ -11,125 +11,134 @@
     public static int TYPE_TEXT_RADIO = 2;
     public static int TYPE_TEXT_CHECKBOX = 3;
 *@
-<h2>Edit Form Informaiton</h2>
 
 
 @using (Html.BeginForm("EditForm", "FormsAdmin", FormMethod.Post, new { @class = "full", @id = "new-form" }))
 {
-    @Html.HiddenFor(m => m.adminGUID);
+    <div class="form-horizontal">
+        <fieldset>
+            <legend>Edit Form Content</legend>
+            @Html.HiddenFor(m => m.adminGUID)
 
-    <div class="form-group">
-        <label class="col-lg-2 control-label">@Html.LabelFor(m => m.Name)</label>
-        <div class="col-lg-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-            <p class="text-warning">@Html.ValidationMessageFor(m => m.Name)</p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-lg-2 control-label">@Html.LabelFor(m => m.Status)</label>
-        @Html.CheckBoxFor(m => m.Status);
-    </div>
-
-    <div class="form-group">
-        <label class="col-lg-2 control-label">@Html.LabelFor(m => m.StartDate)</label>
-        <div class="col-lg-4">
-            @Html.TextBoxFor(m => m.StartDate, null, new { @Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
-            @Html.ValidationMessageFor(m => m.StartDate)
-        </div>
-        <label class="col-lg-1 control-label">@Html.LabelFor(m => m.EndDate)</label>
-        <div class="col-lg-4">
-            @Html.TextBoxFor(m => m.EndDate, null, new { @Value = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
-            @Html.ValidationMessageFor(m => m.EndDate)
-        </div>
-    </div>
-
-
-
-    <div class="form-group">
-        <label class="col-lg-2 control-label"></label>
-        <div class=" col-lg-8">
-            <div id="item-zone">
-             @for (var i = 0; i < items.Count(); ++i)
-                {
-                    ViewBag.index = i;
-                    ViewBag.TextBoxCount = i;
-                    var currentItem = items.ElementAt(i);
-                    if (currentItem.type == 2)         {
-
-                    @Html.Partial("~/Views/FormsAdmin/_RadioButtonPartial.cshtml", currentItem)
-                    }
-                    else if (currentItem.type == 1)
-                    {
-                    @Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", currentItem)
-                    }
-                    else if (currentItem.type == 0)
-                    {
-                    @Html.Partial("~/Views/FormsAdmin/_EditTextBoxPartial.cshtml", currentItem)
-                    }
-                    else if (currentItem.type == 3)
-                    {
-                    @Html.Partial("~/Views/FormsAdmin/_CheckBoxesPartial.cshtml", currentItem)
-                    }
-                }
+            <div class="form-group">
+                <label class="col-lg-2 control-label">@Html.LabelFor(m => m.Name)</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    <p class="text-warning">@Html.ValidationMessageFor(m => m.Name)</p>
+                </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Status, new { @class = "col-lg-2 control-label"})
+                <div class="col-lg-10">
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(m => m.Status)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">@Html.LabelFor(m => m.StartDate)</label>
+                <div class="col-lg-4">
+                    @Html.TextBoxFor(m => m.StartDate, null, new { @Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
+                    @Html.ValidationMessageFor(m => m.StartDate)
+                </div>
+                <label class="col-lg-1 control-label">@Html.LabelFor(m => m.EndDate)</label>
+                <div class="col-lg-4">
+                    @Html.TextBoxFor(m => m.EndDate, null, new { @Value = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm"), @class = "date form-control" })
+                    @Html.ValidationMessageFor(m => m.EndDate)
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label"></label>
+                <div class=" col-lg-8">
+                    <div id="item-zone">
+                        @for (var i = 0; i < items.Count(); ++i)
+                        {
+                            ViewBag.index = i;
+                            ViewBag.TextBoxCount = i;
+                            var currentItem = items.ElementAt(i);
+                            if (currentItem.type == 2)         {
+
+                                @Html.Partial("~/Views/FormsAdmin/_RadioButtonPartial.cshtml", currentItem)
+                            }
+                            else if (currentItem.type == 1)
+                            {
+                                @Html.Partial("~/Views/FormsAdmin/_TextAreaPartial.cshtml", currentItem)
+                            }
+                            else if (currentItem.type == 0)
+                            {
+                                @Html.Partial("~/Views/FormsAdmin/_EditTextBoxPartial.cshtml", currentItem)
+                            }
+                            else if (currentItem.type == 3)
+                            {
+                                @Html.Partial("~/Views/FormsAdmin/_CheckBoxesPartial.cshtml", currentItem)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Type</label>
+                <div class="col-lg-4">
+                    <select class="form-control form-selection-type" id="select">
+                        <option value='@Url.Content("~/FormsAdmin/AddTextBox")'>Text Box</option>
+                        <option value='@Url.Content("~/FormsAdmin/AddTextArea")'>Text Area</option>
+                        <option value='@Url.Content("~/FormsAdmin/AddRadioButton")'>Radio Button</option>
+                        <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
+                    </select>
+                </div>
+                <label class="col-lg-1 control-label sub-elements" hidden>Number of Options:</label>
+                <div class="col-lg-4">
+                    <input type="number" class="form-control number-Of-sub-elements sub-elements" value="-1" min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label ">Count</label>
+                <div class="col-lg-10">
+                    <input type="number" class="form-control form-selection-count" value="1" min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="button" class="btn btn-primary btn-lg btn-add-form-item"><span class="glyphicon glyphicon-plus span-space" aria-hidden="true"></span>Add FormItem</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-8">
+                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                </div>
+            </div>
+
+            <div id="test" hidden></div>
+
+            @Html.HiddenFor(m => m.key)
+
+        </fieldset>
     </div>
-
-    <div class="form-group">
-        <label class="col-lg-2 control-label">Type</label>
-        <div class="col-lg-4">
-            <select class="form-control form-selection-type" id="select">
-                <option value='@Url.Content("~/FormsAdmin/AddTextBox")'>Text Box</option>
-                <option value='@Url.Content("~/FormsAdmin/AddTextArea")'>Text Area</option>
-                <option value='@Url.Content("~/FormsAdmin/AddRadioButton")'>Radio Button</option>
-                <option value='@Url.Content("~/FormsAdmin/AddCheckBoxes")'>Check Box</option>
-            </select>
-        </div>
-        <label class="col-lg-1 control-label sub-elements" hidden>Number of Options:</label>
-        <div class="col-lg-4">
-            <input type="number" class="form-control number-Of-sub-elements sub-elements" value="-1" min="1">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-lg-2 control-label ">Count</label>
-        <div class="col-lg-10">
-            <input type="number" class="form-control form-selection-count" value="1" min="1">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-            <button type="button" class="btn btn-primary btn-lg btn-add-form-item"><span class="glyphicon glyphicon-plus span-space" aria-hidden="true"></span>Add FormItem</button>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-8">
-            <button type="submit" class="btn btn-success btn-lg">Submit</button>
-        </div>
-    </div>
-
-    <div id="test" hidden></div>
-
-    @Html.HiddenFor(m => m.key);
-
+    
 }
 
+    @Scripts.Render("~/Scripts/views/forms-admin-view.js")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.extend(form, {
+                settings: {
+                    UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
+                    UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
+                    UrlAddRadioBtton: '@Url.Content("~/FormsAdmin/AddRadioButton")',
+                    UrlAddCheckBoxes: '@Url.Content("~/FormsAdmin/AddCheckBoxes")',
+                }
+            });
+            window.form.init();
+        })
 
-
-@Scripts.Render("~/Scripts/views/forms-admin-view.js")
-<script type="text/javascript">
-    $(document).ready(function () {
-        $.extend(form, {
-            settings: {
-                UrlAddTextBox: '@Url.Content("~/FormsAdmin/AddTextBox")',
-                UrlAddTextArea: '@Url.Content("~/FormsAdmin/AddTextArea")',
-                UrlAddRadioBtton: '@Url.Content("~/FormsAdmin/AddRadioButton")',
-                UrlAddCheckBoxes: '@Url.Content("~/FormsAdmin/AddCheckBoxes")',
-            }
-        });
-        window.form.init();
-    })
-
-</script>
+    </script>

@@ -70,15 +70,68 @@ namespace FormsGeneratorWebApplication.Controllers
             //model.FormItemIList[0].answer = "answer";
             //model.FormItemIList[1].answer = "answer2";
             model.Status = false;
-            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-            foreach(FormItemModel item in model.FormItemIList)
+            //db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+            //foreach(FormItemModel item in model.FormItemIList)
+            //{
+            //    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            //
+            Func<FormsModel, bool> keyCompare = delegate(FormsModel form)
             {
-                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                if (form.key == model.key)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            };
+            FormsModel result = db.FormModels.First<FormsModel>(keyCompare);
+            var deleteQuestionList = new List<FormItemModel>();
+            if(result.FormItemIList != null)
+            {
+                foreach(FormItemModel fIM in result.FormItemIList)
+                {
+                    deleteQuestionList.Add(fIM);
+                    if (fIM.options != null)
+                    {
+                        var deleteOptionsList = new List<OptionsModel>();
+                        foreach (OptionsModel oM in fIM.options)
+                        {
+                            deleteOptionsList.Add(oM);
+                        }
+                        foreach (OptionsModel oM in deleteOptionsList)
+                        {
+                            db.OptionsModels.Remove(oM);
+                        }
+                    }
+                    if(fIM.selected != null)
+                    {
+                        var deleteSelectedList = new List<SelectedModel>();
+                        foreach (SelectedModel oM in fIM.selected)
+                        {
+                            deleteSelectedList.Add(oM);
+                        }
+                        foreach (SelectedModel oM in deleteSelectedList)
+                        {
+                            db.SelectedModels.Remove(oM);
+                        }
+                    }
+                }
+                foreach(FormItemModel fIM in deleteQuestionList)
+                {
+                    db.FormItemModels.Remove(fIM);
+                }
             }
+            db.FormModels.Remove(result);
+            db.SaveChanges();
+            db.FormModels.Add(model);
+            db.SaveChanges();
             var guid = model.adminGUID;
-            Func<ResultModel, bool> compare = delegate(ResultModel result)
+            //comment
+            Func<ResultModel, bool> compare = delegate(ResultModel resultModel)
             {
-                if (result.userGUID == guid)
+                if (resultModel.userGUID == guid)
                 {
                     return true;
                 }
