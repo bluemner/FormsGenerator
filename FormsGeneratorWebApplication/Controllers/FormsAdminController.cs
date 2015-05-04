@@ -674,7 +674,7 @@ namespace FormsGeneratorWebApplication.Controllers
             var resultsList = db.ResultModels.ToList<ResultModel>();
             var correctList = new List<ResultModel>();
             var textdt = new DataTable();
-            var selectdt = new DataTable();
+            //var selectdt = new DataTable();
 
             foreach (ResultModel rL in resultsList)
             {
@@ -781,37 +781,38 @@ namespace FormsGeneratorWebApplication.Controllers
                     }
                 }
             }
-            listodataTable<String>(formsList.text, textdt, baseForm.FormItemIList);
-            //listodataTable<int>(formsList.selectable, selectdt, baseForm.FormItemIList);
-            for (int i = 0; i < formsList.selectable.Count; ++i)
+
+            var sCount = 0;
+            var tCount = 0;
+            foreach (FormItemModel q in baseForm.FormItemIList)
             {
-                var row = textdt.NewRow();
-
-                for (int j = 0; j < formsList.selectable[i].Count; ++j)
+                
+                if (q.type > 1)
                 {
-                    row[baseForm.FormItemIList[i].question] = formsList.selectable[i][j].ToString();
+                    textdt.Columns.Add(q.question, typeof(string));
+                    for(var j=0; j<formsList.selectable[sCount].Count;++j){
+                    var row = textdt.NewRow();
+                    row[q.question] = q.options[j] + " - " + formsList.selectable[sCount][j].ToString();
+                    textdt.Rows.Add(row);
+                    }
+                    sCount++;
+                   
                 }
-                textdt.Rows.Add(row);
+                else
+                {
+                    textdt.Columns.Add(q.question, typeof(string));
+                    for (var j = 0; j < formsList.text[tCount].Count; ++j)
+                    {
+                        var row = textdt.NewRow();
+                        row[q.question] = formsList.text[tCount][j].ToString();
+                        textdt.Rows.Add(row);
+                    }
+                    tCount++;
 
+                }
             }
 
             return new DownloadFileActionResult(textdt, "Download.xls");
-        }
-        private void listodataTable<T>(IList<IList<T>> list, DataTable dt, IList<FormItemModel> itemlist)
-        {
-            for (int i = 0; i < list.Count; ++i)
-            {
-                var row = dt.NewRow();
-
-                for (int j = 0; j < list[i].Count; ++j)
-                {
-                    row[itemlist[i].question] = list[i][j];
-                }
-                dt.Rows.Add(row);
-
-            }
-            return;
-
         }
     }
 }
