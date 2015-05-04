@@ -52,7 +52,7 @@
                     form.Email.push(selectedIteam.val());
                 });
        
-                if (!form.emailValidation()) {                 
+                if (!form.emailValidation()) {
                     return;
                 }
                 else {
@@ -97,12 +97,16 @@
             $('#Email-form').submit();
         },
         emailValidation: function () {
-            var feild = $('#email-add-text').val();
+            var feild = [];
+            $("input[name='fields[]']").each(function () {
+                feild.push($(this).val());
+            });
             var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    
-            if (!regex.test(feild)) {
-                $('#email-error-message').show();
-                return false;
+            for (var i = 0; i < feild.length; ++i) {
+                if (!regex.test(feild[i])) {
+                    $('#email-error-message').show();
+                    return false;
+                }
             }
             return true;
         },
