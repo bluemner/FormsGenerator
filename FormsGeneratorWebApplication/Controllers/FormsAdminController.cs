@@ -27,6 +27,7 @@ namespace FormsGeneratorWebApplication.Controllers
         public const int TEMPLATE_FORM_TRUE_OR_FALSE = 0;
         public const int TEMPLATE_FORM_TEXTAREA = 1;
         public const int TEMPLATE_FORM_TEXTBOX = 2;
+        public const int TEMPLATE_FORM_MIX = 3;
 
 
 
@@ -384,6 +385,30 @@ namespace FormsGeneratorWebApplication.Controllers
                         TextBoxMod.question = "Describe pigs beauty in the three words.";
                         formModel.FormItemIList.Add(TextBoxMod);
                         formModel.FormItemIList[i].type = TYPE_TEXT_BOX;
+                    }
+                    break;
+                case TEMPLATE_FORM_MIX:
+                    //populate form model with textbox questions
+                    for (int i = 0; i < numberOfSubElements; ++i)
+                    {
+
+                        var RadioMod = new RadioButtonModel();
+                        RadioMod.options = new List<OptionsModel>();
+                        RadioMod.options.Add(new OptionsModel() { option = "True" });
+                        RadioMod.options.Add(new OptionsModel() { option = "False" });
+                        RadioMod.question = "Can pigs fly?";
+                        formModel.FormItemIList.Add(RadioMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_RADIO;
+
+                        var TextAreaMod = new TextAreaModel();
+                        TextAreaMod.question = "Argue that pigs do fly.";
+                        formModel.FormItemIList.Add(TextAreaMod);
+                        formModel.FormItemIList[i+1].type = TYPE_TEXT_AREA;
+
+                        var TextBoxMod = new TextBoxModel();
+                        TextBoxMod.question = "Describe pigs beauty in the three words.";
+                        formModel.FormItemIList.Add(TextBoxMod);
+                        formModel.FormItemIList[i+2].type = TYPE_TEXT_BOX;
                     }
                     break;
             }
