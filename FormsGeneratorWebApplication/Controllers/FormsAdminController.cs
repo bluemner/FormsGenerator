@@ -587,10 +587,7 @@ namespace FormsGeneratorWebApplication.Controllers
                     else if (item.type < 2)
                     {
                         var question = formsList.text.ElementAt<IList<String>>(textCounter);
-                        if (item.options.Count > 0)
-                        {
-                            question.Add(item.answer);
-                        }
+                        question.Add(item.answer);
                         textCounter++;
                     }
                     //checkboxes
