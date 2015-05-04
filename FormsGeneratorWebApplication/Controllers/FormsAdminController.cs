@@ -358,12 +358,12 @@ namespace FormsGeneratorWebApplication.Controllers
                     {
                         var RadioMod = new RadioButtonModel();
                         RadioMod.options = new List<OptionsModel>();
-
                         RadioMod.options.Add(new OptionsModel() { option = "True" });
                         RadioMod.options.Add(new OptionsModel() { option = "False" });
 
                         RadioMod.question = "Can pigs fly?";
                         formModel.FormItemIList.Add(RadioMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_RADIO;
                     }
                     break;
                 case TEMPLATE_FORM_TEXTAREA:
@@ -371,8 +371,9 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextAreaMod = new TextAreaModel();
-                        TextAreaMod.value = "Pigs do fly.";
+                        TextAreaMod.question = "Argue that pigs do fly.";
                         formModel.FormItemIList.Add(TextAreaMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_AREA;
                     }
                     break;
                 case TEMPLATE_FORM_TEXTBOX:
@@ -380,13 +381,14 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextBoxMod = new TextBoxModel();
-                        TextBoxMod.value = "Pigs do fly.";
+                        TextBoxMod.question = "Describe pigs beauty in the three words.";
                         formModel.FormItemIList.Add(TextBoxMod);
+                        formModel.FormItemIList[i].type = TYPE_TEXT_BOX;
                     }
                     break;
             }
 
-            return View("MakeForm", formModel);
+            return View("EditForm", formModel);
         }
         //TODO: low- priority. 
         //makes a copy of a pre-existing form for sake of convenience.
