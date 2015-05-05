@@ -24,10 +24,9 @@ namespace FormsGeneratorWebApplication.Controllers
         public static int TYPE_TEXT_RADIO = 2;
         public static int TYPE_TEXT_CHECKBOX = 3;
 
-        public const int TEMPLATE_FORM_TRUE_OR_FALSE = 0;
+        public const int TEMPLATE_FORM_TRUE_OR_FALSE = 2;
         public const int TEMPLATE_FORM_TEXTAREA = 1;
-        public const int TEMPLATE_FORM_TEXTBOX = 2;
-        public const int TEMPLATE_FORM_MIX = 3;
+        public const int TEMPLATE_FORM_TEXTBOX = 0;
 
 
 
@@ -345,13 +344,14 @@ namespace FormsGeneratorWebApplication.Controllers
         }
         //creates a simple form for user if creating from template
         [HttpGet]
-        public ActionResult Template(int type, int numberOfSubElements)
+        public ActionResult Template(int typechoose, int numberOfSubElements)
         {
             ViewBag.TextBoxCount = numberOfSubElements;
             // Create instance of a form
             var formModel = new FormsModel();
             formModel.FormItemIList = new List<FormItemModel>();
-            switch (type)
+            formModel.adminGUID = createGuid();
+            switch (typechoose)
             {
                 case TEMPLATE_FORM_TRUE_OR_FALSE:
                     // populate form model with true or false
@@ -359,12 +359,24 @@ namespace FormsGeneratorWebApplication.Controllers
                     {
                         var RadioMod = new RadioButtonModel();
                         RadioMod.options = new List<OptionsModel>();
-                        RadioMod.options.Add(new OptionsModel() { option = "True" });
-                        RadioMod.options.Add(new OptionsModel() { option = "False" });
 
-                        RadioMod.question = "Can pigs fly?";
+                        if (i == 0)
+                        {
+                            RadioMod.question = "Can pigs fly?";
+                            RadioMod.options.Add(new OptionsModel() { option = "True" });
+                            RadioMod.options.Add(new OptionsModel() { option = "False" });
+                        }
+                        else
+                        {
+                            RadioMod.question = "Which is your Favorite Highlender 2015 Model?";
+                            RadioMod.options.Add(new OptionsModel() { option = "LE" });
+                            RadioMod.options.Add(new OptionsModel() { option = "LE Plus" });
+                            RadioMod.options.Add(new OptionsModel() { option = "XLE" });
+                            RadioMod.options.Add(new OptionsModel() { option = "Limited Platinum" });
+                        }
                         formModel.FormItemIList.Add(RadioMod);
                         formModel.FormItemIList[i].type = TYPE_TEXT_RADIO;
+                        
                     }
                     break;
                 case TEMPLATE_FORM_TEXTAREA:
@@ -372,7 +384,8 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextAreaMod = new TextAreaModel();
-                        TextAreaMod.question = "Argue that pigs do fly.";
+                        if (i == 0) TextAreaMod.question = "Argue that pigs do fly.";
+                        else TextAreaMod.question = "Argue that you are the best in the world.";
                         formModel.FormItemIList.Add(TextAreaMod);
                         formModel.FormItemIList[i].type = TYPE_TEXT_AREA;
                     }
@@ -382,38 +395,14 @@ namespace FormsGeneratorWebApplication.Controllers
                     for (int i = 0; i < numberOfSubElements; ++i)
                     {
                         var TextBoxMod = new TextBoxModel();
-                        TextBoxMod.question = "Describe pigs beauty in the three words.";
+                        if (i == 0) TextBoxMod.question = "Describe pigs beauty in the three words.";
+                        else TextBoxMod.question = "Describe your beauty in the three words.";
                         formModel.FormItemIList.Add(TextBoxMod);
                         formModel.FormItemIList[i].type = TYPE_TEXT_BOX;
                     }
                     break;
-                case TEMPLATE_FORM_MIX:
-                    //populate form model with textbox questions
-                    for (int i = 0; i < numberOfSubElements; ++i)
-                    {
-
-                        var RadioMod = new RadioButtonModel();
-                        RadioMod.options = new List<OptionsModel>();
-                        RadioMod.options.Add(new OptionsModel() { option = "True" });
-                        RadioMod.options.Add(new OptionsModel() { option = "False" });
-                        RadioMod.question = "Can pigs fly?";
-                        formModel.FormItemIList.Add(RadioMod);
-                        formModel.FormItemIList[i].type = TYPE_TEXT_RADIO;
-
-                        var TextAreaMod = new TextAreaModel();
-                        TextAreaMod.question = "Argue that pigs do fly.";
-                        formModel.FormItemIList.Add(TextAreaMod);
-                        formModel.FormItemIList[i+1].type = TYPE_TEXT_AREA;
-
-                        var TextBoxMod = new TextBoxModel();
-                        TextBoxMod.question = "Describe pigs beauty in the three words.";
-                        formModel.FormItemIList.Add(TextBoxMod);
-                        formModel.FormItemIList[i+2].type = TYPE_TEXT_BOX;
-                    }
-                    break;
             }
-
-            return View("EditForm", formModel);
+            return View("TemplateView", formModel);
         }
         //TODO: low- priority. 
         //makes a copy of a pre-existing form for sake of convenience.

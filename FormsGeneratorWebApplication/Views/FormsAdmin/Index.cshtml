@@ -19,10 +19,9 @@
                             <a href="#" class="btn btn-success btn-lg"> <span class="glyphicon glyphicon-list-alt span-space"></span> Create form template</a>
                             <a href="#" class="btn btn-success btn-lg dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                             <ul class="dropdown-menu btn-block">
-                                <li>@Html.ActionLink("True or False Template", "Template", new { type = 0, numberOfSubElements = 2 }, new { @class = "btn btn-lg" })</li>
-                                <li>@Html.ActionLink("TextBox Template", "Template", new { type = 2, numberOfSubElements = 2 }, new { @class = "btn btn-lg" })</li>
-                                <li>@Html.ActionLink("TextArea Template", "Template", new { type = 1, numberOfSubElements = 2 }, new { @class = "btn btn-lg" })</li>
-                                <li>@Html.ActionLink("Mix Template", "Template", new { type = 3, numberOfSubElements = 1 }, new { @class = "btn btn-lg" })</li>
+                                <li>@Html.ActionLink("True or False Template", "Template", new { typechoose = 2, numberOfSubElements = 2 }, new { @class = "btn btn-lg" })</li>
+                                <li>@Html.ActionLink("TextBox Template", "Template", new { typechoose = 0, numberOfSubElements = 2 }, new { @class = "btn btn-lg" })</li>
+                                <li>@Html.ActionLink("TextArea Template", "Template", new { typechoose = 1, numberOfSubElements = 2 }, new { @class = "btn btn-lg" })</li>
                             </ul>
                         </div>
                     </div>
